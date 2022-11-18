@@ -1,4 +1,4 @@
-## Collaborator:
+## Collaborators:
 ##### @Anirudh-Chandran: 10626568
 ##### @Ameya-Khandekar: 10547037
 ##### @vicky-motwani: 10632013
