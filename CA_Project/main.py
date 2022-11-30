@@ -6,9 +6,7 @@ app = Flask(__name__)
 def hello(): # Name of the method
     return("Hello World!") #indent this line
 
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port='8080') # indent this line
+def requirement
 
 server = 'tcp:avadb01.database.windows.net'
 database ='AVA_DB_1'
@@ -22,3 +20,8 @@ connection.commit()
 cursor.execute("SELECT * FROM Vendor;")
 for row in cursor.fetchall():
     print(row)
+
+
+if __name__ == "__main__":
+    requirements()
+    app.run(host='0.0.0.0', port='8080') # indent this line
