@@ -2,8 +2,6 @@ from flask import Flask,request,render_template
 import os
 import pyodbc
 
-prod_insert = """?,?,?,?,?,?)"""
-
 app = Flask(__name__, template_folder="templates")
 app.config['UPLOADED_IMAGES_DEST'] = 'uploads'
 
