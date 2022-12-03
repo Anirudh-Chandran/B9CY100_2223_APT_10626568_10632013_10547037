@@ -2,7 +2,7 @@ from flask import Flask,request,render_template
 import os
 import pyodbc
 
-prod_insert = """INSERT INTO Product(Prod_id, Prod_Name, Prod_Man_Date, Prod_Man_By, Prod_Dimensions, Prod_Image) VALUES(?,?,?,?,?,?)"""
+prod_insert = """?,?,?,?,?,?)"""
 
 app = Flask(__name__, template_folder="templates")
 app.config['UPLOADED_IMAGES_DEST'] = 'uploads'
@@ -35,7 +35,8 @@ def Database_Connection(binary_value):
     password ='Dublin@098'
     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD='+ password)
     cursor = connection.cursor()
-    cursor.execute(prod_insert,'1', 'X-RAY', '2021-02-28', 'Pharma', '10x10x10',binary_value)
+    command = "INSERT INTO Product(Prod_id, Prod_Name, Prod_Man_Date, Prod_Man_By, Prod_Dimensions, Prod_Image) VALUES('1', 'X-RAY', 2021-02-28, 'Pharma', '10x10x10',?)"
+    cursor.executemany(command,binary_value)
     cursor.commit()
     for row in cursor.fetchall():
         print(row)
