@@ -41,5 +41,5 @@ def Database_Connection(binary_value):
     print(type(image_value))
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080) # indent this line
+    app.run(host='0.0.0.0', port=8080) # Remove Host and Port after testing
 
