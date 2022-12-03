@@ -38,10 +38,6 @@ def Database_Connection(binary_value):
     command = "INSERT INTO Images(col_image) VALUES(?)"
     cursor.execute(command,binary_value)
     cursor.commit()
-    cursor.execute("SELECT * from Images;")
-    cursor.commit()
-    for row in cursor.fetchall():
-        print(row)
 
 
 if __name__ == "__main__":
