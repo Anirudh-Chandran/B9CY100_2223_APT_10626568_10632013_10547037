@@ -1,0 +1,9 @@
+CREATE TABLE Invoice(
+Inv_ID		INT			NOT NULL,
+Prod_Name VARCHAR  		NOT NULL,
+Prod_ID 	INT			NOT NULL,
+Quantity	INT			NOT NULL,
+Price		INT			NOT NULL,
+V_ID		INT			NOT NULL,
+H_ID		INT			NOT NULL,
+);
