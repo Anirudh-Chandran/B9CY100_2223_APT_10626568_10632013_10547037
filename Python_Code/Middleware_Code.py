@@ -35,7 +35,7 @@ def Database_Connection(binary_value):
     password ='Dublin@098'
     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD='+ password)
     cursor = connection.cursor()
-    command = "INSERT INTO Product(Prod_id, Prod_Name, Prod_Man_Date, Prod_Man_By, Prod_Dimensions, Prod_Image,v_id) VALUES('1', 'X-RAY', '2021-02-28', 'Pharma', '10x10x10',?,4)"
+    command = "INSERT INTO Product(Prod_id, Prod_Name, Prod_Man_Date, Prod_Man_By, Prod_Dimensions, Prod_Image,v_id,Prod_Quantity,Prod_Description) VALUES('1', 'X-RAY', '2021-02-28', 'Pharma', '10x10x10',?,4,1,'something-something')"
     cursor.execute(command,binary_value)
     cursor.commit()
     for row in cursor.fetchall():
