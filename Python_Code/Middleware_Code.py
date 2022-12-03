@@ -38,7 +38,9 @@ def Database_Connection(binary_value):
     command = "INSERT INTO Images(col_image) VALUES(?)"
     cursor.execute(command,binary_value)
     cursor.commit()
-
+    cursor.execute("SELECT * from Images")
+    image_value = cursor.fetchval()
+    print(type(image_value))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080) # indent this line
