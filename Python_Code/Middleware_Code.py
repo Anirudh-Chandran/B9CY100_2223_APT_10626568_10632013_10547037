@@ -20,10 +20,12 @@ def submission():
         files.save(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name))
         with open(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name), 'rb') as f:
             bin_data = f.read()
+        os.remove(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name))
         image_val = Database_Connection(bin_data)
-        with open(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name),'wb') as f:
-            f.write(bin_data)
-        return render_template('submission.html', image=f)
+        image_loc = os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name)
+        with open(image_loc,'wb') as f:
+            f.write(image_val)
+        return render_template('submission.html', image=image_loc)
     else:
         return "except"
 
