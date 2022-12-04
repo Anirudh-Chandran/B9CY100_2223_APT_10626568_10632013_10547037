@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>
+            "AVA Corp"
+        </title>
         <meta name="viewpoint" content="width-device-width, initial-scale=1">
         <style>
             body {font-family: Arial, Helvetica, sans-serif;}
@@ -26,4 +29,60 @@
                 cursor: pointer;
                 width: 100%;
             }
+            button:hover 
+            {
+                opacity: 1.0;
+            }
+            .cancelbtn 
+            {
+                width:auto;
+                padding: 10px 20px;
+                background-color: red;
+            }
+            .imgcontainer
+            {
+                text-align: center;
+                margin: auto;
+            }
+            img.avatar
+            {
+                width: 20%;
+                border-radius: 20%;
+            }
+            .container
+            {
+                padding: 10px;
+            
+            }
+            span.psw
+            {
+                float: right;
+                padding-top: 10px;
+            }
         </style>
+        </head>
+        <body>
+            <h2>Login Form</h2>
+            <form action="/Homepage.html" method="post">
+                <div class="imgcontainer">
+                    <img src="login-icon.png" alt="Avatar" class="avatar">
+                </div>
+                <div class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" required>
+                    <label for="pwd"><b>Password</b></label>
+                    <input type="text" placeholder="Enter Password" name="pwd" required>
+                    <button type="submit">Login</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember Me
+                    </label>
+                </div>
+            </form>
+                <div class="container" styles="background-color:white">
+                    <button type="button" class="cancelbtn">Cancel</button>
+                    <span class="=pwd" <a href="#">Forgot password?</a></span>
+                </div>
+            </form>
+
+        </body>
+        </html>
