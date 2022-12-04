@@ -13,25 +13,21 @@ def index():  # Name of the method
 
 @app.route("/submission", methods=['GET', 'POST'])
 def submission():
-    image_loc = ''
+    image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
     if request.method == "POST":
         fname = request.form['fname']
         files = request.files['photo']
         file_name = files.filename
-        print(file_name)
-        files.save(app.config['UPLOADED_IMAGES_DEST']+'/'+file_name)
-        with open(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name), 'rb') as f:
+        files.save(image_loc + file_name)
+        with open(image_loc+file_name, 'rb') as f:
             bin_data = f.read()
         Database_Connection(bin_data)
         image_val = Data_Retrieval(bin_data)
-        image_loc = app.config['UPLOADED_IMAGES_DEST'] +'/'+file_name
-        with open(image_loc,"wb") as f:
+        with open('image.jpg',"wb") as f:
             f.write(image_val)
-
-        return render_template('submission.html', image=image_loc)
+        return render_template('submission.html', image=image_new_loc)
     else:
-        return render_template('submission.html', image=image_loc)
-
+        return render_template('submission.html')
 
 def Database_Connection(binary_value):
     server = 'tcp:avadb01.database.windows.net'
