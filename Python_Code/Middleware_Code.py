@@ -1,9 +1,10 @@
-from flask import Flask,request,render_template
+import flask
+from flask import Flask,request,render_template,url_for
 import os
 import pyodbc
 
 app = Flask(__name__, template_folder="templates")
-app.config['UPLOADED_IMAGES_DEST'] = 'uploads'
+app.config['UPLOADED_IMAGES_DEST'] = 'static'
 
 
 @app.route("/")#URL leading to method
@@ -27,8 +28,8 @@ def submission():
         image_new_loc = image_loc + image
         with open(image_new_loc,"wb") as f:
             f.write(image_val)
-        image_location = "C:\\Users\\ANIRUDH\\OneDrive - Dublin Business School (DBS)\\CA_Repo\\Python_Code\\uploads\\" + image
-        return render_template('submission.html', image=image_location)
+
+        return render_template('submission.html')
     else:
         return render_template('submission.html')
 
