@@ -20,8 +20,10 @@ def submission():
         files.save(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name))
         with open(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name), 'rb') as f:
             bin_data = f.read()
-        Database_Connection(bin_data)
-        return render_template('submission.html')
+        image_val = Database_Connection(bin_data)
+        with open(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name),'wb') as f:
+            f.write(bin_data)
+        return render_template('submission.html', image=f)
     else:
         return "except"
 
@@ -38,7 +40,7 @@ def Database_Connection(binary_value):
     cursor.commit()
     cursor.execute("SELECT * from Images")
     image_value = cursor.fetchval()
-    print(type(image_value))
+    return image_value
 
 
 if __name__ == "__main__":
