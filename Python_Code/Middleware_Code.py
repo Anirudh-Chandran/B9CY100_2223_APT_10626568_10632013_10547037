@@ -18,13 +18,16 @@ def submission():
         fname = request.form['fname']
         files = request.files['photo']
         file_name = files.filename
-        files.save(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name))
+        print(file_name)
+        files.save(app.config['UPLOADED_IMAGES_DEST']+'/'+file_name)
         with open(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name), 'rb') as f:
             bin_data = f.read()
-        os.remove(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name))
         Database_Connection(bin_data)
-        image_val = Data_Retrieval(file_name)
-        image_loc = app.config['UPLOADED_IMAGES_DEST']+"/"+ image_val
+        image_val = Data_Retrieval(bin_data)
+        image_loc = app.config['UPLOADED_IMAGES_DEST'] +'/'+file_name
+        with open(image_loc,"wb") as f:
+            f.write(image_val)
+
         return render_template('submission.html', image=image_loc)
     else:
         return render_template('submission.html', image=image_loc)
@@ -50,7 +53,6 @@ def Data_Retrieval(filename):
     cursor = connection.cursor()
     cursor.execute("SELECT ? from Images",filename)
     image_value = cursor.fetchval()
-    print(image_value)
     return image_value
 
 
