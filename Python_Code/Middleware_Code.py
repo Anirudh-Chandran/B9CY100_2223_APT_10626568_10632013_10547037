@@ -40,6 +40,7 @@ def Database_Connection(binary_value):
     image_value = cursor.fetchval()
     print(type(image_value))
 
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080) # Remove Host and Port after testing
 
