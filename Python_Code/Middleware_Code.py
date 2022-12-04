@@ -27,7 +27,8 @@ def submission():
         image_new_loc = image_loc + image
         with open(image_new_loc,"wb") as f:
             f.write(image_val)
-        return render_template('submission.html', image=image_new_loc)
+        image_location = "C:\\Users\\ANIRUDH\\OneDrive - Dublin Business School (DBS)\\CA_Repo\\Python_Code\\uploads\\" + image
+        return render_template('submission.html', image=image_location)
     else:
         return render_template('submission.html')
 
