@@ -27,8 +27,7 @@ def submission():
         image_new_loc = image_loc + image
         with open(image_new_loc,"wb") as f:
             f.write(image_val)
-        images = request.args[image_new_loc]
-        return render_template('submission.html', image=images)
+        return render_template('submission.html', image=image_new_loc)
     else:
         return render_template('submission.html')
 
