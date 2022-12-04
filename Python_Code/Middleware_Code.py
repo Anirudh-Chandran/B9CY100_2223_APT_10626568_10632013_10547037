@@ -13,6 +13,7 @@ def index():  # Name of the method
 
 @app.route("/submission", methods=['GET', 'POST'])
 def submission():
+    image_loc = ''
     if request.method == "POST":
         fname = request.form['fname']
         files = request.files['photo']
@@ -21,13 +22,14 @@ def submission():
         with open(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name), 'rb') as f:
             bin_data = f.read()
         os.remove(os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name))
-        image_val = Database_Connection(bin_data)
-        image_loc = os.path.join(app.config['UPLOADED_IMAGES_DEST'],file_name)
-        with open(image_loc,'wb') as f:
+        Database_Connection(bin_data)
+        image_val = Data_Retrieval(file_name)
+        image_loc = app.config['UPLOADED_IMAGES_DEST']+"/"+ file_name
+        with open(image_loc, 'wb') as f:
             f.write(image_val)
         return render_template('submission.html', image=image_loc)
     else:
-        return "except"
+        return render_template('submission.html', image=image_loc)
 
 
 def Database_Connection(binary_value):
@@ -40,8 +42,17 @@ def Database_Connection(binary_value):
     command = "INSERT INTO Images(col_image) VALUES(?)"
     cursor.execute(command,binary_value)
     cursor.commit()
-    cursor.execute("SELECT * from Images")
+
+def Data_Retrieval(filename):
+    server = 'tcp:avadb01.database.windows.net'
+    database = 'AVA_DB_1'
+    username = 'SAadmin'
+    password = 'Dublin@098'
+    connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=yes;UID=' + username + ';PWD=' + password)
+    cursor = connection.cursor()
+    cursor.execute("SELECT ? from Images",filename)
     image_value = cursor.fetchval()
+    print(type(image_value))
     return image_value
 
 
