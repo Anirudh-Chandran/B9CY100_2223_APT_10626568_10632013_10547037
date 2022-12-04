@@ -23,7 +23,10 @@ def submission():
             bin_data = f.read()
         Database_Connection(bin_data)
         image_val = Data_Retrieval(bin_data)
-        with open('image.jpg',"wb") as f:
+
+        image = 'image.jpg'
+        image_new_loc = image_loc + image
+        with open(image_new_loc,"wb") as f:
             f.write(image_val)
         return render_template('submission.html', image=image_new_loc)
     else:
