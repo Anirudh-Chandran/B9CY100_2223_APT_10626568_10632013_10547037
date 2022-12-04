@@ -1,78 +1,109 @@
 <!DOCTYPE html>
 <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" >
 <style>
 body {font-family: Aeial;}
 
-.tab{
+.tab {
 	overflow: hidden;
 	border: 1px solid #ccc;
 	background-color: #f1f1f1;
 
 }
-.tab button{
+.tab button {
 	background-color: inherit;
 	float: left;
 	border: none;
-	online: none;
+	outline: none;
 	cursor: pointer;
 	padding: 14px 16px;
 	transition: 0.3s;
 }
-.tab button:hover {
+.tab button:hover 	{
 	background-color: #ddd;
 
 }
-.tab button.active{
+.tab button.active	{
 	background-color: #ccc;
 }
-.tabcontent {
+.tabcontent	{
 	display: none;
 	padding: 6px 12px:
 	border: 1px #ccc;
 	border-top: none;
 }
-  <section>
-  <img class="mySlides" src="BPMachine.jpg" style="width:10%">
-  <img class="mySlides" src="Xray.jpg" style="width:10%">
-  <img class="mySlides" src="Machine.jpg" style="width:12%">
-  </section>
-		<script>
-		  var myIndex = 0;
-		carousel();
-
-		function carousel() {
-		  var i;
-		  var x = document.getElementsByClassName("mySlides");
-		  for (i = 0; i < x.length; i++) {
-			x[i].style.display = "none";
-		  }
-		  myIndex++;
-		  if (myIndex > x.length) {myIndex = 1}
-		  x[myIndex-1].style.display = "block";
-		  setTimeout(carousel, 3000);
-		}
-		</script>
-
-
+</style>
+</head>
+<body>
+  
 <div class="tab">
 	<button class="tablinks" oneclick="openCity(event, 'Products')">Products</button>
 	<button class="tablinks" oneclick="openCity(event, 'Help')">Help</button>
 	<button class="tablinks" oneclick="openCity(event, 'Contact Us')">Contact Us</button>
+</div>
+
 	<div id="Products" class="tabcontent">
 		<h3>Products</h3>
 		<p>Website in Progress</p>
+	</div>
+
 	<div id="Products" class="tabcontent">
 		<h3>Products</h3>
 		<p>Website in Progress</p>
+	</div>
+
 	<div id="Help" class="tabcontent">
 	<h3>Help</h3>
 	<p>Website in Progress</p>
+	</div>
+
 	<div id="Contact" class="tabcontent">
 		<h3>Contact</h3>
-		<p>Website in Progress</p>		
-		
+		<p>Website in Progress</p>			
 	</div>
-</div>
-</nav>
-</style>
+<script>
+	function openCity(evt, functionName) 
+	{
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i=0; i< tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+	
+		}
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i=0; i < tablinks.length;i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active","")
+		}
+		document.getElementById(functionname).style.display = "block";
+		evt.currentTarget.className += "active:";
+	}
+	
+</script>
+</body>
 </html>
+
+
+
+<section>
+	<img class="mySlides" src="BPMachine.jpg" style="width:50%">
+	<img class="mySlides" src="Xray.jpg" style="width:50%">
+	<img class="mySlides" src="Machine.jpg" style="width:52%">
+	</section>
+		  <script>
+			var myIndex = 0;
+		  carousel();
+  
+		  function carousel() {
+			var i;
+			var x = document.getElementsByClassName("mySlides");
+			for (i = 0; i < x.length; i++) {
+			  x[i].style.display = "none";
+			}
+			myIndex++;
+			if (myIndex > x.length) {myIndex = 1}
+			x[myIndex-1].style.display = "block";
+			setTimeout(carousel, 3000);
+		  }
+		  </script>
+  
