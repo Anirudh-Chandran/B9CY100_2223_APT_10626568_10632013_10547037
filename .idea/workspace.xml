@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14c43e1b-18eb-4575-a288-4d29205bb8d5" name="Changes" comment=" working on image processing">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_Code/Middleware_Code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Code/Middleware_Code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_Code/uploads/382691_6529374702_5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Code/uploads/382691_6529374702_5.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +99,28 @@
       <option name="project" value="LOCAL" />
       <updated>1670178767686</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary=" working on image processing">
+      <created>1670180951896</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670180951896</updated>
+    </task>
+    <task id="LOCAL-00003" summary=" working on image processing">
+      <created>1670182793305</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670182793305</updated>
+    </task>
+    <task id="LOCAL-00004" summary=" working on image processing">
+      <created>1670182799188</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670182799188</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
