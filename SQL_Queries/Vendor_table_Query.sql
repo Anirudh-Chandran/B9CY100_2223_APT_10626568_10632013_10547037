@@ -12,4 +12,10 @@ Prod_ID int
 alter table vendor
 --drop column v_location
 --add v_street varchar, v_city varchar , v_postal_code varchar
-alter column v_city varchar not null
+--alter column v_city varchar not null
+drop constraint PK__Vendor__AD3D844110B23F37
+
+--select * from vendor
+
+
+
