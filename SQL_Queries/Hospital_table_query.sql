@@ -12,5 +12,5 @@ alter table hospital
 --alter column H_Id int not null
 --alter column h_name varchar not null
 --drop column h_contact
-alter column Phome varchar
+rename column Email to H_Email
 --add primary key(H_ID)
