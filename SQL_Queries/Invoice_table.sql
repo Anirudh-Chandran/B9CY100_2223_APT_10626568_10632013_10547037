@@ -14,7 +14,9 @@ alter table invoice
 --add primary key (inv_id)
 --add foreign key (V_ID) references vendor
 --add foreign key (h_ID) references hospital
-drop constraint FK__Invoice__V_ID__339FAB6E
+--drop constraint FK__Invoice__V_ID__339FAB6E
+--drop column v_id
+add foreign key (Prod_id) references product
 
 /*
 SELECT TABLE_NAME,
