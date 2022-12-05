@@ -23,7 +23,7 @@ def submission():
         with open(image_loc+file_name, 'rb') as f:
             bin_data = f.read()
         Database_Connection(fname,bin_data)
-        image_val = Data_Retrieval(bin_data)
+        image_val = Data_Retrieval(fname)
         image = "image.jpg"
         image_new_loc = image_loc + image
         with open(image_new_loc,"wb") as f:
@@ -51,7 +51,7 @@ def Data_Retrieval(filename):
     password = 'Dublin@098'
     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=yes;UID=' + username + ';PWD=' + password)
     cursor = connection.cursor()
-    cursor.execute("SELECT img_id,? from Prod_Images",filename)
+    cursor.execute("SELECT ?,prod_image from Prod_Images",filename)
     image_value = cursor.fetchone()
     c=[]
     for values in image_value:
