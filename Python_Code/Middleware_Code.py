@@ -22,26 +22,26 @@ def submission():
         files.save(image_loc + file_name)
         with open(image_loc+file_name, 'rb') as f:
             bin_data = f.read()
-        Database_Connection(bin_data)
+        Database_Connection(fname,bin_data)
         image_val = Data_Retrieval(bin_data)
-        image = file_name
+        image = "image.jpg"
         image_new_loc = image_loc + image
         with open(image_new_loc,"wb") as f:
-            f.write(image_val)
-
-        return render_template('submission.html')
+            f.write(image_val[1])
+        data = image_val[0]
+        return render_template('submission.html',data=data)
     else:
         return render_template('submission.html')
 
-def Database_Connection(binary_value):
+def Database_Connection(img_id,binary_value):
     server = 'tcp:avadb01.database.windows.net'
     database ='AVA_DB_1'
     username ='SAadmin'
     password ='Dublin@098'
     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD='+ password)
     cursor = connection.cursor()
-    command = "INSERT INTO Images(prod_image) VALUES(?)"
-    cursor.execute(command,binary_value)
+    command = "INSERT INTO Prod_Images(img_id,prod_image) VALUES(?,?)"
+    cursor.execute(command,img_id,binary_value)
     cursor.commit()
 
 def Data_Retrieval(filename):
@@ -51,9 +51,12 @@ def Data_Retrieval(filename):
     password = 'Dublin@098'
     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=yes;UID=' + username + ';PWD=' + password)
     cursor = connection.cursor()
-    cursor.execute("SELECT ? from Images",filename)
-    image_value = cursor.fetchval()
-    return image_value
+    cursor.execute("SELECT img_id,? from Prod_Images",filename)
+    image_value = cursor.fetchone()
+    c=[]
+    for values in image_value:
+        c.append(values)
+    return c
 
 
 if __name__ == "__main__":
