@@ -12,4 +12,4 @@ primary key (Ack_ID)
 
 alter table request_approval
 --drop constraint FK__Request_Ap__V_ID__31B762FC
-add foreign key (v_id) references vendor
+add foreign key (req_id) references ondemand_request
