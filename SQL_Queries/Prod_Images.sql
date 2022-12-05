@@ -1,4 +1,6 @@
-create table images (
-col_image blob (max)
+
+create table Prod_Images (
+Prod_Image varbinary
 )
+
 
