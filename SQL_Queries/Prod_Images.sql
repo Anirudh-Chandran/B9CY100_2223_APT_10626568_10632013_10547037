@@ -13,3 +13,5 @@ add Prod_ID int foreign key (Prod_ID) references Product
 
 --Alter table prod_images
 --add primary key(Img_id)
+
+select * from prod_images

@@ -17,4 +17,6 @@ primary key (Req_ID)
 
 alter table ondemand_request
 --add H_ID int not null
-add foreign key (h_id) references hospital
+--add foreign key (h_id) references hospital
+--alter column req_title varchar(30) not null,
+alter column req_budget varchar (12) not null 

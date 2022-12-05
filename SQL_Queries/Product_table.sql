@@ -31,4 +31,6 @@ alter column prod_description varchar(1000) not null
 select * from product
 --delete from Product
 
+insert into product values(1,'Prod-1',9,1,'This is first product entry')
+
 
