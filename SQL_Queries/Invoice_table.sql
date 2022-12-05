@@ -11,4 +11,5 @@ H_ID		INT			NOT NULL,
 */
 
 alter table invoice
-add primary key (inv_id)
+--add primary key (inv_id)
+add foreign key (V_ID) references vendor
