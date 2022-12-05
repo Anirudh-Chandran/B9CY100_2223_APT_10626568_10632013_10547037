@@ -40,7 +40,7 @@ def Database_Connection(binary_value):
     password ='Dublin@098'
     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD='+ password)
     cursor = connection.cursor()
-    command = "INSERT INTO Images(col_image) VALUES(?)"
+    command = "INSERT INTO Images(prod_image) VALUES(?)"
     cursor.execute(command,binary_value)
     cursor.commit()
 
