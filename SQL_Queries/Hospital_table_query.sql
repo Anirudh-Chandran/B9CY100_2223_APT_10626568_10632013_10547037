@@ -10,7 +10,12 @@ H_Contact varchar
 
 alter table hospital
 --alter column H_Id int not null
---alter column h_name varchar not null
+alter column h_city varchar(30) not null
 --drop column h_contact
-rename column Phome to H_Phone
+--rename column Phome to H_Phone
 --add primary key(H_ID)
+
+--select * from Hospital
+
+insert into Hospital (h_id,h_name,h_city)
+values (1,'hospital-1','dublin')
