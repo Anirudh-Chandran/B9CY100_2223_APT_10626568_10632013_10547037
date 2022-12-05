@@ -14,7 +14,8 @@ alter table Vendor
 --add v_street varchar, v_city varchar , v_postal_code varchar
 --alter column v_city varchar not null
 --drop constraint PK__Vendor__AD3D844110B23F37
-add primary key (v_id)
+--add primary key (v_id)
+add v_phone varchar, v_email varchar
 
 --select * from vendor
 
