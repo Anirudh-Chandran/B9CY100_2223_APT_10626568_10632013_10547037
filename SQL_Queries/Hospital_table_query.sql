@@ -9,4 +9,6 @@ H_Contact varchar
 */
 
 alter table hospital
-alter column H_Id int not null 
+--alter column H_Id int not null
+--alter column h_name varchar not null
+drop column h_contact
