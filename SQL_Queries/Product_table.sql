@@ -25,9 +25,12 @@ alter table Product
 --alter column prod_id int not null
 --add primary key(prod_id)
 --drop constraint FK__Product__v_id__3A4CA8FD
-add constraint v_id_fk foreign key (v_id) references vendor
+--add constraint v_id_fk foreign key (v_id) references vendor
+alter column prod_description varchar(1000) not null
 
---select * from product
+select * from product
 --delete from Product
+
+insert into product values(1,'Prod-1',9,1,'This is first product entry')
 
 
