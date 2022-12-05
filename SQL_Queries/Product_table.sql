@@ -14,10 +14,15 @@ CONSTRAINT v_id_fk foreign key (v_id)
 REFERENCES Vendor (v_id)
 )
 */
+
 --insert into Product (prod_id, prod_name, prod_quantity,v_id)
 --values('123','Nam', 7,4)
 
 
 
-alter table product
-Add prod_description varchar
+alter table Product
+drop constraint prod_pk;
+--alter column prod_id int not null
+
+
+
