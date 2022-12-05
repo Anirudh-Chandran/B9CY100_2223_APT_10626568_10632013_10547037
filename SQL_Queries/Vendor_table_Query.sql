@@ -10,4 +10,4 @@ Prod_ID int
 */
 
 alter table vendor
-drop column contact
+drop column v_contact
