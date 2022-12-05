@@ -5,4 +5,7 @@ Prod_Image varbinary
 
 */
 
-select * from Prod_Images
+--select * from Prod_Images
+
+Alter table prod_images
+add Img_ID int 
