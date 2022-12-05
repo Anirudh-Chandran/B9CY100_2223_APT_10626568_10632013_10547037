@@ -12,4 +12,5 @@ H_ID		INT			NOT NULL,
 
 alter table invoice
 --add primary key (inv_id)
-add foreign key (V_ID) references vendor
+--add foreign key (V_ID) references vendor
+add foreign key (h_ID) references hospital
