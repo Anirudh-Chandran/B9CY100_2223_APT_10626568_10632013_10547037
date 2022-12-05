@@ -11,4 +11,4 @@ Prod_ID int
 
 alter table vendor
 --drop column v_location
-add v_street varchar, v_city varchar not null, v_postal_code varchar
+add v_street varchar, v_city varchar , v_postal_code varchar
