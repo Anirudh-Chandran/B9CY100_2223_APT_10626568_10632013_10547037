@@ -12,15 +12,22 @@ Prod_ID int
 alter table Vendor
 --drop column v_location
 --add v_street varchar, v_city varchar , v_postal_code varchar
---alter column v_city varchar not null
+--alter column v_email varchar(30) not null
 --drop constraint PK__Vendor__AD3D844110B23F37
 --add primary key (v_id)
 --add v_phone varchar, v_email varchar
-add v_aboutus varchar
+add v_website varchar(100)
+
 
 --select * from vendor
 
 --delete from vendor
+
+insert into vendor values('Vendor-1', 1,'st 1','dublin','123','0987895643','vendor@vendor.com','We manufacture medical devices')
+
+
+update vendor
+set v_website='https://vendor-1.com' where v_id=1
 
 
 
