@@ -24,6 +24,10 @@ alter table Product
 --drop constraint prod_pk;
 --alter column prod_id int not null
 --add primary key(prod_id)
-drop constraint v_id_fk
+--drop constraint FK__Product__v_id__3A4CA8FD
+add constraint v_id_fk foreign key (v_id) references vendor
+
+--select * from product
+--delete from Product
 
 
