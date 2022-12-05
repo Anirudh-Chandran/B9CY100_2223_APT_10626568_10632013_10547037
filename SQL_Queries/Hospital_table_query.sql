@@ -17,5 +17,5 @@ alter table hospital
 alter column h_email varchar (50) not null
 --select * from Hospital
 
-insert into Hospital (h_id,h_name,h_city)
-values (1,'hospital-1','dublin')
+insert into Hospital 
+values (2,'hospital-2','https://hospital-2.com','street-2','Dublin','1230987','0812376541','hospital-2@hospital2.com')
