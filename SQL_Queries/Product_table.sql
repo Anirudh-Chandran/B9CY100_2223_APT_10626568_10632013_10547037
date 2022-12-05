@@ -21,8 +21,9 @@ REFERENCES Vendor (v_id)
 
 
 alter table Product
-drop constraint prod_pk;
+--drop constraint prod_pk;
 --alter column prod_id int not null
+add primary key(prod_id)
 
 
 
