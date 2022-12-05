@@ -1,3 +1,4 @@
+/*
 create table OnDemand_Request(
 Req_ID int not null,
 Req_Title varchar not null,
@@ -11,3 +12,8 @@ primary key (Req_ID)
 --foreign key(H_ID)
 --references hospital
 )
+*/
+--select * from OnDemand_Request
+
+alter table ondemand_request
+add H_ID int not null
