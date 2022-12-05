@@ -1,7 +1,7 @@
 create table OnDemand_Request(
-Req_ID int(3) not null,
+Req_ID int not null,
 Req_Title varchar not null,
-Req_Quantity int(2),
+Req_Quantity int,
 Req_Dimensions varchar,
 Req_Description varchar not null,
 Req_Need_by_Date date,
