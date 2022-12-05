@@ -16,7 +16,8 @@ alter table invoice
 --add foreign key (h_ID) references hospital
 --drop constraint FK__Invoice__V_ID__339FAB6E
 --drop column v_id
-add foreign key (Prod_id) references product
+--add foreign key (Prod_id) references product
+alter
 
 /*
 SELECT TABLE_NAME,
