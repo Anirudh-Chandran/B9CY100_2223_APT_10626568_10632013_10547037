@@ -16,4 +16,5 @@ primary key (Req_ID)
 --select * from OnDemand_Request
 
 alter table ondemand_request
-add H_ID int not null
+--add H_ID int not null
+add foreign key (h_id) references hospital
