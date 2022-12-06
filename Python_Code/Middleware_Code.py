@@ -33,8 +33,9 @@ def loginpage():
     else:
         return render_template("Login.html")
 
-@app.route("/Register")
+@app.route("/Register",methods=['GET', 'POST'])
 def register():
+
     return render_template("Register.html")
 
 # @app.route("/submission", methods=['GET', 'POST'])
