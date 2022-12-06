@@ -24,12 +24,12 @@ def submission():
             bin_data = f.read()
         Database_Connection(fname,bin_data)
         image_val = Data_Retrieval(fname)
-        image = "image.jpg"
+        image = file_name
         image_new_loc = image_loc + image
         with open(image_new_loc,"wb") as f:
             f.write(image_val[1])
         data = image_val[0]
-        return render_template('submission.html',data=data)
+        return render_template('submission.html',data=data,image=url_for('static',filename=file_name))
     else:
         return render_template('submission.html')
 
@@ -44,16 +44,16 @@ def Database_Connection(img_id,binary_value):
     cursor.execute(command,img_id,binary_value)
     cursor.commit()
 
-def Data_Retrieval(filename):
+def Data_Retrieval(img_id):
     server = 'tcp:avadb01.database.windows.net'
     database = 'AVA_DB_1'
     username = 'SAadmin'
     password = 'Dublin@098'
     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=yes;UID=' + username + ';PWD=' + password)
     cursor = connection.cursor()
-    cursor.execute("SELECT ?,prod_image from Prod_Images",filename)
+    cursor.execute("SELECT ?,prod_image from Prod_Images ",img_id)
     image_value = cursor.fetchone()
-    c=[]
+    c = []
     for values in image_value:
         c.append(values)
     return c
