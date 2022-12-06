@@ -7,7 +7,8 @@ app = Flask(__name__, template_folder="templates")
 app.config['UPLOADED_IMAGES_DEST'] = 'static'
 
 
-@app.route("/" or "/Home")
+@app.route("/")
+@app.route("/Home")
 def Homepage():
     return render_template("Homepage.html")
 
