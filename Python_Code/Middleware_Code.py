@@ -9,9 +9,16 @@ app.config['SECRET_KEY'] = "secret_key"
 
 
 @app.route("/")
-@app.route("/Home", methods=['GET', 'POST'])
+@app.route("/guest")
 def homepage():
     return render_template("Homepage.html")
+
+
+@app.route("/home", methods=['GET', 'POST'])
+def user_home():
+        return render_template("Homepage.html")
+    else:
+        return render_template("User_Homepage.html")
 
 
 @app.route("/Login", methods=['GET', 'POST'])
