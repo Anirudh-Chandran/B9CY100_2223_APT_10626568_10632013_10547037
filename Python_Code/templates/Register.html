@@ -33,6 +33,12 @@
             {
                 opacity: 1.0;
             }
+            .cancelbtn 
+            {
+                width:auto;
+                padding: 10px 20px;
+                background-color: red;
+            }
             
             .imgcontainer
             {
@@ -72,7 +78,7 @@
     </head>
     <body>
         <center><h2> Please Register </h2></center>
-        <form action="C:\Users\rocki\Documents\GitHub\CA_Repo\Python_Code\templates\Homepage.html" method="post"> 
+        <form action="/Home" method="post"> 
             <div class="imgcontainer">
                 <img src="https://cdn-icons-png.flaticon.com/512/1792/1792392.png" 
                 alt="Avatar" class="avatar">
@@ -91,11 +97,14 @@
                 <input type="text" placeholder="Enter Phone Number" name="num" required>
                 
                 <button type="submit">Register</button>
-                
+            </div>
+                <div class="container signin">
+                    <p>Already have an account? <a href="login.html">Sign in</a>.</p>
+                </div>
                 
         </form>
 
             
-        </div>
+        
     </body>
 </html>
