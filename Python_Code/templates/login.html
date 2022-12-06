@@ -76,7 +76,7 @@
            </style>   
     </head>
         <body>
-			<a href="/Register">Register</a>
+			
             <h2><center>Please Login</center> </h2>
 			<form method="post">
                 <div class="imgcontainer">
@@ -84,9 +84,9 @@
                     alt="Avatar" class="avatar">
                 </div>
 				<div class="flashes">
-					{% for message in get_flashed_messages() %}
+					<!--{% for message in get_flashed_messages() %}
 						{{ message }}
-					{% endfor %}
+					{% endfor %} -->
 				</div>
                 <div class="container">
                     <label for="uname"><b>Username</b></label>
@@ -94,9 +94,12 @@
                     <label for="pwd"><b>Password</b></label>
                     <input type="text" placeholder="Enter Password" name="pwd" required>
                     <button type="submit">Login</button>
+                    
                     <label>
                         <input type="checkbox" checked="checked" name="remember"> Remember Me
                     </label>
+                    <h4>New User?</h4>
+                    <a href="/Register.html"> Please Register</a>
                 </div>
             </form>
                 <div class="container" styles="background-color:white">
