@@ -76,12 +76,18 @@
            </style>   
     </head>
         <body>
+			<a href="/Register">Register</a>
             <h2><center>Please Login</center> </h2>
-            <form action="C:\Users\rocki\Documents\GitHub\CA_Repo\Python_Code\templates\Homepage.html" method="post">
+			<form method="post">
                 <div class="imgcontainer">
                     <img src="https://cdn-icons-png.flaticon.com/512/1674/1674704.png" 
                     alt="Avatar" class="avatar">
                 </div>
+				<div class="flashes">
+					{% for message in get_flashed_messages() %}
+						{{ message }}
+					{% endfor %}
+				</div>
                 <div class="container">
                     <label for="uname"><b>Username</b></label>
                     <input type="text" placeholder="Enter Username" name="uname" required>
