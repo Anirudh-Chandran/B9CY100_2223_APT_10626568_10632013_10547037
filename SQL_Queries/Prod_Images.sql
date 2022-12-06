@@ -15,3 +15,5 @@ add Prod_ID int foreign key (Prod_ID) references Product
 --add primary key(Img_id)
 
 select * from prod_images
+
+delete from prod_images

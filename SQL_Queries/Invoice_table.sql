@@ -17,7 +17,7 @@ alter table invoice
 --drop constraint FK__Invoice__V_ID__339FAB6E
 --drop column v_id
 --add foreign key (Prod_id) references product
-alter
+alter column prod_name varchar (200)
 
 /*
 SELECT TABLE_NAME,

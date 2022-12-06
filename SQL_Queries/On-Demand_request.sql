@@ -19,4 +19,8 @@ alter table ondemand_request
 --add H_ID int not null
 --add foreign key (h_id) references hospital
 --alter column req_title varchar(30) not null,
-alter column req_budget varchar (12) not null 
+alter column req_title varchar (100) not null 
+
+select * from ondemand_request
+
+insert into ondemand_request values(1,'Request-1',12,'10x5x34','This is the first request from Hospital-1 and we need a medical device with mentioned dimensions. If any vendor can fulfill then please contact.','2023-08-23','80000',1)

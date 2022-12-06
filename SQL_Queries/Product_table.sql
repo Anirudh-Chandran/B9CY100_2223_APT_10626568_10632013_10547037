@@ -26,7 +26,9 @@ alter table Product
 --add primary key(prod_id)
 --drop constraint FK__Product__v_id__3A4CA8FD
 --add constraint v_id_fk foreign key (v_id) references vendor
-alter column prod_description varchar(1000) not null
+--alter column prod_description varchar(1000) not null
+
+add Prod_size varchar(15)
 
 select * from product
 --delete from Product
@@ -34,3 +36,5 @@ select * from product
 insert into product values(1,'Prod-1',9,1,'This is first product entry')
 
 
+update product
+set prod_man_date='2022-08-25', prod_size='10x8x25'
