@@ -1,12 +1,13 @@
+import random
 import flask
-from flask import Flask,request,render_template,url_for,flash
-import os
+from flask import Flask,request,render_template,url_for,flash,session
 import pyodbc
+from datetime import timedelta
 
 app = Flask(__name__, template_folder="templates")
 app.config['UPLOADED_IMAGES_DEST'] = 'static'
 app.config['SECRET_KEY'] = "secret_key"
-
+app.permanent_session_lifetime = timedelta(minutes=5)
 
 @app.route("/")
 @app.route("/guest")
@@ -16,6 +17,8 @@ def homepage():
 
 @app.route("/Home", methods=['GET', 'POST'])
 def user_home():
+    if 'uname' in session:
+        flash("Logged in")
     return render_template("Homepage.html")
 
 
@@ -27,6 +30,7 @@ def loginpage():
         password = request.form['pwd']
         if username in login_ids:
             if password == login_ids[username]:
+                session[username]=username
                 return render_template("Homepage.html")
             else:
                 message = 'PASSWORD is incorrect'
@@ -36,6 +40,7 @@ def loginpage():
             flash('NO Username found, Please register...')
             return render_template("Login.html")
     else:
+
         return render_template("Login.html")
 
 @app.route("/Register",methods=['GET', 'POST'])
