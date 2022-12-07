@@ -14,11 +14,9 @@ def homepage():
     return render_template("Homepage.html")
 
 
-@app.route("/home", methods=['GET', 'POST'])
+@app.route("/Home", methods=['GET', 'POST'])
 def user_home():
-        return render_template("Homepage.html")
-    else:
-        return render_template("User_Homepage.html")
+    return render_template("Homepage.html")
 
 
 @app.route("/Login", methods=['GET', 'POST'])
@@ -42,7 +40,6 @@ def loginpage():
 
 @app.route("/Register",methods=['GET', 'POST'])
 def register():
-
     return render_template("Register.html")
 
 # @app.route("/submission", methods=['GET', 'POST'])
