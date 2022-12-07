@@ -1,6 +1,6 @@
 import random
 import flask
-from flask import Flask,request,render_template,url_for,flash,session
+from flask import Flask,request,render_template,url_for,flash,session,redirect
 import pyodbc
 from datetime import timedelta
 
@@ -8,6 +8,16 @@ app = Flask(__name__, template_folder="templates")
 app.config['UPLOADED_IMAGES_DEST'] = 'static'
 app.config['SECRET_KEY'] = "secret_key"
 app.permanent_session_lifetime = timedelta(minutes=5)
+
+image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
+
+def Database_Connection():
+    server = 'tcp:avadb01.database.windows.net'
+    database ='AVA_DB_1'
+    username ='SAadmin'
+    password ='Dublin@098'
+    connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD='+ password)
+    return connection.cursor()
 
 @app.route("/")
 @app.route("/guest")
@@ -17,9 +27,24 @@ def homepage():
 
 @app.route("/Home", methods=['GET', 'POST'])
 def user_home():
-    if 'uname' in session:
-        flash("Logged in")
-    return render_template("Homepage.html")
+    cursor = Database_Connection()
+    cursor.execute("SELECT prod_id,prod_name,prod_description from Product")
+    all_prods = cursor.fetchall()
+    cursor.execute("Select prod_image from prod_images")
+    prod_id1 = all_prods[0][0]
+    prod_name1 = all_prods[0][1]
+    prod_desc1 = all_prods[0][2]
+    prod_id2 = all_prods[1][0]
+    prod_name2 = all_prods[1][1]
+    prod_desc2 = all_prods[1][2]
+    cursor.execute("SELECT prod_image from Prod_Images where prod_id=? or prod_id = ?",prod_id1,prod_id2)
+    image_val = cursor.fetchall()
+    filename="image.png"
+    image_new_loc = image_loc + filename
+    with open(image_new_loc,"wb") as f:
+        f.write(image_val[0][0])
+    data = image_val[0]
+    return render_template("Index.html",prod_id1=prod_id1,prod_id2=prod_id2,prod_name1=prod_name1,prod_name2=prod_name2,prod_desc1=prod_desc1,prod_desc2=prod_desc2,image=url_for('static',filename=filename))
 
 
 @app.route("/Login", methods=['GET', 'POST'])
@@ -31,7 +56,7 @@ def loginpage():
         if username in login_ids:
             if password == login_ids[username]:
                 session[username]=username
-                return render_template("Homepage.html")
+                return redirect("/Home")
             else:
                 message = 'PASSWORD is incorrect'
                 flash(message)
@@ -40,7 +65,6 @@ def loginpage():
             flash('NO Username found, Please register...')
             return render_template("Login.html")
     else:
-
         return render_template("Login.html")
 
 @app.route("/Register",methods=['GET', 'POST'])
@@ -59,22 +83,12 @@ def register():
 #             bin_data = f.read()
 #         Database_Connection(fname,bin_data)
 #         image_val = Data_Retrieval(fname)
-#         image = file_name
-#         image_new_loc = image_loc + image
-#         with open(image_new_loc,"wb") as f:
-#             f.write(image_val[1])
-#         data = image_val[0]
+#
 #         return render_template('submission.html',data=data,image=url_for('static',filename=file_name))
 #     else:
 #         return render_template('submission.html')
 #
-# def Database_Connection(img_id,binary_value):
-#     server = 'tcp:avadb01.database.windows.net'
-#     database ='AVA_DB_1'
-#     username ='SAadmin'
-#     password ='Dublin@098'
-#     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD='+ password)
-#     cursor = connection.cursor()
+
 #     command = "INSERT INTO Prod_Images(img_id,prod_image) VALUES(?,?)"
 #     cursor.execute(command,img_id,binary_value)
 #     cursor.commit()
@@ -86,11 +100,6 @@ def register():
 #     password = 'Dublin@098'
 #     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=yes;UID=' + username + ';PWD=' + password)
 #     cursor = connection.cursor()
-#     cursor.execute("SELECT ?,prod_image from Prod_Images ",img_id)
-#     image_value = cursor.fetchone()
-#     c = []
-#     for values in image_value:
-#         c.append(values)
 #     return c
 
 

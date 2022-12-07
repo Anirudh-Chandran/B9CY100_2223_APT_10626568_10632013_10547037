@@ -1,16 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<title>
-	"AVA_Corp"
-</title>
+<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>home</title>
+
+<link href="../static/css/bootstrap-4.4.1.css" rel="stylesheet">
 </head>
+
 <body>
-<form action="/submission" method='POST' enctype="multipart/form-data">
-	<label for="fname"> First Name: </label>
-	<input type="text" id="fname" name="fname"><br>
-	<input type="file" name="photo">
-	<input type="submit" value="Submit">
-</form>
+
+<center><a href="h.html"><img src="../static/images/AVA_Logo.png" alt="AVA" width="700" class="center"></a></center>
+<hr>
+	<center><h2 class="text-center">Available Products</h2></center>
+<hr>
+<div class="container">
+		<div class="row text-center">
+			<div class="col-md-4 pb-1 pb-md-0">
+		<div class="card">
+		  <img src={{image}} alt="Card image cap" width="350" height="200" class="card-img-top rounded">
+			<div class="card-body">
+				<a href="product.html" class="btn btn-primary">{{prod_id1}}.{{prod_name1}}</a>
+				<p class="card-text">{{prod_desc1}}</p>
+			</div>
+		</div>
+		</div>
+			<div class="col-md-4 pb-1 pb-md-0">
+		<div class="card">
+			<img src="../static/images/BPMachine.jpg" alt="Card image cap" width="350" height="200" class="card-img-top rounded">
+			<div class="card-body">
+				<a href="product.html" class="btn btn-primary">{{prod_id2}}.{{prod_name2}}</a>
+				<p class="card-text">{{prod_desc2}}</p>
+			</div>
+		</div>
+		</div>
+		<div class="col-md-4 pb-1 pb-md-0">		
+		<div class="card">
+			<img src="../static/images/BPMachine.jpg" alt="Card image cap" width="350" height="200" class="card-img-top rounded">
+			<div class="card-body">
+				<a href="product.html" class="btn btn-primary">{{prod_name}}</a>
+				<p class="card-text">This is the description of 3rd product</p>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="row text-center">
+			<div class="col-md-4 pb-1 pb-md-0">
+		<div class="card">
+		  <img src="../static/images/BPMachine.jpg" alt="Card image cap" width="350" height="200" class="card-img-top rounded">
+			<div class="card-body">
+				<a href="product.html" class="btn btn-primary">{{prod_name}}</a>
+				<p class="card-text">This is the description of 4th product</p>
+			</div>
+		</div>
+		</div>
+			<div class="col-md-4 pb-1 pb-md-0">
+		<div class="card">
+			<img src="../static/images/BPMachine.jpg" alt="Card image cap" width="350" height="200" class="card-img-top rounded">
+			<div class="card-body">
+				<a href="product.html" class="btn btn-primary">{{prod_name}}</a>
+				<p class="card-text">This is the description of 5th product</p>
+			</div>
+		</div>
+		</div>
+		<div class="col-md-4 pb-1 pb-md-0">		
+		<div class="card">
+			<img src="../static/images/BPMachine.jpg" alt="Card image cap" width="350" height="200" class="card-img-top rounded">
+			<div class="card-body">
+				<a href="product.html" class="btn btn-primary">{{prod_name}}</a>
+				<p class="card-text">This is the description of 6th product</p>
+			</div>
+		</div>
+		</div>
+	</div>
+		</div>
+	<hr>
+	<center><h2 class="text-center">OnDemand Requests</h2></center>
+<hr>
+<div class="container">
+		<div class="row text-center">
+			<div class="col-md-4 pb-1 pb-md-0">
+		<div class="card">
+			<div class="card-body">
+				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
+				<p class="card-text">This is the description of 1st request</p>
+			</div>
+		</div>
+		</div>
+			<div class="col-md-4 pb-1 pb-md-0">
+		<div class="card">
+			<div class="card-body">
+				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
+				<p class="card-text">This is the description of 2nd request</p>
+			</div>
+		</div>
+		</div>
+		<div class="col-md-4 pb-1 pb-md-0">		
+		<div class="card">
+			<div class="card-body">
+				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
+				<p class="card-text">This is the description of 3rd request</p>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="row text-center">
+			<div class="col-md-4 pb-1 pb-md-0">
+		<div class="card">
+			<div class="card-body">
+				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
+				<p class="card-text">This is the description of 4th request</p>
+			</div>
+		</div>
+		</div>
+			<div class="col-md-4 pb-1 pb-md-0">
+		<div class="card">
+			<div class="card-body">
+				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
+				<p class="card-text">This is the description of 5th request</p>
+			</div>
+		</div>
+		</div>
+		<div class="col-md-4 pb-1 pb-md-0">		
+		<div class="card">
+			<div class="card-body">
+				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
+				<p class="card-text">This is the description of 6th request</p>
+			</div>
+		</div>
+		</div>
+	</div>
+		</div>
+	<script src="../static/js/jquery-3.4.1.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap-4.4.1.js"></script>
 </body>
 </html>
