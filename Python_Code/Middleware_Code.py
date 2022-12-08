@@ -43,9 +43,8 @@ def user_home():
     image_new_loc = image_loc + filename
     with open(image_new_loc,"wb") as f:
         f.write(image_val[0][0])
-    data = image_val[0]
-    return render_template("Index.html",prod_id1=prod_id1,prod_id2=prod_id2,prod_name1=prod_name1,prod_name2=prod_name2,prod_desc1=prod_desc1,prod_desc2=prod_desc2,image=url_for('static',filename=filename))
-
+    prod_ids = [prod_id1,prod_id2]
+    return render_template("Index.html",prod_ids_len=len(prod_ids),prod_ids=prod_ids,prod_name1=prod_name1,prod_name2=prod_name2,prod_desc1=prod_desc1,prod_desc2=prod_desc2,image=url_for('static',filename=filename)
 
 @app.route("/Login", methods=['GET', 'POST'])
 def loginpage():

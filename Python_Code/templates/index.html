@@ -15,25 +15,21 @@
 	<center><h2 class="text-center">Available Products</h2></center>
 <hr>
 <div class="container">
+		
 		<div class="row text-center">
 			<div class="col-md-4 pb-1 pb-md-0">
+		{{prod_ids}}
+		{%for i in range(prod_ids_len)%}
 		<div class="card">
 		  <img src={{image}} alt="Card image cap" width="350" height="200" class="card-img-top rounded">
 			<div class="card-body">
-				<a href="product.html" class="btn btn-primary">{{prod_id1}}.{{prod_name1}}</a>
+				
+				<a href="product.html" class="btn btn-primary">{{prod_ids[i]}}.{{prod_name1}}</a>
 				<p class="card-text">{{prod_desc1}}</p>
 			</div>
 		</div>
 		</div>
-			<div class="col-md-4 pb-1 pb-md-0">
-		<div class="card">
-			<img src="../static/images/BPMachine.jpg" alt="Card image cap" width="350" height="200" class="card-img-top rounded">
-			<div class="card-body">
-				<a href="product.html" class="btn btn-primary">{{prod_id2}}.{{prod_name2}}</a>
-				<p class="card-text">{{prod_desc2}}</p>
-			</div>
-		</div>
-		</div>
+		{%endfor%}
 		<div class="col-md-4 pb-1 pb-md-0">		
 		<div class="card">
 			<img src="../static/images/BPMachine.jpg" alt="Card image cap" width="350" height="200" class="card-img-top rounded">
