@@ -44,7 +44,8 @@ def user_home():
     with open(image_new_loc,"wb") as f:
         f.write(image_val[0][0])
     prod_ids = [prod_id1,prod_id2]
-    return render_template("Index.html",prod_ids_len=len(prod_ids),prod_ids=prod_ids,prod_name1=prod_name1,prod_name2=prod_name2,prod_desc1=prod_desc1,prod_desc2=prod_desc2,image=url_for('static',filename=filename)
+    return render_template("Index.html",prod_ids_len=len(prod_ids),prod_ids=prod_ids,prod_name1=prod_name1,prod_name2=prod_name2,prod_desc1=prod_desc1,prod_desc2=prod_desc2,image=url_for('static',filename=filename))
+
 
 @app.route("/Login", methods=['GET', 'POST'])
 def loginpage():
@@ -66,27 +67,30 @@ def loginpage():
     else:
         return render_template("Login.html")
 
+
 @app.route("/Register",methods=['GET', 'POST'])
 def register():
     return render_template("Register.html")
 
-# @app.route("/submission", methods=['GET', 'POST'])
-# def submission():
-#     image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
-#     if request.method == "POST":
-#         fname = request.form['fname']
-#         files = request.files['photo']
-#         file_name = files.filename
-#         files.save(image_loc + file_name)
-#         with open(image_loc+file_name, 'rb') as f:
-#             bin_data = f.read()
-#         Database_Connection(fname,bin_data)
-#         image_val = Data_Retrieval(fname)
-#
-#         return render_template('submission.html',data=data,image=url_for('static',filename=file_name))
-#     else:
-#         return render_template('submission.html')
-#
+
+
+@app.route("/Products", methods=['GET', 'POST'])
+def products():
+    image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
+    if request.method == "POST":
+        fname = request.form['fname']
+        files = request.files['photo']
+        file_name = files.filename
+        files.save(image_loc + file_name)
+        with open(image_loc+file_name, 'rb') as f:
+            bin_data = f.read()
+        Database_Connection(fname,bin_data)
+        image_val = Data_Retrieval(fname)
+
+        return render_template('Form.html',data=data,image=url_for('static',filename=file_name))
+    else:
+        return render_template('Form.html')
+
 
 #     command = "INSERT INTO Prod_Images(img_id,prod_image) VALUES(?,?)"
 #     cursor.execute(command,img_id,binary_value)
