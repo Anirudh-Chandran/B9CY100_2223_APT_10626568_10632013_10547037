@@ -65,8 +65,42 @@
             </style>
         <body>
             <h2><center>Product Form Page</center></h2>
+            <form action="/Home" method="post"> 
+                <div class="imgcontainer">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3788/3788182.png" 
+                    alt="Avatar" class="avatar">
+                </div>
+                <div class="container">
+                    <label for="Prod_ID"><b>Product ID:</b></label><br>
+                    <input type="number" placeholder="Enter Product ID" id="Prod_ID" required> <br>
+
+                    <label for="Prod_Name"><b>Product Name:</b></label><br>
+                    <input type="text" placeholder="Enter Product Name" id="Prod_Name" required><br>
+                    
+                    <label for="V_ID"><b>Vendor ID:</b></label><br>
+                    <input type="number" placeholder="Enter Vendor ID" id="V_ID" required><br>
+                    
+                    <label for="Man_date"><b>Manufacturing Date:</b></label><br>
+                    <input type="number" placeholder="Enter Manufacturing Date" id="Man_date" required><br>
+                    
+                    <label for="Dimensions"><b>Dimensions:</b></label><br>
+                    <input type="number" placeholder="Enter Dimensions" id="Dimensions" required><br>
+                    
+                    <label for="Quantity"><b>Enter Quantity:</b></label><br>
+                    <input type="number" placeholder="Enter Quantity" id="Quantity" required><br>
+                    
+                    <label for="Description"><b>Enter Description:</b></label><br>
+                    <input type="text" placeholder="Enter Product Description" id="Description" required><br>
+                    
+                    <label for="Images"><b>Upload Image:</b></label><br>
+                    <input type="file"  id="Images" required><br>
+
+                    <button type="submit"><b>Submit</b></button>
+                </div>
+
+            <!--
             <p>Please Enter the product details below</p>
-            <form action="#"> <!--Webpage Where these values will be saved-->
+            <form action="#"> Webpage Where these values will be saved
                 <label for="Prod_ID">Product ID:</label><br>
                 <input type="number" id="Prod_ID"> <br>
                 <label for="Prod_Name">Product Name:</label><br>
@@ -84,6 +118,7 @@
                 <label for="Images">Enter Image:</label><br>
                 <input type="file" id="Images"><br>
                 <input type="submit" value="Submit">
+                        -->
             </form>
         </body>
     </head>
