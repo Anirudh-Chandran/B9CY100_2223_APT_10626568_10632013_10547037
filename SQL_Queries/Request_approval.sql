@@ -11,6 +11,13 @@ primary key (Ack_ID)
 */
 
 alter table request_approval
---drop constraint FK__Request_Ap__V_ID__31B762FC
+drop constraint FK__Request_A__Req_I__395884C4
 --add foreign key (req_id) references ondemand_request
-alter column ack_status varchar (15)
+--alter column ack_status varchar (15)
+
+
+
+SELECT TABLE_NAME,
+       CONSTRAINT_TYPE,CONSTRAINT_NAME
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+WHERE TABLE_NAME='request_approval';

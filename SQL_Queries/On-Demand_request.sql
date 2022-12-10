@@ -24,3 +24,8 @@ alter column req_title varchar (100) not null
 select * from ondemand_request
 
 insert into ondemand_request values(1,'Request-1',12,'10x5x34','This is the first request from Hospital-1 and we need a medical device with mentioned dimensions. If any vendor can fulfill then please contact.','2023-08-23','80000',1)
+
+SELECT TABLE_NAME,
+       CONSTRAINT_TYPE,CONSTRAINT_NAME
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+WHERE TABLE_NAME='ondemand_request';
