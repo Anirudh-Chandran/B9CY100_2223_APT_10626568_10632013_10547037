@@ -9,8 +9,7 @@ Prod_Image varbinary
 
 Alter table prod_images
 --add Prod_ID int foreign key (Prod_ID) references Product
-
-
+drop constraint FK__Prod_Imag__Prod___2BFE89A6
 --Alter table prod_images
 --add primary key(Img_id)
 
