@@ -11,6 +11,7 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 
 image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
 
+
 def Database_Connection():
     server = 'tcp:avadb01.database.windows.net'
     database ='AVA_DB_1'
@@ -19,10 +20,15 @@ def Database_Connection():
     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD='+ password)
     return connection.cursor()
 
+
+def prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quantity,Description,bin_data):
+    handler.execute("INSERT INTO Product(Prod_ID,Prod_Name,Man_date,Prod_Size,Prod_Quantity,Description) VALUES(?,?,?,?,?,?)",Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quantity,Description)
+
+
 @app.route("/")
 @app.route("/guest")
 def homepage():
-    return render_template("Homepage.html")
+    return render_template("h.html")
 
 
 @app.route("/Home", methods=['GET', 'POST'])
@@ -44,7 +50,7 @@ def user_home():
     with open(image_new_loc,"wb") as f:
         f.write(image_val[0][0])
     prod_ids = [prod_id1,prod_id2]
-    return render_template("Index.html",prod_ids_len=len(prod_ids),prod_ids=prod_ids,prod_name1=prod_name1,prod_name2=prod_name2,prod_desc1=prod_desc1,prod_desc2=prod_desc2,image=url_for('static',filename=filename))
+    return render_template("h.html",prod_ids_len=len(prod_ids),prod_ids=prod_ids,prod_name1=prod_name1,prod_name2=prod_name2,prod_desc1=prod_desc1,prod_desc2=prod_desc2,image=url_for('static',filename=filename))
 
 
 @app.route("/Login", methods=['GET', 'POST'])
@@ -78,16 +84,19 @@ def register():
 def products():
     image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
     if request.method == "POST":
-        fname = request.form['fname']
-        files = request.files['photo']
+        Prod_ID = request.form['Prod_ID']
+        Prod_Name = request.form['Prod_Name']
+        Man_date = request.form['Man_date']
+        Prod_Size = request.form['Dimensions']
+        Quantity = request.form['Quantity']
+        Description = request.form['Description']
+        files = request.files['Images']
         file_name = files.filename
-        files.save(image_loc + file_name)
         with open(image_loc+file_name, 'rb') as f:
             bin_data = f.read()
-        Database_Connection(fname,bin_data)
-        image_val = Data_Retrieval(fname)
-
-        return render_template('Form.html',data=data,image=url_for('static',filename=file_name))
+        handler = Database_Connection()
+        prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Quantity,Description,bin_data)
+        return render_template('Form.html',Prod_ID=Prod_ID,Prod_Name=Prod_Name,Man_date=Man_date,Prod_Size=Prod_Size,Prod_Quantity=Prod_Quantity,Description=Description,image=url_for('static',filename=file_name))
     else:
         return render_template('Form.html')
 
