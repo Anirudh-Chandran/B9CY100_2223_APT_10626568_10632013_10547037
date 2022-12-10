@@ -7,7 +7,6 @@
     <list default="true" id="14c43e1b-18eb-4575-a288-4d29205bb8d5" name="Changes" comment=" working on image processing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_Code/Middleware_Code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Code/Middleware_Code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_Code/templates/Homepage.html" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Code/templates/Homepage.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
