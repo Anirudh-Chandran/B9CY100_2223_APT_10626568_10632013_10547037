@@ -22,61 +22,35 @@
 	<hr>
 	 <h2 class="text-center">OnDemand Requests</h2>
 <hr>
-<div class="container">
+<hr>
+  <div class="container">
+
+	{% for i in range(0,row_length) %} 
+	  
+	  <!-- row_length will be calculated like below
+		if(len(prod_id)%3==0)
+			row_length=int(len(prod_id)/3)
+		else
+			row_length=int(len(prod_id)/3) +1-->
+	  
 		<div class="row text-center">
-			<div class="col-md-4 pb-1 pb-md-0">
+		{% for j in range(i*3,(i+1)*3)%}
+                <div class="col-md-4 pb-1 pb-md-0">
 		<div class="card">
+		  <img src={{image}} alt="Card image cap" width="350" height="200" class="card-img-top rounded">
 			<div class="card-body">
-				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
+				<a href="product.html" class="btn btn-primary">{{req_ids[j]}}.{{req_name1}}</a>
 				<p class="card-text">This is the description of 1st request</p>
 			</div>
 		</div>
 		</div>
-			<div class="col-md-4 pb-1 pb-md-0">
-		<div class="card">
-			<div class="card-body">
-				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
-				<p class="card-text">This is the description of 2nd request</p>
-			</div>
-		</div>
-		</div>
-		<div class="col-md-4 pb-1 pb-md-0">		
-		<div class="card">
-			<div class="card-body">
-				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
-				<p class="card-text">This is the description of 3rd request</p>
-			</div>
-		</div>
-		</div>
+			
+	
+		{% endfor %}
 	</div>
-	<div class="row text-center">
-			<div class="col-md-4 pb-1 pb-md-0">
-		<div class="card">
-			<div class="card-body">
-				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
-				<p class="card-text">This is the description of 4th request</p>
-			</div>
-		</div>
-		</div>
-			<div class="col-md-4 pb-1 pb-md-0">
-		<div class="card">
-			<div class="card-body">
-				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
-				<p class="card-text">This is the description of 5th request</p>
-			</div>
-		</div>
-		</div>
-		<div class="col-md-4 pb-1 pb-md-0">		
-		<div class="card">
-			<div class="card-body">
-				<a href="request.html" class="btn btn-primary">{{prod_name}}</a>
-				<p class="card-text">This is the description of 6th request</p>
-			</div>
-		</div>
-		</div>
-	</div>
-</div>
-		
+	{% endfor %}
+	
+	</div>	
 <script src="../static/js/jquery-3.4.1.min.js"></script>
     <script src="../static/js/popper.min.js"></script>
     <script src="../static/js/bootstrap-4.4.1.js"></script>

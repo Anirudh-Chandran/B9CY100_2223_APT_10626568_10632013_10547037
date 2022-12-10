@@ -16,14 +16,20 @@
 		<a href="onDemandRequest.html">On-Demand Requests</a>
 		<a href="About_us.html">About Us</a>
 		<a href="login.html">Login/ Register</a>
-		<a href="New_product_form.html">New Product</a>
+		<a href="Form.html">New Product</a>
 	
 	</div>
 </nav>
 	<hr>
   <div class="container">
 
-	{% for i in range(0,row_length) %} <!-- row_length= -->
+	{% for i in range(0,row_length) %} 
+	  <!-- row_length will be calculated like below
+		if(len(prod_id)%3==0)
+			row_length=int(len(prod_id)/3)
+		else
+			row_length=int(len(prod_id)/3) +1-->
+	  
 		<div class="row text-center">
 		{% for j in range(i*3,(i+1)*3)%}
                 <div class="col-md-4 pb-1 pb-md-0">
