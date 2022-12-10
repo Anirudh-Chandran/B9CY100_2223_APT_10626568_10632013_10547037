@@ -11,10 +11,10 @@ primary key (Ack_ID)
 */
 
 alter table request_approval
-drop constraint FK__Request_A__Req_I__395884C4
---add foreign key (req_id) references ondemand_request
+--drop constraint FK__Request_A__Req_I__395884C4
+add foreign key (v_id) references vendor
 --alter column ack_status varchar (15)
-
+add ack_id int identity(1,1) primary key
 
 
 SELECT TABLE_NAME,
