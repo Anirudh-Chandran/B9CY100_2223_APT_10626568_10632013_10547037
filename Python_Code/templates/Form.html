@@ -27,7 +27,9 @@
                 <input type="text" id="Prod_Name" name="Prod_Name"><br>
                 <label for="V_name">Manufacturer</label><br>
                 <select name="Manufacturers" id="Manufacturers">
-    			<option value="Vendor-1">Vendor-1</option>
+					{%for l in allVendors%}
+    			<option value=l>{%l%}</option>
+					{%endfor%}
 				</select>
                 <label for="Prod_Size">Prod_Size:</label><br>
                 <input type="number" id="Prod_Size" name="Prod_Size"><br>
