@@ -20,25 +20,28 @@
 	</div>
 </nav>
 	<hr>
-            <h2><center>New Product</center></h2>
+            <h2><center>
+              New Product Request
+            </center></h2>
             <p>Enter the new product details below:</p>
             <form action="#"> 
-                <label for="Prod_Name">Product Name:</label><br>
-                <input type="text" id="Prod_Name" name="Prod_Name"><br>
-                <label for="V_name">Manufacturer</label><br>
-                <select name="Manufacturers" id="Manufacturers">
+                <label for="Req_title">Request Title:</label><br>
+                <input type="text" id="Req_title" name="Req_title"><br>
+                <label for="H_name">Requested by</label><br>
+                <select name="hospitals" id="hospitals">
 					{%for l in allhospitalss%}
     			<option value=l>{%l%}</option>
 					{%endfor%}
 				</select>
-                <label for="Prod_Size">Prod_Size:</label><br>
-                <input type="number" id="Prod_Size" name="Prod_Size"><br>
-                <label for="Quantity">Enter Quantity:</label><br>
+                <label for="Dimensions">Dimensions</label><br>
+                <input type="number" id="Dimensions" name="Dimensions"><br>
+                <label for="Quantity">Quantity:</label><br>
                 <input type="number" id="Quantity" name="Quantity"><br>
-                <label for="Description">Enter Description:</label><br>
-                <input type="text" id="Description" name="Description"><br>
-                <label for="Images">Enter Image:</label><br>
-                <input type="file" id="Images" name="Images"><br><br>
+                <label for="Req_Description">Details:</label><br>
+                <textarea id="Req_Description" name="Req_Description" rows="4" cols="50">Provide more details about product request</textarea><br>
+				<label for="Budget">Quantity:</label><br>
+                <input type="number" id="Budget" name="Budget"><br>
+				
                 <input type="submit" value="Submit">
             </form>
 
