@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Product Form
+        </title>
+        <meta name="viewpoint" content="width-device-width, initial-scale=1">
+        <style>
+            body{font-family: Arial, Helvetica, sans-serif;}
+            form {border: 4px solid #f1f1f1;}
+
+            input[type=text], input[type=password]
+            {
+                width: 100%;
+                padding: 14px, 20px;
+                margin: 5px 0;
+                display: inline-block;
+                border: 4px solid #f1f1f1;
+                box-sizing: border-box;
+            }
+
+            button
+            {
+                background-color: aquamarine;
+                color: #f1f1f1;
+                
+            }
+
+        </style>
+        <body>
+            <h2><center>Product Form Page</center></h2>
+            <p>Please Enter the product details below</p>
+            <form action="#"> <!--Webpage Where these values will be saved-->
+                <label for="Prod_ID">Product ID:</label><br>
+                <input type="number" id="Prod_ID" name="Prod_ID"> <br>
+                <label for="Prod_Name">Product Name:</label><br>
+                <input type="text" id="Prod_Name" name="Prod_Name"><br>
+                <label for="V_ID">Vendor ID:</label><br>
+                <input type="number" id="V_ID" name="V_ID"><br>
+                <label for="Man_date">Manufacturing Date:</label><br>
+                <input type="number" id="Man_date" name="Man_date"><br>
+                <label for="Prod_Size">Prod_Size:</label><br>
+                <input type="number" id="Prod_Size" name="Prod_Size"><br>
+                <label for="Quantity">Enter Quantity:</label><br>
+                <input type="number" id="Quantity" name="Quantity"><br>
+                <label for="Description">Enter Description:</label><br>
+                <input type="text" id="Description" name="Description"><br>
+                <label for="Images">Enter Image:</label><br>
+                <input type="file" id="Images" name="Images"><br>
+                <input type="submit" value="Submit">
+            </form>
+
+        </body>
+    </head>
+</html>
