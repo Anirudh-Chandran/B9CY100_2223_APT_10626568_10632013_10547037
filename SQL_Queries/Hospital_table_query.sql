@@ -19,3 +19,8 @@ alter column h_email varchar (50) not null
 
 insert into Hospital 
 values (2,'hospital-2','https://hospital-2.com','street-2','Dublin','1230987','0812376541','hospital-2@hospital2.com')
+
+SELECT TABLE_NAME,
+CONSTRAINT_TYPE,CONSTRAINT_NAME
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+WHERE TABLE_NAME='hospital';

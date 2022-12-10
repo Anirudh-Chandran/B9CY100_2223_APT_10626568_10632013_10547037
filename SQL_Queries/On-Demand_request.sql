@@ -19,7 +19,9 @@ alter table ondemand_request
 --add H_ID int not null
 --add foreign key (h_id) references hospital
 --alter column req_title varchar(30) not null,
-alter column req_title varchar (100) not null 
+--alter column req_title varchar (100) not null 
+drop constraint PK__OnDemand__E36A27689745CD63
+
 
 select * from ondemand_request
 
