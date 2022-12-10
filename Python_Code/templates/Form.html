@@ -4,7 +4,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="../static/css/bootstrap-4.4.1.css" rel="stylesheet">
         <title>
-            New Product
+            New Product Form
         </title>
         <meta name="viewpoint" content="width-device-width, initial-scale=1">
         
@@ -18,7 +18,7 @@
 		<a href="About_us.html">About Us</a>
 		<a href="login.html">Login/ Register</a>
 		<a href="New_product_form.html">New Product</a>
-		<a href="New_request.html">New Request</a>
+		
 	
 	</div>
 </nav>
@@ -28,18 +28,16 @@
             <form action="#"> 
                 <label for="Prod_Name">Product Name:</label><br>
                 <input type="text" id="Prod_Name" name="Prod_Name"><br><br>
-                <label for="V_name">Manufacturer</label><br>
+                <label for="V_name">Manufactured By</label><br>
                 <select name="Manufacturers" id="Manufacturers">
 					{%for l in allVendors%}
     			<option value={{l}}> {{l}} </option>
 					{%endfor%}
 				</select><br><br>
                 <label for="Prod_Size">Prod_Size:</label><br>
-                <input type="number" id="Prod_Size" name="Prod_Size"><br><br>
-                <label for="Quantity">Enter Quantity:</label><br>
-                <input type="number" id="Quantity" name="Quantity"><br><br>
+                <input type="text" id="Prod_Size" name="Prod_Size"><br><br>
                 <label for="Description">Enter Description:</label><br>
-                <input type="text" id="Description" name="Description"><br><br>
+                <textarea id="Description" name="Description" rows="4" cols="50">Enter description of the product.</textarea><br><br>
                 <label for="Images">Enter Image:</label><br>
                 <input type="file" id="Images" name="Images"><br><br>
                 <input type="submit" value="Submit">
