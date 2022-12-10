@@ -24,7 +24,8 @@ alter table Product
 --drop constraint prod_pk;
 --alter column prod_id int not null
 --add primary key(prod_id)
---drop constraint FK__Product__v_id__3A4CA8FD
+drop constraint v_id_fk
+drop constraint PK__Product__C55AC32BC19C5368
 --add constraint v_id_fk foreign key (v_id) references vendor
 --alter column prod_description varchar(1000) not null
 
@@ -38,3 +39,8 @@ insert into product values(1,'Prod-1',9,1,'This is first product entry')
 
 update product
 set prod_man_date='2022-08-25', prod_size='10x8x25'
+
+SELECT TABLE_NAME,
+       CONSTRAINT_TYPE,CONSTRAINT_NAME
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+WHERE TABLE_NAME='product';
