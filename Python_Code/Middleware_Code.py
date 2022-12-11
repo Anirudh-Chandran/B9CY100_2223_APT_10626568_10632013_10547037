@@ -45,30 +45,17 @@ def homepage():
         prod_ids.append(all_prods[value][0])
         prod_names.append(all_prods[value][1])
         prod_descs.append(all_prods[value][2])
-
-    cursor.execute("SELECT Prod_id,Prod_Image from Prod_Images")
-    image_val = cursor.fetchall()
-    if len(image_val) == len(prod_ids):
-        for value in range(len(image_val)):
-            filename = "image_"+str(value)+".png"
-            image_new_loc = image_loc + filename
-            Prod_id = image_val[value][0]
-            print(Prod_id)
-            if Prod_id in prod_ids:
-                image_list.append(image_new_loc)
-                with open(image_new_loc, "wb") as f:
-                    f.write(image_val[value][1])
-    else:
-        for value in range(len(prod_ids)):
+        cursor.execute("SELECT Prod_Image from Prod_Images WHERE prod_id=?", all_prods[value][0])
+        image_val = cursor.fetchval()
+        if image_val is not None:
             filename = "image_" + str(value) + ".png"
             image_new_loc = image_loc + filename
-            try:
-                Prod_id = image_val[value][0]
-                image_list.append(image_new_loc)
-                with open(image_new_loc, "wb") as f:
-                    f.write(image_val[value][1])
-            except IndexError:
-                image_list.append(" ")
+            image_list.append(image_new_loc)
+            with open(image_new_loc, "wb") as f:
+                f.write(image_val)
+        else:
+            image_list.append(image_loc + "/images/blank.png")
+    print(image_list)
     return render_template("h.html", row_length=int(row_length) , prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
 
 
