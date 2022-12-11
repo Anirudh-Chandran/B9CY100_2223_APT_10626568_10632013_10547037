@@ -158,16 +158,17 @@ def products():
         prod_ids.append(all_prods[value][0])
         prod_names.append(all_prods[value][1])
         prod_descs.append(all_prods[value][2])
-
-    cursor.execute("SELECT Prod_Image from Prod_Images")
-    image_val = cursor.fetchall()
-    for value in range(len(image_val)):
-        filename = "image_" + str(value) + ".png"
-        image_new_loc = image_loc + filename
-        image_list.append(image_new_loc)
-        with open(image_new_loc, "wb") as f:
-            f.write(image_val[value][0])
-    return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
+        cursor.execute("SELECT Prod_Image from Prod_Images where prod_id = ?",all_prods[value][0])
+        image_val = cursor.fetchval()
+        if image_val is not None:
+            filename = "image_" + str(value) + ".png"
+            image_new_loc = image_loc + filename
+            image_list.append(image_new_loc)
+            with open(image_new_loc, "wb") as f:
+                f.write(image_val)
+        else:
+            image_list.append(image_loc + "images/blank.png")
+    return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
 
 
 @app.route("/New_Products_Form", methods=['GET', 'POST'])
