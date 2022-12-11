@@ -171,10 +171,10 @@ def products():
     return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
 
 
-@app.route("/New_Products_Form", methods=['GET', 'POST'])
+@app.route("/New_Products", methods=['GET', 'POST'])
 def new_products():
     image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
-    if request.method == "POST":
+    if request.method == "POST" and session.get('uname'):
         Prod_ID = request.form['Prod_ID']
         Prod_Name = request.form['Prod_Name']
         Man_date = request.form['Man_date']
@@ -189,12 +189,12 @@ def new_products():
         prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Quantity,Description,bin_data)
         return render_template('Forms.html',Prod_ID=Prod_ID,Prod_Name=Prod_Name,Man_date=Man_date,Prod_Size=Prod_Size,Prod_Quantity=Prod_Quantity,Description=Description,image=url_for('static',filename=file_name))
     else:
-        return render_template('new_products_form.html')
+        return redirect('/Login')
 
 
-@app.route("/On_Demand_Request",methods = ['GET', 'POST'])
+@app.route("/OnDemandRequest",methods = ['GET', 'POST'])
 def On_Demand_Request():
-    if session['uname']:
+    if session.get('uname'):
         prod_ids = []
         prod_names = []
         prod_descs = []
@@ -224,9 +224,9 @@ def On_Demand_Request():
         return redirect("/Login")
 
 
-@app.route("/About_Us")
+@app.route("/AboutUs")
 def about_us():
-    render_template("about_us.html")
+    return render_template("about_us.html")
 
 
 if __name__ == "__main__":
