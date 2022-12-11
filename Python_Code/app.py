@@ -2,6 +2,7 @@ from flask import Flask,request,render_template,url_for,flash,session,redirect
 from flask_session import Session
 import pyodbc
 from datetime import timedelta
+import string
 
 app = Flask(__name__, template_folder="templates")
 app.config['UPLOADED_IMAGES_DEST'] = 'static'
@@ -142,9 +143,32 @@ def loginpage():
 @app.route("/Register",methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        spl_char = ['%','!','@','#','$','^','&','*','(',')','_','-','=','+']
+        upper_char =string.ascii_uppercase
+        lower_char = string.ascii_lowercase
+        number_char = range(0,9)
         username = request.form['uname']
         password = request.form['pwd']
-        login_ids[username]=password
+        message="Please use \n Password length >8 character \n one Upper character \n one lower character \n one number \n special character(@,#,!,etc) "
+        if len(password)<8:
+            flash(message)
+            return redirect("/Register")
+        for i in spl_char:
+            if i not in password:
+                flash(message)
+                return redirect("/Register")
+        for i in upper_char:
+            if i not in password:
+                flash(message)
+                return redirect("/Register")
+        for i in lower_char :
+            if i not in password:
+                flash(message)
+                return redirect("/Register")
+        for i in number_char:
+            if i not in password:
+                flash(message)
+                return redirect("/Register")
         email = request.form['email']
         if '@' not in email or ".com" not in email:
             flash("Incorrect email id")
@@ -155,6 +179,7 @@ def register():
             return redirect("/Register")
         session['uname']=username
         flash("Registration Successful")
+        login_ids[username] = password
         return redirect('/Home')
     else:
         return render_template("registration.html")
