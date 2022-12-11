@@ -138,6 +138,7 @@ def loginpage():
 
 @app.route("/Register",methods=['GET', 'POST'])
 def register():
+    
     return render_template("registration.html")
 
 
