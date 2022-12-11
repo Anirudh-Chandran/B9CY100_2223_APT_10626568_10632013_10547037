@@ -56,7 +56,6 @@ def homepage():
                 f.write(image_val)
         else:
             image_list.append(image_loc + "images/blank.png")
-    print(image_list)
     return render_template("homepage.html", row_length=int(row_length) , prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
 
 
@@ -80,14 +79,16 @@ def user_home():
             prod_names.append(all_prods[value][1])
             prod_descs.append(all_prods[value][2])
 
-        cursor.execute("SELECT Prod_Image from Prod_Images")
+        cursor.execute("SELECT Prod_Image from Prod_Images WHERE prod_id=?", all_prods[value][0])
         image_val = cursor.fetchall()
-        for value in range(len(image_val)):
+        if image_val is not None:
             filename = "image_" + str(value) + ".png"
             image_new_loc = image_loc + filename
             image_list.append(image_new_loc)
             with open(image_new_loc, "wb") as f:
-                f.write(image_val[value][0])
+                f.write(image_val)
+        else:
+            image_list.append(image_loc + "images/blank.png")
         return render_template("index.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
     else:
         prod_ids = []
@@ -105,15 +106,16 @@ def user_home():
             prod_ids.append(all_prods[value][0])
             prod_names.append(all_prods[value][1])
             prod_descs.append(all_prods[value][2])
-
-        cursor.execute("SELECT Prod_Image from Prod_Images")
-        image_val = cursor.fetchall()
-        for value in range(len(image_val)):
-            filename = "image_" + str(value) + ".png"
-            image_new_loc = image_loc + filename
-            image_list.append(image_new_loc)
-            with open(image_new_loc, "wb") as f:
-                f.write(image_val[value][0])
+            cursor.execute("SELECT Prod_Image from Prod_Images WHERE prod_id=?", all_prods[value][0])
+            image_val = cursor.fetchval()
+            if image_val is not None:
+                filename = "image_" + str(value) + ".png"
+                image_new_loc = image_loc + filename
+                image_list.append(image_new_loc)
+                with open(image_new_loc, "wb") as f:
+                    f.write(image_val)
+            else:
+                image_list.append(image_loc + "images/blank.png")
         return render_template("user_homepage.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
 
 
@@ -125,7 +127,6 @@ def loginpage():
         if username in login_ids:
             if password == login_ids[username]:
                 session['uname'] = username
-
                 return redirect("/Home")
             else:
                 message = 'PASSWORD is incorrect'
@@ -142,7 +143,6 @@ def loginpage():
 def register():
     if request.method == 'POST':
         username = request.form['uname']
-        print(username)
         password = request.form['pwd']
         login_ids[username]=password
         email = request.form['email']
@@ -150,7 +150,7 @@ def register():
             flash("Incorrect email id")
             return redirect("/Register")
         phone_no = request.form['num']
-        if int(phone_no) or len(phone_no) > 10:
+        if not int(phone_no) or len(phone_no) > 10:
             flash("Incorrect phone number")
             return redirect("/Register")
         session['uname']=username
