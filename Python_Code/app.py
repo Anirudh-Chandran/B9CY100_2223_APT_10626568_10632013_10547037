@@ -12,6 +12,7 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 
 image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
 
+login_ids = {'admin':'password'}
 
 def Database_Connection():
     server = 'tcp:avadb01.database.windows.net'
@@ -117,7 +118,6 @@ def user_home():
 
 @app.route("/Login", methods=['GET', 'POST'])
 def loginpage():
-    login_ids = {'admin':'password'}
     if request.method == "POST":
         username = request.form['uname']
         password = request.form['pwd']
@@ -138,8 +138,16 @@ def loginpage():
 
 @app.route("/Register",methods=['GET', 'POST'])
 def register():
-    
-    return render_template("registration.html")
+    if request.method == 'POST':
+        username = request.form['uname']
+        password = request.form['pwd']
+        login_ids[username]=password
+        email = request.form['email']
+        phone_no = request.form['num']
+        session['uname']=username
+        return redirect('/Home')
+    else:
+        return render_template("registration.html")
 
 
 @app.route("/Products",methods=['GET', 'POST'])
