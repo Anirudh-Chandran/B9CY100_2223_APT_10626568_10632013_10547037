@@ -63,7 +63,7 @@ def homepage():
 @app.route("/Home", methods=['GET', 'POST'])
 def user_home():
     if session.get('uname'):
-        flash("Hello, " + username)
+        flash("Login Successful")
         prod_ids = []
         prod_names = []
         prod_descs = []
@@ -81,7 +81,7 @@ def user_home():
             prod_descs.append(all_prods[value][2])
 
         cursor.execute("SELECT Prod_Image from Prod_Images WHERE prod_id=?", all_prods[value][0])
-        image_val = cursor.fetchall()
+        image_val = cursor.fetchval()
         if image_val is not None:
             filename = "image_" + str(value) + ".png"
             image_new_loc = image_loc + filename
@@ -90,7 +90,7 @@ def user_home():
                 f.write(image_val)
         else:
             image_list.append(image_loc + "images/blank.png")
-        return render_template("index.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
+        return render_template("user_homepage.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
     else:
         prod_ids = []
         prod_names = []
@@ -117,7 +117,7 @@ def user_home():
                     f.write(image_val)
             else:
                 image_list.append(image_loc + "images/blank.png")
-        return render_template("user_homepage.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
+        return render_template("user_homepage.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
 
 
 @app.route("/Login", methods=['GET', 'POST'])
@@ -153,22 +153,9 @@ def register():
         if len(password)<8:
             flash(message)
             return redirect("/Register")
-        for i in spl_char:
-            if i not in password:
-                flash(message)
-                return redirect("/Register")
-        for i in upper_char:
-            if i not in password:
-                flash(message)
-                return redirect("/Register")
-        for i in lower_char :
-            if i not in password:
-                flash(message)
-                return redirect("/Register")
-        for i in number_char:
-            if i not in password:
-                flash(message)
-                return redirect("/Register")
+        for i in password:
+            if i in spl_char or i in upper_char or i in lower_char or i in number_char:
+                continue
         email = request.form['email']
         if '@' not in email or ".com" not in email:
             flash("Incorrect email id")
@@ -178,7 +165,6 @@ def register():
             flash("Incorrect phone number")
             return redirect("/Register")
         session['uname']=username
-        flash("Registration Successful")
         login_ids[username] = password
         return redirect('/Home')
     else:
@@ -231,7 +217,7 @@ def new_products():
             bin_data = f.read()
         handler = Database_Connection()
         prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Quantity,Description,bin_data)
-        return render_template('Forms.html',Prod_ID=Prod_ID,Prod_Name=Prod_Name,Man_date=Man_date,Prod_Size=Prod_Size,Prod_Quantity=Prod_Quantity,Description=Description,image=url_for('static',filename=file_name))
+        return render_template('Forms.html',Prod_ID=Prod_ID,Prod_Name=Prod_Name,Man_date=Man_date,Prod_Size=Prod_Size,Prod_Quantity=Prod_Quantity,Description=Description,image_list=image_list)
     else:
         return redirect('/Login')
 
