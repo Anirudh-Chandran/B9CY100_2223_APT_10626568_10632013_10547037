@@ -1,6 +1,7 @@
 import random
 import flask
 from flask import Flask,request,render_template,url_for,flash,session,redirect
+from Flask-session
 import pyodbc
 from datetime import timedelta
 
@@ -25,33 +26,64 @@ def prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quanti
     handler.execute("INSERT INTO Product(Prod_ID,Prod_Name,Man_date,Prod_Size,Prod_Quantity,Description) VALUES(?,?,?,?,?,?)",Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quantity,Description)
 
 
-@app.route("/")
-@app.route("/guest")
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/Guest", methods=['GET', 'POST'])
 def homepage():
-    return render_template("h.html")
+    session[username] = "guest"
+    prod_ids = []
+    prod_names = []
+    prod_descs = []
+    image_list = []
+    cursor = Database_Connection()
+    cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
+    all_prods = cursor.fetchall()
+    if len(all_prods) % 3 == 0:
+        row_length = len(all_prods)/3
+    else:
+        row_length = (len(all_prods)/3)+1
+    for value in range(len(all_prods)):
+        prod_ids.append(all_prods[value][0])
+        prod_names.append(all_prods[value][1])
+        prod_descs.append(all_prods[value][2])
+
+    cursor.execute("SELECT Prod_Image from Prod_Images")
+    image_val = cursor.fetchall()
+    for value in range(len(image_val)):
+        filename = "image_"+str(value)+".png"
+        image_new_loc = image_loc + filename
+        image_list.append(image_new_loc)
+        with open(image_new_loc, "wb") as f:
+            f.write(image_val[value][0])
+    return render_template("h.html", row_length=int(row_length) , prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
 
 
 @app.route("/Home", methods=['GET', 'POST'])
 def user_home():
+    prod_ids = []
+    prod_names = []
+    prod_descs = []
+    image_list = []
     cursor = Database_Connection()
-    cursor.execute("SELECT prod_id,prod_name,prod_description from Product")
+    cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
     all_prods = cursor.fetchall()
-    cursor.execute("Select prod_image from prod_images")
-    prod_id1 = all_prods[0][0]
-    prod_name1 = all_prods[0][1]
-    prod_desc1 = all_prods[0][2]
-    prod_id2 = all_prods[1][0]
-    prod_name2 = all_prods[1][1]
-    prod_desc2 = all_prods[1][2]
-    cursor.execute("SELECT prod_image from Prod_Images where prod_id=? or prod_id = ?",prod_id1,prod_id2)
-    image_val = cursor.fetchall()
-    filename="image.png"
-    image_new_loc = image_loc + filename
-    with open(image_new_loc,"wb") as f:
-        f.write(image_val[0][0])
-    prod_ids = [prod_id1,prod_id2]
-    return render_template("h.html",prod_ids_len=len(prod_ids),prod_ids=prod_ids,prod_name1=prod_name1,prod_name2=prod_name2,prod_desc1=prod_desc1,prod_desc2=prod_desc2,image=url_for('static',filename=filename))
+    if len(all_prods) % 3 == 0:
+        row_length = len(all_prods) / 3
+    else:
+        row_length = (len(all_prods) / 3) + 1
+    for value in range(len(all_prods)):
+        prod_ids.append(all_prods[value][0])
+        prod_names.append(all_prods[value][1])
+        prod_descs.append(all_prods[value][2])
 
+    cursor.execute("SELECT Prod_Image from Prod_Images")
+    image_val = cursor.fetchall()
+    for value in range(len(image_val)):
+        filename = "image_" + str(value) + ".png"
+        image_new_loc = image_loc + filename
+        image_list.append(image_new_loc)
+        with open(image_new_loc, "wb") as f:
+            f.write(image_val[value][0])
+    return render_template("index.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
 
 @app.route("/Login", methods=['GET', 'POST'])
 def loginpage():
@@ -61,7 +93,7 @@ def loginpage():
         password = request.form['pwd']
         if username in login_ids:
             if password == login_ids[username]:
-                session[username]=username
+                session[username] = username
                 return redirect("/Home")
             else:
                 message = 'PASSWORD is incorrect'
