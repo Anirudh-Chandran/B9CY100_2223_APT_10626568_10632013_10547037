@@ -6,7 +6,10 @@
 		<link href="../static/css/bootstrap-4.4.1.css" rel="stylesheet">
 <title>New Request</title>
 </head>
-
+<style>
+.m-b-md {
+  margin-bottom: 10%;	
+</style>
 <body>
 <hr>
 	<nav class="navbar navbar-expand">
@@ -24,15 +27,17 @@
               New Product Request
             </center></h2>
 			<div class="container">
-				<div class="row">
+				<div class="row text-center" >
 					<div class="col-xs-14 col-lg-offset-3 col-lg-12">
 						<div class="m-b-md text-center">
 			<p>Enter the new request details below:</p>
             <form action="#"> 
-                <label for="Req_title">Request Title:</label><br>
-                <input type="text" id="Req_title" name="Req_title"><br>
-                <label for="H_name">Requested by</label><br>
-                <select name="hospitals" id="hospitals">
+				<fieldset>
+                <label for="Req_title">Request Title *</label><br>
+                <input type="text" id="Req_title" name="Req_title" required/><br>
+					</fieldset>
+                <label for="H_name">Requested by *</label><br>
+                <select name="hospitals" id="hospitals" required>
 					{%for l in allhospitalss%}
     			<option value=l>{%l%}</option>
 					{%endfor%}
@@ -40,13 +45,13 @@
                 <label for="Dimensions">Dimensions</label><br>
                 <input type="number" id="Dimensions" name="Dimensions"><br>
                 <label for="Quantity">Quantity:</label><br>
-                <input type="number" id="Quantity" name="Quantity"><br>
+                <input type="number" id="Quantity" name="Quantity" required><br>
                 <label for="Req_Description">Details:</label><br>
-                <textarea id="Req_Description" name="Req_Description" rows="4" cols="50">Provide more details about product request</textarea><br>
+                <textarea id="Req_Description" name="Req_Description" rows="4" cols="50" required>Provide more details about product request</textarea><br>
 				<label for="Budget">Budget($)</label><br>
-                <input type="number" id="Budget" name="Budget"><br>
+                <input type="number" id="Budget" name="Budget" required><br>
 				<label for="NeedByDate">Need By Date:</label><br>
-				<input type="date" id="NeedByDate" name="NeedByDate"><br><br>
+				<input type="date" id="NeedByDate" name="NeedByDate" required><br><br>
                 <input type="submit" value="Submit" class="btn btn-primary">
             </form>
 </div>
