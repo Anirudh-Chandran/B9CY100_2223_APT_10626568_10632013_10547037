@@ -63,6 +63,7 @@ def homepage():
 @app.route("/Home", methods=['GET', 'POST'])
 def user_home():
     if session.get('uname'):
+        flash("Hello, " + username)
         prod_ids = []
         prod_names = []
         prod_descs = []
@@ -118,12 +119,13 @@ def user_home():
 
 @app.route("/Login", methods=['GET', 'POST'])
 def loginpage():
-    if request.method == "POST":
+    if request.method == "POST" and not session['uname']:
         username = request.form['uname']
         password = request.form['pwd']
         if username in login_ids:
             if password == login_ids[username]:
                 session['uname'] = username
+
                 return redirect("/Home")
             else:
                 message = 'PASSWORD is incorrect'
@@ -140,11 +142,19 @@ def loginpage():
 def register():
     if request.method == 'POST':
         username = request.form['uname']
+        print(username)
         password = request.form['pwd']
         login_ids[username]=password
         email = request.form['email']
+        if '@' not in email or ".com" not in email:
+            flash("Incorrect email id")
+            return redirect("/Register")
         phone_no = request.form['num']
+        if int(phone_no) or len(phone_no) > 10:
+            flash("Incorrect phone number")
+            return redirect("/Register")
         session['uname']=username
+        flash("Registration Successful")
         return redirect('/Home')
     else:
         return render_template("registration.html")
