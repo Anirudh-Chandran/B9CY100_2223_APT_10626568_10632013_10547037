@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{req_title}}</title>
+</head>
+
+<body>
+	{{req_title}}<br>
+	{{req_description}}<br>
+	{%if req_dimensions is not None%}
+	{{req_dimensions}}<br>
+	{%endif%}
+	{%if req_quantity is not None%}
+	{{req_quantity}}<br>
+	{%endif%}
+	{%if req_budget is not None%}
+	{{req_budget}}<br>
+	{%endif%}
+	{%if req_need_by_date is not None%}
+	{{req_need_by_date}}<br>
+	{%endif%}
+	{%if h_name is not None%}
+	{{h_name}}<br>
+	{%endif%}
+	{%if h_phone is not None%}
+	{{h_phone}}<br>
+	{%endif%}
+	{%if h_email is not None%}
+	{{h_email}}<br>
+	{%endif%}
+</body>
+</html>

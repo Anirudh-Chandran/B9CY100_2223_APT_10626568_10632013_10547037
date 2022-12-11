@@ -6,5 +6,24 @@
 </head>
 
 <body>
+	
+	<img src={{prod_image}}></img><br>
+	{{prod_name}}<br>
+	{{prod_description}}<br>
+	{%if prod_size is not None%}
+	{{prod_size}}<br>
+	{%endif%}
+	{%if v_name is not None%}
+	{{v_name}}<br>
+	{%endif%}
+	{%if v_phone is not None%}
+	{{v_phone}}<br>
+	{%endif%}
+	{%if v_email is not None%}
+	{{v_email}}<br>
+	{%endif%}
+	{%if v_website is not None%}
+	{{v_website}}<br>
+	{%endif%}
 </body>
 </html>
