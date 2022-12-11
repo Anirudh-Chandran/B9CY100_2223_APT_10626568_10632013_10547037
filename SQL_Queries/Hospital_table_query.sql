@@ -20,7 +20,7 @@ alter table hospital
 add H_ID int identity(1,1) primary key
 
 insert into Hospital 
-values (2,'hospital-2','https://hospital-2.com','street-2','Dublin','1230987','0812376541','hospital-2@hospital2.com')
+values ('hospital-3','https://hospital-3.com','street-3','Dublin 3','1230986','0812376321','hospital-3@hospital3.com')
 
 SELECT TABLE_NAME,
 CONSTRAINT_TYPE,CONSTRAINT_NAME
