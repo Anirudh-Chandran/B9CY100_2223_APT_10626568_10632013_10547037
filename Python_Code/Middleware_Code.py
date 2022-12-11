@@ -1,7 +1,7 @@
 import random
 import flask
 from flask import Flask,request,render_template,url_for,flash,session,redirect
-from Flask-session
+from flask-session import Session
 import pyodbc
 from datetime import timedelta
 
