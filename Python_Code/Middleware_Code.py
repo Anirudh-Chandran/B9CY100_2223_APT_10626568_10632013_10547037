@@ -54,7 +54,7 @@ def homepage():
         image_list.append(image_new_loc)
         with open(image_new_loc, "wb") as f:
             f.write(image_val[value][0])
-    return render_template("h.html", row_length=int(row_length) , prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
+    return render_template("h.html", row_length=int(row_length) , prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=image_list)
 
 
 @app.route("/Home", methods=['GET', 'POST'])
@@ -139,6 +139,34 @@ def register():
     return render_template("Register.html")
 
 
+@app.route("/Products",methods=['GET', 'POST'])
+def products():
+    prod_ids = []
+    prod_names = []
+    prod_descs = []
+    image_list = []
+    cursor = Database_Connection()
+    cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
+    all_prods = cursor.fetchall()
+    if len(all_prods) % 3 == 0:
+        row_length = len(all_prods) / 3
+    else:
+        row_length = (len(all_prods) / 3) + 1
+    for value in range(len(all_prods)):
+        prod_ids.append(all_prods[value][0])
+        prod_names.append(all_prods[value][1])
+        prod_descs.append(all_prods[value][2])
+
+    cursor.execute("SELECT Prod_Image from Prod_Images")
+    image_val = cursor.fetchall()
+    for value in range(len(image_val)):
+        filename = "image_" + str(value) + ".png"
+        image_new_loc = image_loc + filename
+        image_list.append(image_new_loc)
+        with open(image_new_loc, "wb") as f:
+            f.write(image_val[value][0])
+    return render_template("Products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
+
 
 @app.route("/new_Products", methods=['GET', 'POST'])
 def new_products():
@@ -190,16 +218,12 @@ def onDemandRequests():
                 f.write(image_val[value][0])
         return render_template("onDemandRequest.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
     else:
-        redirect("/Login")
+        return redirect("/Login")
 
-# def Data_Retrieval(img_id):
-#     server = 'tcp:avadb01.database.windows.net'
-#     database = 'AVA_DB_1'
-#     username = 'SAadmin'
-#     password = 'Dublin@098'
-#     connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=yes;UID=' + username + ';PWD=' + password)
-#     cursor = connection.cursor()
-#     return c
+
+@app.route("/About_us")
+def about_us():
+    render_template("About_us.html")
 
 
 if __name__ == "__main__":
