@@ -13,8 +13,12 @@
 
 	input, select, textarea, submit {
 			display: block;
-			width: 60%;
+			width: 100%;
+		margin: 0
 	}
+	label{margin-left:32px;}
+	form{width: 700px; margin: auto}
+	
 </style>
 <body>
 <hr>
@@ -37,9 +41,9 @@
 					<div class="col-xs-14 col-lg-offset-3 col-lg-12">
 					  
 			<p>Enter the new request details below:</p>
-            <form action="#" id="new-request" id="new-request"> 
+            <form action="#" id="new-request" id="new-request" style="background-color: aliceblue; background-size: auto"> 
 				
-                <label for="Req_title">Request Title <strong style="color:red">*</strong></label><br>
+                <label for="Req_title" >Request Title <strong style="color:red">*</strong></label><br>
                 <input type="text" id="Req_title" name="Req_title" required/><br>
 				
                 <label for="H_name">Requested by <strong style="color:red">*</strong></label><br>
