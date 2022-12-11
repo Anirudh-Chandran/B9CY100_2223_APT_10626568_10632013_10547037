@@ -1,13 +1,13 @@
-import random
-import flask
 from flask import Flask,request,render_template,url_for,flash,session,redirect
-from flask-session import Session
+from flask_session import Session
 import pyodbc
 from datetime import timedelta
 
 app = Flask(__name__, template_folder="templates")
 app.config['UPLOADED_IMAGES_DEST'] = 'static'
+app.config['SESSION_TYPE'] = "filesystem"
 app.config['SECRET_KEY'] = "secret_key"
+Session(app)
 app.permanent_session_lifetime = timedelta(minutes=5)
 
 image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
@@ -29,7 +29,7 @@ def prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quanti
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/Guest", methods=['GET', 'POST'])
 def homepage():
-    session[username] = "guest"
+    session['uname']=None
     prod_ids = []
     prod_names = []
     prod_descs = []
@@ -59,31 +59,59 @@ def homepage():
 
 @app.route("/Home", methods=['GET', 'POST'])
 def user_home():
-    prod_ids = []
-    prod_names = []
-    prod_descs = []
-    image_list = []
-    cursor = Database_Connection()
-    cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
-    all_prods = cursor.fetchall()
-    if len(all_prods) % 3 == 0:
-        row_length = len(all_prods) / 3
-    else:
-        row_length = (len(all_prods) / 3) + 1
-    for value in range(len(all_prods)):
-        prod_ids.append(all_prods[value][0])
-        prod_names.append(all_prods[value][1])
-        prod_descs.append(all_prods[value][2])
+    if session.get('uname'):
+        prod_ids = []
+        prod_names = []
+        prod_descs = []
+        image_list = []
+        cursor = Database_Connection()
+        cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
+        all_prods = cursor.fetchall()
+        if len(all_prods) % 3 == 0:
+            row_length = len(all_prods) / 3
+        else:
+            row_length = (len(all_prods) / 3) + 1
+        for value in range(len(all_prods)):
+            prod_ids.append(all_prods[value][0])
+            prod_names.append(all_prods[value][1])
+            prod_descs.append(all_prods[value][2])
 
-    cursor.execute("SELECT Prod_Image from Prod_Images")
-    image_val = cursor.fetchall()
-    for value in range(len(image_val)):
-        filename = "image_" + str(value) + ".png"
-        image_new_loc = image_loc + filename
-        image_list.append(image_new_loc)
-        with open(image_new_loc, "wb") as f:
-            f.write(image_val[value][0])
-    return render_template("index.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
+        cursor.execute("SELECT Prod_Image from Prod_Images")
+        image_val = cursor.fetchall()
+        for value in range(len(image_val)):
+            filename = "image_" + str(value) + ".png"
+            image_new_loc = image_loc + filename
+            image_list.append(image_new_loc)
+            with open(image_new_loc, "wb") as f:
+                f.write(image_val[value][0])
+        return render_template("index.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
+    else:
+        prod_ids = []
+        prod_names = []
+        prod_descs = []
+        image_list = []
+        cursor = Database_Connection()
+        cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
+        all_prods = cursor.fetchall()
+        if len(all_prods) % 3 == 0:
+            row_length = len(all_prods) / 3
+        else:
+            row_length = (len(all_prods) / 3) + 1
+        for value in range(len(all_prods)):
+            prod_ids.append(all_prods[value][0])
+            prod_names.append(all_prods[value][1])
+            prod_descs.append(all_prods[value][2])
+
+        cursor.execute("SELECT Prod_Image from Prod_Images")
+        image_val = cursor.fetchall()
+        for value in range(len(image_val)):
+            filename = "image_" + str(value) + ".png"
+            image_new_loc = image_loc + filename
+            image_list.append(image_new_loc)
+            with open(image_new_loc, "wb") as f:
+                f.write(image_val[value][0])
+        return render_template("index.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
+
 
 @app.route("/Login", methods=['GET', 'POST'])
 def loginpage():
@@ -93,7 +121,7 @@ def loginpage():
         password = request.form['pwd']
         if username in login_ids:
             if password == login_ids[username]:
-                session[username] = username
+                session['uname'] = username
                 return redirect("/Home")
             else:
                 message = 'PASSWORD is incorrect'
@@ -112,8 +140,8 @@ def register():
 
 
 
-@app.route("/Products", methods=['GET', 'POST'])
-def products():
+@app.route("/new_Products", methods=['GET', 'POST'])
+def new_products():
     image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
     if request.method == "POST":
         Prod_ID = request.form['Prod_ID']
@@ -128,15 +156,42 @@ def products():
             bin_data = f.read()
         handler = Database_Connection()
         prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Quantity,Description,bin_data)
-        return render_template('Form.html',Prod_ID=Prod_ID,Prod_Name=Prod_Name,Man_date=Man_date,Prod_Size=Prod_Size,Prod_Quantity=Prod_Quantity,Description=Description,image=url_for('static',filename=file_name))
+        return render_template('Forms.html',Prod_ID=Prod_ID,Prod_Name=Prod_Name,Man_date=Man_date,Prod_Size=Prod_Size,Prod_Quantity=Prod_Quantity,Description=Description,image=url_for('static',filename=file_name))
     else:
-        return render_template('Form.html')
+        return render_template('Forms.html')
 
 
-#     command = "INSERT INTO Prod_Images(img_id,prod_image) VALUES(?,?)"
-#     cursor.execute(command,img_id,binary_value)
-#     cursor.commit()
-#
+@app.route("/onDemandRequests",methods = ['GET', 'POST'])
+def onDemandRequests():
+    if session['uname']:
+        prod_ids = []
+        prod_names = []
+        prod_descs = []
+        image_list = []
+        cursor = Database_Connection()
+        cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
+        all_prods = cursor.fetchall()
+        if len(all_prods) % 3 == 0:
+            row_length = len(all_prods) / 3
+        else:
+            row_length = (len(all_prods) / 3) + 1
+        for value in range(len(all_prods)):
+            prod_ids.append(all_prods[value][0])
+            prod_names.append(all_prods[value][1])
+            prod_descs.append(all_prods[value][2])
+
+        cursor.execute("SELECT Prod_Image from Prod_Images")
+        image_val = cursor.fetchall()
+        for value in range(len(image_val)):
+            filename = "image_" + str(value) + ".png"
+            image_new_loc = image_loc + filename
+            image_list.append(image_new_loc)
+            with open(image_new_loc, "wb") as f:
+                f.write(image_val[value][0])
+        return render_template("onDemandRequest.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
+    else:
+        redirect("/Login")
+
 # def Data_Retrieval(img_id):
 #     server = 'tcp:avadb01.database.windows.net'
 #     database = 'AVA_DB_1'
