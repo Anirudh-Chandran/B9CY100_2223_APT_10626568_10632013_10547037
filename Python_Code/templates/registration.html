@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>
-            "Registration"
+            "Sign Up"
         </title>
         <meta name="viewpoint" content="width-device-width, initial-scale=1">
         <style>
@@ -77,7 +77,7 @@
            </style>   
     </head>
     <body>
-        <center><h2> Please Register </h2></center>
+        <center><h2> Sign Up </h2></center>
         <form method="post"> 
             <div class="imgcontainer">
                 <img src="https://cdn-icons-png.flaticon.com/512/1792/1792392.png" 
@@ -89,16 +89,22 @@
 					{% endfor %}
 			</div>
             <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <label for="uname" ><b>Username<b style="color: red"> *</b></b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required >
                 
-                <label for="pwd"><b>Password</b></label>
+                <label for="pwd"><b>Password<b style="color: red"> *</b></b></label>
                 <input type="password" placeholder="Enter Password" name="pwd" required>
                 
-                <label for="email"><b>Email ID</b></label>
+				<label for="user_type"><b>User Type<b style="color: red"> *</b></b></label>
+				<select name="user_type" id="user_type" required>
+					<option name="none">None</option>
+					<option name="hospital">Hospital</option>
+					<option name="vendor">Vendor/ Manufacturer</option>
+					</select>
+                <label for="email"><b>Email ID<b style="color: red"> *</b></b></label>
                 <input type="text" placeholder="Enter Email Address" name="email" required>
                 
-                <label for="num"><b>Phone Number</b></label>
+                <label for="num"><b>Phone Number<b style="color: red"> *</b></b></label>
                 <input type="text" placeholder="Enter Phone Number" name="num" required>
                 
                 <button type="submit" >Register</button>
