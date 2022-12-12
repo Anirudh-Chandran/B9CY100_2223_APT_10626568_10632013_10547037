@@ -213,7 +213,7 @@ def products():
 @app.route("/New_Products", methods=['GET', 'POST'])
 def new_products():
     image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
-    if request.method == "POST" and session.get('uname'):
+    if request.method == "POST":
         Prod_ID = request.form['Prod_ID']
         Prod_Name = request.form['Prod_Name']
         Man_date = request.form['Man_date']
@@ -226,20 +226,20 @@ def new_products():
             bin_data = f.read()
         handler = Database_Connection()
         prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Quantity,Description,bin_data)
-        return render_template('Forms.html',Prod_ID=Prod_ID,Prod_Name=Prod_Name,Man_date=Man_date,Prod_Size=Prod_Size,Prod_Quantity=Prod_Quantity,Description=Description,image_list=image_list)
+        return render_template('new_product_form.html',Prod_ID=Prod_ID,Prod_Name=Prod_Name,Man_date=Man_date,Prod_Size=Prod_Size,Prod_Quantity=Prod_Quantity,Description=Description,image_list=image_list)
     else:
-        return redirect('/Login')
+        return redirect('/New_Products')
 
 
 @app.route("/OnDemandRequest",methods = ['GET', 'POST'])
 def On_Demand_Request():
     if session.get('uname'):
-        prod_ids = []
-        prod_names = []
-        prod_descs = []
+        req_ids = []
+        req_titles = []
+        req_descs = []
         image_list = []
         cursor = Database_Connection()
-        cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
+        cursor.execute("SELECT req_id,req_title,req_description from OnDemand_Request")
         all_prods = cursor.fetchall()
         if len(all_prods) % 3 == 0:
             row_length = len(all_prods) / 3
