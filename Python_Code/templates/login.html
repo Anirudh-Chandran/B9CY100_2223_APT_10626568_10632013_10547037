@@ -11,12 +11,13 @@
 
             input[type=text], input[type=password]
             {
-                width: 100%;
+                width:250px;
                 padding: 14px, 20px;
-                margin: 5px 0;
+                margin-left:auto;
                 display: inline-block;
                 border: 2px solid #ccc;
                 box-sizing: border-box;
+				text-align: center
             }
 
             button 
@@ -27,7 +28,7 @@
                 margin: 2px 0;   
                 border: none;
                 cursor: pointer;
-                width: 100%;
+                width: 300px;
             }
             button:hover 
             {
@@ -89,13 +90,13 @@
 					{% endfor %}
 				</div>
                 <div class="container">
-                    <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="uname" required>
-                    <label for="pwd"><b>Password</b></label>
+                    <label for="uname"><b>Username</b></label><br>
+                    <input type="text" placeholder="Enter Username" name="uname" required><br><br>
+                    <label for="pwd"><b>Password</b></label><br>
                     <input type="password" placeholder="Enter Password" name="pwd" required><br><br>
-                    <button type="submit">Login </button> <br>
-                    <button type="button" class="cancelbtn">Cancel</button><br>
-                    New User?<a href="/Register"> Please Register</a> 
+                    <button type="submit">Login </button> <br><br>
+                    <button type="button" class="cancelbtn">Cancel</button><br><br>
+                    <b>New User?</b><a href="/Register"> Please Register</a> 
                 </div>
 				    
             </form>
