@@ -139,6 +139,11 @@ def loginpage():
     else:
         return render_template("login.html")
 
+@app.route("/Logout",methods=['GET', 'POST'])
+def logout():
+    session.pop('uname',None)
+    return redirect("/Guest")
+
 
 @app.route("/Register",methods=['GET', 'POST'])
 def register():
