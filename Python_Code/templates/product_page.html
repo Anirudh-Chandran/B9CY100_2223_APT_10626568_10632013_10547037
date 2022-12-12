@@ -9,25 +9,28 @@
 </head>
 
 <body>
-	<form action="#">
+	<br><br><br><br>
+	
+	<form action="#" style="background-color: aliceblue; background-size: auto">
 	<img src={{prod_image}}></img><br>
-	{{prod_name}}<br>
-	{{prod_description}}<br>
+	{{prod_name}}<br><br>
+	{{prod_description}}<br><br>
 	{%if prod_size is not None%}
-	{{prod_size}}<br>
+	{{prod_size}}<br><br>
 	{%endif%}
 	{%if v_name is not None%}
-	{{v_name}}<br>
+	{{v_name}}<br><br>
 	{%endif%}
 	{%if v_phone is not None%}
-	{{v_phone}}<br>
+	{{v_phone}}<br><br>
 	{%endif%}
 	{%if v_email is not None%}
-	{{v_email}}<br>
+	{{v_email}}<br><br>
 	{%endif%}
 	{%if v_website is not None%}
-	{{v_website}}<br>
+	{{v_website}}<br><br>
 	{%endif%}
 	</form>
+
 </body>
 </html>
