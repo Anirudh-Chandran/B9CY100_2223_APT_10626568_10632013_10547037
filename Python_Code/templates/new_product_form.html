@@ -44,10 +44,10 @@
 				<label for="Description">Enter Description <strong style="color:red">*</strong></label><br>
                 <textarea id="Description" name="Description" rows="4" cols="50">Enter description of the product.</textarea><br><br>
 				
-                <label for="V_name">Manufactured By <strong style="color:red">*</strong></label><br>
-                <select name="Manufacturers" id="Manufacturers">
+                <label for="V_name">Manufactured By (Vendor)<strong style="color:red">*</strong></label><br>
+                <select name="Manufacturers" id="Manufacturers" style="width: 350px; margin: auto" required>
 					{%for l in allVendors%}
-    			<option value={{l}}> {{l}} </option>
+    			<option value={{l}} style="text-align: center"> {{l}} </option>
 					{%endfor%}
 				</select><br><br>
 				

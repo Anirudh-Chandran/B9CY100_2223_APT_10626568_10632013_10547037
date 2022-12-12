@@ -47,7 +47,7 @@
                 <label for="H_name">Requested by (Hospital)<strong style="color:red">*</strong></label><br>
                 <select name="hospitals" id="hospitals" style="width: 350px; margin: auto" required>
 					{%for l in allhospitalss%}
-    			<option value=l style="text-align: center">{%l%}</option>
+    			<option value={{l}} style="text-align: center">{{l}}</option>
 					{%endfor%}
 				</select><br>
                 <label for="Dimensions">Dimensions</label><br>
