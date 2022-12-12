@@ -173,33 +173,37 @@ def register():
 
 @app.route("/Products",methods=['GET', 'POST'])
 def products():
-    if session.get('uname'):
-        prod_ids = []
-        prod_names = []
-        prod_descs = []
-        image_list = []
-        cursor = Database_Connection()
-        cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
-        all_prods = cursor.fetchall()
-        if len(all_prods) % 3 == 0:
-            row_length = len(all_prods) / 3
+
+    prod_ids = []
+    prod_names = []
+    prod_descs = []
+    image_list = []
+    cursor = Database_Connection()
+    cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
+    all_prods = cursor.fetchall()
+    if len(all_prods) % 3 == 0:
+        row_length = len(all_prods) / 3
+    else:
+        row_length = (len(all_prods) / 3) + 1
+    for value in range(len(all_prods)):
+        prod_ids.append(all_prods[value][0])
+        prod_names.append(all_prods[value][1])
+        prod_descs.append(all_prods[value][2])
+        cursor.execute("SELECT Prod_Image from Prod_Images where prod_id = ?",all_prods[value][0])
+        image_val = cursor.fetchval()
+        if image_val is not None:
+            filename = "image_" + str(value) + ".png"
+            image_new_loc = image_loc + filename
+            image_list.append(image_new_loc)
+            with open(image_new_loc, "wb") as f:
+                f.write(image_val)
         else:
-            row_length = (len(all_prods) / 3) + 1
-        for value in range(len(all_prods)):
-            prod_ids.append(all_prods[value][0])
-            prod_names.append(all_prods[value][1])
-            prod_descs.append(all_prods[value][2])
-            cursor.execute("SELECT Prod_Image from Prod_Images where prod_id = ?",all_prods[value][0])
-            image_val = cursor.fetchval()
-            if image_val is not None:
-                filename = "image_" + str(value) + ".png"
-                image_new_loc = image_loc + filename
-                image_list.append(image_new_loc)
-                with open(image_new_loc, "wb") as f:
-                    f.write(image_val)
-            else:
-                image_list.append(image_loc + "images/blank.png")
+            image_list.append(image_loc + "images/blank.png")
+    if session.get('uname'):
         return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
+    else:
+        return render_template("products_guest.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
+
 
 @app.route("/New_Products", methods=['GET', 'POST'])
 def new_products():
@@ -256,7 +260,7 @@ def On_Demand_Request():
 
 @app.route("/AboutUs")
 def about_us():
-    return render_template("about_us.html")
+    return render_template("about_us.html",session_value=session.get('uname'))
 
 
 if __name__ == "__main__":
