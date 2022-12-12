@@ -16,7 +16,6 @@
 			width: 100%;
 		margin: 0
 	}
-	label{margin-left:32px;}
 	form{width: 700px; margin: auto}
 	
 </style>
@@ -46,10 +45,10 @@
                 <label for="Req_title" >Request Title <strong style="color:red">*</strong></label><br>
                 <input type="text" id="Req_title" name="Req_title" required/><br>
 				
-                <label for="H_name">Requested by <strong style="color:red">*</strong></label><br>
-                <select name="hospitals" id="hospitals" required>
+                <label for="H_name">Requested by (Hospital)<strong style="color:red">*</strong></label><br>
+                <select name="hospitals" id="hospitals" style="width: 50%; margin: auto" required>
 					{%for l in allhospitalss%}
-    			<option value=l>{%l%}</option>
+    			<option value=l style="text-align: center">{%l%}</option>
 					{%endfor%}
 				</select><br>
                 <label for="Dimensions">Dimensions</label><br>
