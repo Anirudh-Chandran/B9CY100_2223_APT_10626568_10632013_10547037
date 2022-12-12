@@ -11,11 +11,11 @@
 	<hr>
 	<nav class="navbar navbar-expand">
 	<div class="container">
-		{% if session_value == None%}
+		{% if session_value == None -%}
 			<a href="/Guest">Home</a>
-		{% else%}
+		{% else -%}
 			<a href="/Home">Home</a>
-		{endif}
+		{%endif%}
 		<a href="/Products">Products</a>
 		<a href="/OnDemandRequest">On-Demand Requests</a>
 	
