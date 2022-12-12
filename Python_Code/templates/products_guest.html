@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Products</title>
+  <link href="../static/css/bootstrap-4.4.1.css" rel="stylesheet">
+</head>
+<body>
+  <hr>
+	<nav class="navbar navbar-expand">
+	<div class="container">
+		<a href="/Guest">Home</a>
+		<a href="/AboutUs">About Us</a>
+	
+	</div>
+</nav>
+	<hr>
+  <div class="container">
+
+	{% for i in range(0,row_length) %} 
+	  <!-- row_length will be calculated like below
+		if(len(prod_id)%3==0)
+			row_length=int(len(prod_id)/3)
+		else
+			row_length=int(len(prod_id)/3) +1-->
+	  
+		<div class="row text-center">
+		{% for j in range(i*3,(i+1)*3)%}
+                <div class="col-md-4 pb-1 pb-md-0">
+		<div class="card">
+		  <img src={{image_list[j]}} alt="Card image cap" width="350" height="200" class="card-img-top rounded">
+			<div class="card-body">
+				<a href="product.html" class="btn btn-primary">{{prod_ids[j]}}.{{prod_names[j]}}</a>
+				<p class="card-text">{{prod_descs[j]}}</p>
+			</div>
+		</div>
+		</div>
+			
+	
+		{% endfor %}
+	</div>
+	{% endfor %}
+	
+	</div>
+<script src="../static/js/jquery-3.4.1.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap-4.4.1.js"></script>
+	
+</body>
+</html>  

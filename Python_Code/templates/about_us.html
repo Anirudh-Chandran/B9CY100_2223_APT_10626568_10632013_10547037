@@ -11,7 +11,11 @@
 	<hr>
 	<nav class="navbar navbar-expand">
 	<div class="container">
-		<a href="/Home">Home</a>
+		{% if session_value == None%}
+			<a href="/Guest">Home</a>
+		{% else%}
+			<a href="/Home">Home</a>
+		{endif}
 		<a href="/Products">Products</a>
 		<a href="/OnDemandRequest">On-Demand Requests</a>
 	

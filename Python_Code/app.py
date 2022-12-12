@@ -122,7 +122,7 @@ def user_home():
 
 @app.route("/Login", methods=['GET', 'POST'])
 def loginpage():
-    if request.method == "POST" and not session['uname']:
+    if request.method == "POST" and not session.get('uname'):
         username = request.form['uname']
         password = request.form['pwd']
         if username in login_ids:
@@ -173,6 +173,7 @@ def register():
 
 @app.route("/Products",methods=['GET', 'POST'])
 def products():
+
     prod_ids = []
     prod_names = []
     prod_descs = []
@@ -198,7 +199,10 @@ def products():
                 f.write(image_val)
         else:
             image_list.append(image_loc + "images/blank.png")
-    return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
+    if session.get('uname'):
+        return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
+    else:
+        return render_template("products_guest.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
 
 
 @app.route("/New_Products", methods=['GET', 'POST'])
@@ -256,7 +260,7 @@ def On_Demand_Request():
 
 @app.route("/AboutUs")
 def about_us():
-    return render_template("about_us.html")
+    return render_template("about_us.html",session_value=session.get('uname'))
 
 
 if __name__ == "__main__":
