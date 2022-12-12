@@ -44,23 +44,22 @@
 				
                 <label for="Req_title" >Request Title <strong style="color:red">*</strong></label><br>
                 <input type="text" id="Req_title" name="Req_title" required/><br>
-				
+				<label for="Req_Description">Details <strong style="color:red">*</strong></label><br>
+                <textarea id="Req_Description" name="Req_Description" rows="4" cols="50" required>Provide more details about product request</textarea><br>
                 <label for="H_name">Requested by (Hospital)<strong style="color:red">*</strong></label><br>
-                <select name="hospitals" id="hospitals" style="width: 50%; margin: auto" required>
+                <select name="hospitals" id="hospitals" style="width: 350px; margin: auto" required>
 					{%for l in allhospitalss%}
     			<option value=l style="text-align: center">{%l%}</option>
 					{%endfor%}
 				</select><br>
                 <label for="Dimensions">Dimensions</label><br>
-                <input type="number" id="Dimensions" name="Dimensions"><br>
-                <label for="Quantity">Quantity <strong style="color:red">*</strong></label><br>
-                <input type="number" id="Quantity" name="Quantity" required><br>
-                <label for="Req_Description">Details <strong style="color:red">*</strong></label><br>
-                <textarea id="Req_Description" name="Req_Description" rows="4" cols="50" required>Provide more details about product request</textarea><br>
+                <input type="number" id="Dimensions" name="Dimensions" style="width: 150px; margin: auto; text-align: center"><br>
 				<label for="Budget">Budget($)<strong style="color:red">*</strong></label><br>
-                <input type="number" id="Budget" name="Budget" required><br>
-				<label for="NeedByDate">Need By Date <strong style="color:red">*</strong></label><br>
-				<input type="date" id="NeedByDate" name="NeedByDate" required><br><br>
+                <input type="number" id="Budget" name="Budget" required style="width: 150px; margin: auto; text-align: center"><br>
+                <label for="NeedByDate">Need By Date <strong style="color:red">*</strong></label><br>
+				<input type="date" id="NeedByDate" name="NeedByDate" required style="width: 150px; margin: auto; text-align: center" required><br>
+				<label for="Quantity">Quantity <strong style="color:red">*</strong></label><br>
+                <input type="number" id="Quantity" name="Quantity" required style="width: 100px; margin: auto; text-align: center"><br>
                 <input type="submit" value="Submit" class="btn btn-primary">
             </form>
 						</div>
