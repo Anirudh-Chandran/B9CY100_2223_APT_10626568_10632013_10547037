@@ -7,16 +7,17 @@
         <meta name="viewpoint" content="width-device-width, initial-scale=1">
         <style>
             body {font-family: Arial, Helvetica, sans-serif;}
-            form {border: 4px solid #f1f1f1;width: 700px; margin: auto}
+            form {border: 4px solid #f1f1f1;width: 500px; margin: auto; text-align: center }
 
             input[type=text], input[type=password], select
             {
-                width: 100%;
+                width: 250px;
                 padding: 14px, 20px;
-                margin: 5px 0;
+                margin-left: auto;
                 display: inline-block;
                 border: 2px solid #ccc;
                 box-sizing: border-box;
+				text-align: center
             }
 
             button 
@@ -74,7 +75,8 @@
                 width: 100%;
                 
                 }
-            }  
+            }
+			label{text-align: center}
            </style>   
     </head>
     <body>
@@ -90,23 +92,23 @@
 					{% endfor %}
 			</div>
             <div class="container">
-                <label for="uname" ><b>Username<b style="color: red"> *</b></b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required >
+                <label for="uname" ><b>Username<b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter Username" name="uname" required ><br><br>
                 
-                <label for="pwd"><b>Password<b style="color: red"> *</b></b></label>
-                <input type="password" placeholder="Enter Password" name="pwd" required>
+                <label for="pwd"><b>Password<b style="color: red"> *</b></b></label><br>
+                <input type="password" placeholder="Enter Password" name="pwd" required><br><br>
                 
-				<label for="user_type"><b>User Type<b style="color: red"> *</b></b></label>
+				<label for="user_type"><b>User Type<b style="color: red"> *</b></b></label><br>
 				<select name="user_type" id="user_type" required>
 					<option name="none">None</option>
 					<option name="hospital">Hospital</option>
 					<option name="vendor">Vendor/ Manufacturer</option>
-					</select>
-                <label for="email"><b>Email ID<b style="color: red"> *</b></b></label>
-                <input type="text" placeholder="Enter Email Address" name="email" required>
+					</select><br><br>
+                <label for="email"><b>Email ID<b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter Email Address" name="email" required><br><br>
                 
-                <label for="num"><b>Phone Number<b style="color: red"> *</b></b></label>
-                <input type="text" placeholder="Enter Phone Number" name="num" required>
+                <label for="num"><b>Phone Number<b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter Phone Number" name="num" required><br><br>
                 
                 <button type="submit" >Register</button> <br><br>
 				<button type="button" class="cancelbtn">Cancel</button>
@@ -114,11 +116,9 @@
                 <div class="container signin">
                     <p>Already have an account? <a href="/Login">Sign in</a>
                 </div>
-                <div class="container" styles="background-color:white">
+               
             
         </form>
-        
-            
         
     </body>
 </html>
