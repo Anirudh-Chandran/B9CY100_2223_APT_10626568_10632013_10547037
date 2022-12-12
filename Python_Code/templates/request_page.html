@@ -8,6 +8,22 @@
 </head>
 
 <body>
+	<hr>
+	<nav class="navbar navbar-expand">
+	<div class="container">
+		<a href="/Home">Home</a>
+		<a href="/Products">Products</a>
+		<a href="/OnDemandRequest">On-Demand Requests</a>
+		<a href="/AboutUs">About Us</a>
+		<a href="/New_Products">New Product</a>
+		<a href="/Logout">Logout</a>
+	
+	</div>
+</nav>
+	<hr>
+	<br><br><br><br>
+	
+	<form action="#" style="background-color: aliceblue; background-size: auto;width: 700px; margin: auto">
 	{{req_title}}<br>
 	{{req_description}}<br>
 	{%if req_dimensions is not None%}
@@ -31,5 +47,6 @@
 	{%if h_email is not None%}
 	{{h_email}}<br>
 	{%endif%}
+		</form>
 </body>
 </html>
