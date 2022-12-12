@@ -37,20 +37,26 @@
 					<div class="col-xs-14 col-lg-offset-3 col-lg-12">
             <p>Enter the new product details below:</p>
             <form action="#" style="background-color: aliceblue; background-size: auto"> 
+				
                 <label for="Prod_Name">Product Name<strong style="color:red">*</strong></label><br>
-                <input type="text" id="Prod_Name" name="Prod_Name"><br><br>
+                <input type="text" id="Prod_Name" name="Prod_Name" required><br><br>
+				
                 <label for="V_name">Manufactured By <strong style="color:red">*</strong></label><br>
                 <select name="Manufacturers" id="Manufacturers">
 					{%for l in allVendors%}
     			<option value={{l}}> {{l}} </option>
 					{%endfor%}
 				</select><br><br>
-                <label for="Prod_Size">Prod_Size <strong style="color:red">*</strong></label><br>
-                <input type="text" id="Prod_Size" name="Prod_Size"><br><br>
+				
+                <label for="Prod_Size">Prod_Size </label><br>
+                <input type="text" id="Prod_Size" name="Prod_Size" style="width: 150px; margin: auto; text-align: center"><br><br>
+				
                 <label for="Description">Enter Description <strong style="color:red">*</strong></label><br>
                 <textarea id="Description" name="Description" rows="4" cols="50">Enter description of the product.</textarea><br><br>
+				
                 <label for="Images">Enter Image <strong style="color:red">*</strong></label><br>
                 <input type="file" id="Images" name="Images"><br><br>
+				
                 <input type="submit" value="Submit">
             </form>
 </div>
