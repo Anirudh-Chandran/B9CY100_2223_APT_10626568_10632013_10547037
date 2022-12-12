@@ -122,7 +122,7 @@ def user_home():
 
 @app.route("/Login", methods=['GET', 'POST'])
 def loginpage():
-    if request.method == "POST" and not session['uname']:
+    if request.method == "POST" and not session.get('uname'):
         username = request.form['uname']
         password = request.form['pwd']
         if username in login_ids:
@@ -173,33 +173,33 @@ def register():
 
 @app.route("/Products",methods=['GET', 'POST'])
 def products():
-    prod_ids = []
-    prod_names = []
-    prod_descs = []
-    image_list = []
-    cursor = Database_Connection()
-    cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
-    all_prods = cursor.fetchall()
-    if len(all_prods) % 3 == 0:
-        row_length = len(all_prods) / 3
-    else:
-        row_length = (len(all_prods) / 3) + 1
-    for value in range(len(all_prods)):
-        prod_ids.append(all_prods[value][0])
-        prod_names.append(all_prods[value][1])
-        prod_descs.append(all_prods[value][2])
-        cursor.execute("SELECT Prod_Image from Prod_Images where prod_id = ?",all_prods[value][0])
-        image_val = cursor.fetchval()
-        if image_val is not None:
-            filename = "image_" + str(value) + ".png"
-            image_new_loc = image_loc + filename
-            image_list.append(image_new_loc)
-            with open(image_new_loc, "wb") as f:
-                f.write(image_val)
+    if session.get('uname'):
+        prod_ids = []
+        prod_names = []
+        prod_descs = []
+        image_list = []
+        cursor = Database_Connection()
+        cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
+        all_prods = cursor.fetchall()
+        if len(all_prods) % 3 == 0:
+            row_length = len(all_prods) / 3
         else:
-            image_list.append(image_loc + "images/blank.png")
-    return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
-
+            row_length = (len(all_prods) / 3) + 1
+        for value in range(len(all_prods)):
+            prod_ids.append(all_prods[value][0])
+            prod_names.append(all_prods[value][1])
+            prod_descs.append(all_prods[value][2])
+            cursor.execute("SELECT Prod_Image from Prod_Images where prod_id = ?",all_prods[value][0])
+            image_val = cursor.fetchval()
+            if image_val is not None:
+                filename = "image_" + str(value) + ".png"
+                image_new_loc = image_loc + filename
+                image_list.append(image_new_loc)
+                with open(image_new_loc, "wb") as f:
+                    f.write(image_val)
+            else:
+                image_list.append(image_loc + "images/blank.png")
+        return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
 
 @app.route("/New_Products", methods=['GET', 'POST'])
 def new_products():
