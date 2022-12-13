@@ -12,12 +12,17 @@
 	<nav class="navbar navbar-expand">
 	<div class="container">
 		{% if session_value == None -%}
-			<a href="/Guest">Home</a>
+			<a href="/">Home</a>
+			<a href="/Products">Products</a>
+			<a href="/Login">Login/ Register</a>
 		{% else -%}
 			<a href="/Home">Home</a>
+			<a href="/Products">Products</a>
+			<a href="/OnDemandRequest">On-Demand Requests</a>
+			<a href="/Logout">Logout</a>
 		{%endif%}
-		<a href="/Products">Products</a>
-		<a href="/OnDemandRequest">On-Demand Requests</a>
+		
+		
 	
 	</div>
 </nav>
