@@ -25,10 +25,14 @@ def Database_Connection():
     return connection.cursor()
 
 
-def prod_Dataentry(Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quantity,Description,bin_data):
+def prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data):
     handler = Database_Connection()
-    handler.execute("INSERT INTO Product(Prod_ID,Prod_Name,Man_date,Prod_Size,Prod_Quantity,Description) VALUES(?,?,?,?,?,?)",Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quantity,Description)
-
+    handler.execute("INSERT INTO Product(Prod_Name,V_ID,Prod_Size,Prod_Description) VALUES(?,1,?,?)",Prod_Name,Prod_Size,Description)
+    handler.commit()
+    handler.execute("SELECT PROD_ID FROM PRODUCT WHERE PROD_NAME=?",Prod_Name)
+    prod_id = handler.fetchval()
+    handler.execute("INSERT INTO Prod_IMAGES(Prod_ID,PROD_IMAGE) VALUES(?,?)",prod_id,bin_data)
+    handler.commit()
 
 def req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty):
     handler = Database_Connection()
@@ -194,17 +198,16 @@ def products():
 def new_products():
     image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
     if request.method == "POST":
-        Prod_ID = request.form['Prod_ID']
         Prod_Name = request.form['Prod_Name']
-        Man_date = request.form['Man_date']
-        Prod_Size = request.form['Dimensions']
-        Quantity = request.form['Quantity']
         Description = request.form['Description']
-        files = request.files['Images']
+        Prod_Size = request.form['Prod_Size']
+        files = request.files['photos']
         file_name = files.filename
+        files.save(image_loc + file_name)
         with open(image_loc+file_name, 'rb') as f:
             bin_data = f.read()
-        prod_Dataentry(Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Quantity,Description,bin_data)
+
+        prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data)
         message = "New Product added"
         flash(message)
         return redirect('/New_Products')
