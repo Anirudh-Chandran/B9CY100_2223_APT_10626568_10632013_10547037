@@ -29,7 +29,6 @@ def prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quanti
 
 
 @app.route("/", methods=['GET', 'POST'])
-@app.route("/Guest", methods=['GET', 'POST'])
 def homepage():
     session['uname']=None
     prod_ids = []
@@ -205,9 +204,9 @@ def products():
         else:
             image_list.append(image_loc + "images/blank.png")
     if session.get('uname'):
-        return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
+        return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list,session_value=session.get('uname'))
     else:
-        return render_template("products_guest.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
+        return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list,session_value=session.get('uname'))
 
 
 @app.route("/New_Products", methods=['GET', 'POST'])
