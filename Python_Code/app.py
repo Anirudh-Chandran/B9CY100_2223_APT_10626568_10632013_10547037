@@ -15,6 +15,7 @@ image_loc = app.config['UPLOADED_IMAGES_DEST']+'/'
 
 login_ids = {'admin':'password'}
 
+
 def Database_Connection():
     server = 'tcp:avadb01.database.windows.net'
     database ='AVA_DB_1'
