@@ -134,17 +134,17 @@ def loginpage():
                 return render_template("login.html")
         else:
             flash('NO Username found, Please register...')
-            return render_template("Login.html")
+            return render_template("login.html")
     else:
         return render_template("login.html")
 
 @app.route("/Logout",methods=['GET', 'POST'])
 def logout():
     session.pop('uname',None)
-    return redirect("/Guest")
+    return redirect("/")
 
 
-@app.route("/Register",methods=['GET', 'POST'])
+@app.route("/Registration",methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         spl_char = ['%','!','@','#','$','^','&','*','(',')','_','-','=','+']
@@ -156,21 +156,20 @@ def register():
         message="Please use \n Password length >8 character \n one Upper character \n one lower character \n one number \n special character(@,#,!,etc) "
         if len(password)<8:
             flash(message)
-            return redirect("/Register")
+            return redirect("/Registration")
         for i in password:
             if i in spl_char or i in upper_char or i in lower_char or i in number_char:
                 continue
         email = request.form['email']
-        if '@' not in email or ".com" not in email:
+        if '@' not in email or "dbs.ie" not in email:
             flash("Incorrect email id")
-            return redirect("/Register")
+            return redirect("/Registration")
         phone_no = request.form['num']
         if not int(phone_no) or len(phone_no) > 10:
             flash("Incorrect phone number")
-            return redirect("/Register")
-        session['uname']=username
+            return redirect("/Registration")
         login_ids[username] = password
-        return redirect('/Home')
+        return redirect('/Login')
     else:
         return render_template("registration.html")
 
@@ -225,9 +224,17 @@ def new_products():
             bin_data = f.read()
         handler = Database_Connection()
         prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Quantity,Description,bin_data)
-        return render_template('new_product_form.html',Prod_ID=Prod_ID,Prod_Name=Prod_Name,Man_date=Man_date,Prod_Size=Prod_Size,Prod_Quantity=Prod_Quantity,Description=Description,image_list=image_list)
+        message = "New Product added"
+        flash(message)
+        return render_template('new_product_form.html',message=message)
     else:
-        return redirect('/New_Products')
+        allVendors_list = []
+        handler = Database_Connection()
+        handler.execute("SELECT V_NAME FROM VENDOR")
+        allVendors = handler.fetchall()
+        for i in allVendors:
+            allVendors_list.append(i[0])
+        return render_template('new_product_form.html',message=None,allVendors=allVendors_list)
 
 
 @app.route("/OnDemandRequest",methods = ['GET', 'POST'])
