@@ -12,7 +12,7 @@
 	<div class="container">
 		<a href="/Home">Home</a>
 		<a href="/Products">Products</a>
-		<a href="/New_request">New Request</a>
+		<a href="/New_Request">New Request</a>
 		<a href="/AboutUs">About Us</a>
 		<a href="/Logout">Logout</a>
 	
@@ -32,24 +32,21 @@
 		else
 			row_length=int(len(prod_id)/3) +1-->
 	  
-		<div class="row text-center">
+	<div class="row text-center">
 		{% for j in range(i*3,(i+1)*3)%}
                 <div class="col-md-4 pb-1 pb-md-0">
 		<div class="card">
-		  <img src={{image}} alt="Card image cap" width="350" height="200" class="card-img-top rounded">
 			<div class="card-body">
-				<a href="product.html" class="btn btn-primary">{{req_ids[j]}}.{{req_name1}}</a>
-				<p class="card-text">This is the description of 1st request</p>
+				<a href="product.html" class="btn btn-primary">{{req_ids[j]}}.{{req_titles[j]}}</a>
+				<p class="card-text">{{req_descs[j]}}</p>
 			</div>
 		</div>
-		</div>
-			
-	
+				</div>
 		{% endfor %}
 	</div>
 	{% endfor %}
 	
-	</div>	
+   </div>	
 <script src="../static/js/jquery-3.4.1.min.js"></script>
     <script src="../static/js/popper.min.js"></script>
     <script src="../static/js/bootstrap-4.4.1.js"></script>

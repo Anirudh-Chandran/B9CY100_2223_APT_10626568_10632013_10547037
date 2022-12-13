@@ -24,8 +24,14 @@ def Database_Connection():
     return connection.cursor()
 
 
-def prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quantity,Description,bin_data):
+def prod_Dataentry(Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quantity,Description,bin_data):
+    handler = Database_Connection()
     handler.execute("INSERT INTO Product(Prod_ID,Prod_Name,Man_date,Prod_Size,Prod_Quantity,Description) VALUES(?,?,?,?,?,?)",Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Prod_Quantity,Description)
+
+
+def req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty):
+    handler = Database_Connection()
+    handler.execute("INSERT INTO Product(Prod_ID,Prod_Name,Man_date,Prod_Size,Prod_Quantity,Description) VALUES(?,?,?,?,?,?)", Prod_ID, Prod_Name, V_ID, Man_date, Prod_Size, Prod_Quantity, Description)
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -62,7 +68,6 @@ def homepage():
 @app.route("/Home", methods=['GET', 'POST'])
 def user_home():
     if session.get('uname'):
-        flash("Login Successful")
         prod_ids = []
         prod_names = []
         prod_descs = []
@@ -79,33 +84,6 @@ def user_home():
             prod_names.append(all_prods[value][1])
             prod_descs.append(all_prods[value][2])
 
-        cursor.execute("SELECT Prod_Image from Prod_Images WHERE prod_id=?", all_prods[value][0])
-        image_val = cursor.fetchval()
-        if image_val is not None:
-            filename = "image_" + str(value) + ".png"
-            image_new_loc = image_loc + filename
-            image_list.append(image_new_loc)
-            with open(image_new_loc, "wb") as f:
-                f.write(image_val)
-        else:
-            image_list.append(image_loc + "images/blank.png")
-        return render_template("user_homepage.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
-    else:
-        prod_ids = []
-        prod_names = []
-        prod_descs = []
-        image_list = []
-        cursor = Database_Connection()
-        cursor.execute("SELECT prod_id,prod_name,prod_description from Product ORDER BY prod_id DESC")
-        all_prods = cursor.fetchall()
-        if len(all_prods) % 3 == 0:
-            row_length = len(all_prods) / 3
-        else:
-            row_length = (len(all_prods) / 3) + 1
-        for value in range(len(all_prods)):
-            prod_ids.append(all_prods[value][0])
-            prod_names.append(all_prods[value][1])
-            prod_descs.append(all_prods[value][2])
             cursor.execute("SELECT Prod_Image from Prod_Images WHERE prod_id=?", all_prods[value][0])
             image_val = cursor.fetchval()
             if image_val is not None:
@@ -117,6 +95,8 @@ def user_home():
             else:
                 image_list.append(image_loc + "images/blank.png")
         return render_template("user_homepage.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
+    else:
+        return redirect("/")
 
 
 @app.route("/Login", methods=['GET', 'POST'])
@@ -133,10 +113,11 @@ def loginpage():
                 flash(message)
                 return render_template("login.html")
         else:
-            flash('NO Username found, Please register...')
+            flash('Username not found, Please register...')
             return render_template("login.html")
     else:
         return render_template("login.html")
+
 
 @app.route("/Logout",methods=['GET', 'POST'])
 def logout():
@@ -222,11 +203,10 @@ def new_products():
         file_name = files.filename
         with open(image_loc+file_name, 'rb') as f:
             bin_data = f.read()
-        handler = Database_Connection()
-        prod_Dataentry(handler,Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Quantity,Description,bin_data)
+        prod_Dataentry(Prod_ID,Prod_Name,V_ID,Man_date,Prod_Size,Quantity,Description,bin_data)
         message = "New Product added"
         flash(message)
-        return render_template('new_product_form.html',message=message)
+        return redirect('/New_Products')
     else:
         allVendors_list = []
         handler = Database_Connection()
@@ -246,27 +226,44 @@ def On_Demand_Request():
         image_list = []
         cursor = Database_Connection()
         cursor.execute("SELECT req_id,req_title,req_description from OnDemand_Request")
-        all_prods = cursor.fetchall()
-        if len(all_prods) % 3 == 0:
-            row_length = len(all_prods) / 3
-        else:
-            row_length = (len(all_prods) / 3) + 1
-        for value in range(len(all_prods)):
-            prod_ids.append(all_prods[value][0])
-            prod_names.append(all_prods[value][1])
-            prod_descs.append(all_prods[value][2])
+        all_reqs = cursor.fetchall()
 
-        cursor.execute("SELECT Prod_Image from Prod_Images")
-        image_val = cursor.fetchall()
-        for value in range(len(image_val)):
-            filename = "image_" + str(value) + ".png"
-            image_new_loc = image_loc + filename
-            image_list.append(image_new_loc)
-            with open(image_new_loc, "wb") as f:
-                f.write(image_val[value][0])
-        return render_template("on_demand_request.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image=url_for('static', filename=image_list))
+        if len(all_reqs) % 3 == 0:
+            row_length = len(all_reqs) / 3
+        else:
+            row_length = (len(all_reqs) / 3) + 1
+        for value in range(len(all_reqs)):
+            req_ids.append(all_reqs[value][0])
+            req_titles.append(all_reqs[value][1])
+            req_descs.append(all_reqs[value][2])
+
+        return render_template("on_demand_request.html", row_length=int(row_length), req_ids=req_ids, req_titles=req_titles, req_descs=req_descs)
     else:
         return redirect("/Login")
+
+
+@app.route("/New_Request",methods = ['GET', 'POST'])
+def new_request():
+    if request.method == "POST":
+        req_title = request.form['Req_title']
+        req_desc = request.form['Req_Description']
+        hosp_name = request.form['hospitals']
+        req_dimensions = request.form['Dimensions']
+        req_budget = request.form['Budget']
+        req_nbd = request.form['NeedByDate']
+        req_qty = request.form['Quantity']
+        req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty)
+        message = "New Request created"
+        flash(message)
+        return redirect('/New_Request')
+    else:
+        allHospitals_list = []
+        handler = Database_Connection()
+        handler.execute("SELECT H_NAME FROM HOSPITAL")
+        allhospitals = handler.fetchall()
+        for i in allhospitals:
+            allHospitals_list.append(i[0])
+        return render_template("new_request_form.html",message=None,allhospitals=allHospitals_list)
 
 
 @app.route("/AboutUs")

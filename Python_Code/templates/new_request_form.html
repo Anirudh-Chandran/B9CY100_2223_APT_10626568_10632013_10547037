@@ -29,6 +29,13 @@
 	
 	</div>
 </nav>
+	<div class="flashes">
+		{% if message != None%}
+			{% for message in get_flashed_messages() %}
+				{{ message }}
+			{% endfor %}
+		{% endif %}
+	</div>
 	<hr>
             <h2><center>
               New Product Request
@@ -46,7 +53,7 @@
                 <textarea id="Req_Description" name="Req_Description" rows="4" cols="50" required>Provide more details about the request</textarea><br>
                 <label for="H_name">Requested by (Hospital)<strong style="color:red">*</strong></label><br>
                 <select name="hospitals" id="hospitals" style="width: 350px; margin: auto" required>
-					{%for l in allhospitalss%}
+					{%for l in allhospitals%}
     			<option value={{l}} style="text-align: center">{{l}}</option>
 					{%endfor%}
 				</select><br>
