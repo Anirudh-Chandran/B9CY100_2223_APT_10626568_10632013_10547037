@@ -54,13 +54,28 @@ body {
 </head>
 <body>
     <div id="mySidenav" class="sidenav">
-    <a href="#">Home</a>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="homepage.html">Home</a>
     <a href="#">Products</a>
-    <a href="#">On Demand Request</a>
-    <a href="#">About Us</a>
-    <a href="#">login</a>
+    <a href="on_demand_request.html">On Demand Request</a>
+    <a href="about_us.html">About Us</a>
+    <a href="login.html">login</a>
     </div>
 
 <center><a href="h.html" class="text-center"><img src="../static/images/logo_3.gif" alt="AVA" width="500" height= "120" class="center"></a></center>
-</body>
+
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+
+<script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+    </script>
+   
+</body>
+</html> 
+    
