@@ -205,7 +205,6 @@ def register():
 
 @app.route("/Products",methods=['GET', 'POST'])
 def products():
-    print(session['uname'])
     prod_ids = []
     prod_names = []
     prod_descs = []
