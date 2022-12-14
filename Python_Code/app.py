@@ -3,6 +3,7 @@ from flask_session import Session
 import pyodbc
 from datetime import timedelta
 import string
+import xml.etree.ElementTree as x
 
 app = Flask(__name__, template_folder="templates")
 app.config['UPLOADED_IMAGES_DEST'] = 'static'
@@ -37,8 +38,42 @@ def prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data):
 
 def req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty):
     handler = Database_Connection()
-    handler.execute("INSERT INTO Product(Prod_ID,Prod_Name,Man_date,Prod_Size,Prod_Quantity,Description) VALUES(?,?,?,?,?,?)", Prod_ID, Prod_Name, V_ID, Man_date, Prod_Size, Prod_Quantity, Description)
+    handler.execute("INSERT INTO OnDemand_Request(req_title,req_desc,) VALUES(?,?,?,?,?,?)", Prod_ID, Prod_Name, V_ID, Man_date, Prod_Size, Prod_Quantity, Description)
 
+"""
+The below section of code was generated as an initial step to generate the xml file.
+def credentials_generator():
+    root = x.Element("Credentials")
+    vendor = x.Element("Vendor")
+    root.append(vendor)
+    vendor_default = x.SubElement(vendor,"default")
+    vendor_default.text = " "
+    hospital = x.Element("Hospital")
+    hospital_default = x.SubElement(hospital,"default")
+    hospital_default.text = " "
+    root.append(hospital)
+    admin = x.Element("Admin")
+    root.append(admin)
+    admin_cred = x.SubElement(admin,"admin")
+    admin_cred.text = "password"
+    tree = x.ElementTree(root)
+    with open("credentials.xml",'wb+') as f:
+        tree.write(f)
+"""
+
+
+def credentials_addition(usertype,username,password):
+    tree_read = x.parse("credentials.xml")
+    root = tree_read.getroot()
+    for i in root:
+        if usertype==i.tag:
+            provider = i.tag
+            break
+    provider_user = x.SubElement(provider,username)
+    provider_user.text = password
+    tree_write = x.ElementTree(root)
+    with open("credentials.xml",'wb+') as f:
+        tree_write.write(f)
 
 @app.route("/", methods=['GET', 'POST'])
 def homepage():
@@ -110,6 +145,11 @@ def loginpage():
     if request.method == "POST" and not session.get('uname'):
         username = request.form['uname']
         password = request.form['pwd']
+        # credentials_generator()
+        tree = x.parse('credentials.xml')
+        root = tree.getroot()
+        for i in root:
+            login_ids[i[0].tag] = i[0].text
         if username in login_ids:
             if password == login_ids[username]:
                 session['uname'] = username
@@ -136,10 +176,6 @@ def register():
     if request.method == 'POST':
         usertype = request.form['user_type']
         provider = request.form['provider']
-        if usertype == 'Hospital':
-            h_name = usertype
-        elif usertype == 'Manufacturer / Vendor':
-            v_name = usertype
         spl_char = ['%','!','@','#','$','^','&','*','(',')','_','-','=','+']
         upper_char = string.ascii_uppercase
         lower_char = string.ascii_lowercase
@@ -161,8 +197,7 @@ def register():
         if not int(phone_no) or len(phone_no) > 10:
             flash("Incorrect phone number")
             return redirect("/Registration")
-        login_ids[username] = password
-
+        credentials_addition(usertype,username,password)
         return redirect('/Login')
     else:
         return render_template("registration.html")
@@ -170,7 +205,7 @@ def register():
 
 @app.route("/Products",methods=['GET', 'POST'])
 def products():
-
+    print(session['uname'])
     prod_ids = []
     prod_names = []
     prod_descs = []
@@ -296,6 +331,7 @@ def new_request():
         flash(message)
         return redirect('/New_Request')
     else:
+
         allHospitals_list = []
         handler = Database_Connection()
         handler.execute("SELECT H_NAME FROM HOSPITAL")
