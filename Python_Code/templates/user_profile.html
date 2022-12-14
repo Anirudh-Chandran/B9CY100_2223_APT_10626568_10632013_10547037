@@ -88,7 +88,7 @@
 	 <center><h2> My Profile</h2></center>
 	<form method="post" style="background-size: auto"> 
 		<div>
-			<button type="button" class="deletebtn">Delete Account</button>
+			<button type="button" class="deletebtn" onClick="ConfirmDelete()" >Delete Account</button>
 		</div>
             <div class="imgcontainer">
                 <img src="../static/images/profile.png" 
@@ -125,5 +125,16 @@
 				<button type="button" class="cancelbtn">Cancel</button>
 			
             </div>
+		
+	<script>
+		function ConfirmDelete()
+		{
+		  var x = confirm("Are you sure you want to delete?");
+		  if (x)
+			  return true;
+		  else
+			return false;
+		}
+		</script>
 </body>
 </html>
