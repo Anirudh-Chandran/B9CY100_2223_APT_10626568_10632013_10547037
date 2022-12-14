@@ -38,8 +38,12 @@ def prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data):
 
 def req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty):
     handler = Database_Connection()
-    handler.execute("INSERT INTO OnDemand_Request(req_title,req_desc,) VALUES(?,?,?,?,?,?)", Prod_ID, Prod_Name, V_ID, Man_date, Prod_Size, Prod_Quantity, Description)
-
+    handler.execute("INSERT INTO OnDemand_Request(req_title,req_description,req_dimensions,req_quantity,req_need_by_data,req_budget) VALUES(?,?,?,?,?,?)", req_title, req_desc, req_dimensions, req_qty, req_nbd, req_budget)
+    handler.commit()
+    handler.execute("SELECT H_ID from Hospital where hosp_name=?",hosp_name)
+    h_id = handler.fetchval()
+    handler.execute("INSERT INTO OnDemand_Request(h_id) values(?)",h_id)
+    handler.commit()
 """
 The below section of code was generated as an initial step to generate the xml file.
 def credentials_generator():
@@ -339,6 +343,25 @@ def new_request():
             allHospitals_list.append(i[0])
         return render_template("new_request_form.html",message=None,allhospitals=allHospitals_list)
 
+
+@app.route("/Requests/<int:req_id>",methods = ['GET', 'POST'])
+def request_display(req_id):
+    cursor = Database_Connection()
+    cursor.execute("SELECT * FROM OnDemand_Request where req_id=?",req_id)
+    req_values = cursor.fetchall()
+    req_title = req_values[0][1]
+    req_quantity = req_values[0][2]
+    req_dimensions = req_values[0][3]
+    req_description = req_values[0][4]
+    req_need_by_data = req_values[0][5]
+    req_budget = req_values[0][6]
+    h_id = req_values[0][7]
+    cursor.execute("SELECT h_name,h_phone,h_email FROM hospital where h_id=?", h_id)
+    h_values = cursor.fetchall()
+    h_name = h_values[0][0]
+    h_phone = h_values[0][1]
+    h_email = h_values[0][2]
+    return render_template("request_page.html",req_title=req_title,req_quantity=req_quantity,req_dimensions=req_dimensions,req_description=req_description,req_need_by_data=req_need_by_data,req_budget=req_budget,h_name=h_name,h_phone=h_phone,h_email=h_email)
 
 @app.route("/AboutUs")
 def about_us():

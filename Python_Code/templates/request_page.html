@@ -26,25 +26,25 @@
 	<form action="#" style="background-color: aliceblue; background-size: auto;width: 700px; margin: auto; text-align: center" >
 	<b style="color: #007bff">{{req_title}}</b><br><br>
 	{{req_description}}<br><br>
-	{%if req_dimensions is not None%}
+	{%if req_dimensions != None%}
 	{{req_dimensions}}<br><br>
 	{%endif%}
-	{%if req_quantity is not None%}
+	{%if req_quantity != None%}
 	{{req_quantity}}<br><br>
 	{%endif%}
-	{%if req_budget is not None%}
+	{%if req_budget != None%}
 	{{req_budget}}<br><br>
 	{%endif%}
-	{%if req_need_by_date is not None%}
+	{%if req_need_by_date != None%}
 	{{req_need_by_date}}<br><br>
 	{%endif%}
-	{%if h_name is not None%}
+	{%if h_name != None%}
 	{{h_name}}<br><br>
 	{%endif%}
-	{%if h_phone is not None%}
+	{%if h_phone != None%}
 	{{h_phone}}<br><br>
 	{%endif%}
-	{%if h_email is not None%}
+	{%if h_email != None%}
 	{{h_email}}<br><br>
 	{%endif%}
 		</form>
