@@ -93,14 +93,26 @@
 			</div>
             <div class="container">
                 <label for="user_type"><b>Representing<b style="color: red"> *</b></b></label><br>
-                <select name="user_type" id="user_type" required>
+                <select name="user_type" id="user_type" onchange = "if (this.selectedIndex) display();" required>
                     <option name="none">Choose One Option</option>
                     <option name="hospital">Hospital</option>
                     <option name="vendor">Manufacturer / Vendor</option><br><br>
                 </select><br><br>
-                
-                <label for="provider" ><b>Hospital/ Vendor Name <b style="color: red"> *</b></b></label><br>
-                <input type="text" placeholder="Enter Username" name="provider" required ><br><br>
+                <script>
+					function display(){
+						if (document.getElementById("user_type").value == "Hospital"){
+							document.getElementById("provider").innerHTML = "Hospital Details";
+							document.getElementById("place").placeholder = "Hospital Name"
+						}
+						if(document.getElementById("user_type").value == "Manufacturer / Vendor"){
+							document.getElementById("provider").innerHTML = "Vendor Details";
+							document.getElementById("place").placeholder = "Vendor Name";
+						}
+						
+					}
+				</script>
+                <label for ="provider" id="provider"><b> <b style="color: red"> *</b></b></label><br>
+				<input type="text" placeholder="Enter value" id="place" name="provider" required ><br><br>
 				
                 <label for="uname" ><b>Username<b style="color: red"> *</b></b></label><br>
                 <input type="text" placeholder="Enter Username" name="uname" required ><br><br>

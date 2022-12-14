@@ -71,7 +71,7 @@ def credentials_addition(usertype,username,password):
     root = tree_read.getroot()
     for i in root:
         if usertype == i.tag:
-            provider = i.tag
+            provider = i
             break
     provider_user = x.SubElement(provider,username)
     provider_user.text = password
@@ -153,7 +153,9 @@ def loginpage():
         tree = x.parse('credentials.xml')
         root = tree.getroot()
         for i in root:
-            login_ids[i[0].tag] = i[0].text
+            for j in range(len(i)):
+                login_ids[i[j].tag] = i[j].text
+        print(login_ids)
         if username in login_ids:
             if password == login_ids[username]:
                 session['uname'] = username
@@ -178,11 +180,14 @@ def logout():
 @app.route("/Registration",methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        usertype = request.form['user_type']
+        usertype = request.form.get('user_type')
         if usertype == "Hospital":
             h_provider = request.form['provider']
         elif usertype == "Manufacturer / Vendor":
             v_provider = request.form['provider']
+        else:
+            flash("Please select a usertype")
+            return redirect("/Registration")
         spl_char = ['%','!','@','#','$','^','&','*','(',')','_','-','=','+']
         upper_char = string.ascii_uppercase
         lower_char = string.ascii_lowercase
