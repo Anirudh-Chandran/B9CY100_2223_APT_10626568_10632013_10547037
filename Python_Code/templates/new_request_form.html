@@ -50,8 +50,9 @@
                 <label for="Req_title" >Request Title <strong style="color:red">*</strong></label><br>
                 <input type="text" id="Req_title" name="Req_title" required/><br>
 				<label for="Req_Description">Details <strong style="color:red">*</strong></label><br>
-                <textarea id="Req_Description" name="Req_Description" rows="4" cols="50" required>Provide more details about the request</textarea><br>
-                <label for="H_name">Requested by (Hospital)<strong style="color:red">*</strong></label><br>
+                <textarea id="Req_Description" name="Req_Description" placeholder="Provide more details about the request" rows="4" cols="50" required></textarea><br>
+               
+				<label for="H_name">Requested by (Hospital)<strong style="color:red">*</strong></label><br>
                 <select name="hospitals" id="hospitals" style="width: 350px; margin: auto" required>
 					{%for l in allhospitals%}
     			<option value={{l}} style="text-align: center">{{l}}</option>
