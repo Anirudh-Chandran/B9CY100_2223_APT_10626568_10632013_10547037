@@ -2,8 +2,9 @@
 <html>
 <head>
 <meta charset="utf-8">
+		<link href="../static/css/bootstrap-4.4.1.css" rel="stylesheet">
 	<style>
-	body {font-family: Arial, Helvetica, sans-serif;}
+	body {font-family: Arial, Helvetica, sans-serif;font-size: 0.9rem;line-height: 0.9;}
             form {border: 4px solid #f1f1f1;width: 500px; margin: auto; text-align: center }
 
             input[type=text], input[type=password], select
@@ -43,7 +44,7 @@
                 width:auto;
                 padding: 10px 20px;
                 background-color:red;
-				margin-left: 73%
+				margin-left: 73%;
             }
             .imgcontainer
             {
@@ -81,13 +82,26 @@
             }
 			label{text-align: center}
            </style> 
-<title>User Profile</title>
+<title>My Profile</title>
 </head>
 
 <body>
+		<hr>
+	<nav class="navbar navbar-expand">
+	<div class="container">
+		<a href="/Home">Home</a>
+		<a href="/Products">Products</a>
+		<a href="/OnDemandRequest">On-Demand Requests</a>
+		<a href="/AboutUs">About Us</a>
+		<a href="/Logout">Logout</a>
+	
+	</div>
+</nav>
+	<hr>
+	 <center><h2> My Profile</h2></center>
 	<form method="post" style="background-size: auto"> 
 		<div>
-			<button type="button" class="deletebtn">Delete Account</button>
+			<button type="button" class="deletebtn" onClick="ConfirmDelete()" >Delete Account</button>
 		</div>
             <div class="imgcontainer">
                 <img src="../static/images/profile.png" 
@@ -122,7 +136,18 @@
                 
                 <button type="submit" >Save</button> <br><br>
 				<button type="button" class="cancelbtn">Cancel</button>
-			
+			 
             </div>
+		
+	<script>
+		function ConfirmDelete()
+		{
+		  var x = confirm("Are you sure you want to delete?");
+		  if (x)
+			  window.location='https://127.0.01:8080/DeleteAccount';
+		  else
+			return false;
+		}
+		</script>
 </body>
 </html>
