@@ -34,6 +34,7 @@ def prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data):
     handler.execute("INSERT INTO Prod_IMAGES(Prod_ID,PROD_IMAGE) VALUES(?,?)",prod_id,bin_data)
     handler.commit()
 
+
 def req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty):
     handler = Database_Connection()
     handler.execute("INSERT INTO Product(Prod_ID,Prod_Name,Man_date,Prod_Size,Prod_Quantity,Description) VALUES(?,?,?,?,?,?)", Prod_ID, Prod_Name, V_ID, Man_date, Prod_Size, Prod_Quantity, Description)
@@ -192,6 +193,33 @@ def products():
         return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list,session_value=session.get('uname'))
     else:
         return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list,session_value=session.get('uname'))
+
+
+@app.route("/<int:prod_id>",methods=['GET','POST'])
+def product_page(prod_id):
+    cursor = Database_Connection()
+    cursor.execute("SELECT prod_name,prod_description,prod_size,v_id from product where prod_id=?",prod_id)
+    prod_values = cursor.fetchall()
+    prod_name = prod_values[0][0]
+    prod_description = prod_values[0][1]
+    prod_size=prod_values[0][2]
+    v_id=prod_values[0][3]
+    cursor.execute("SELECT v_name,v_phone,v_email,v_website from vendor where v_id=?",v_id)
+    vend_values = cursor.fetchall()
+    v_name = vend_values[0][0]
+    v_phone= vend_values[0][1]
+    v_email= vend_values[0][2]
+    v_website= vend_values[0][3]
+    cursor.execute("SELECT prod_image from prod_images where prod_id=?",prod_id)
+    image_val = cursor.fetchval()
+    if image_val is not None:
+        filename = "image_" + str(prod_id) + ".png"
+        image_new_loc = image_loc + filename
+        with open(image_new_loc, "wb") as f:
+            f.write(image_val)
+    else:
+        image_new_loc = image_loc + "images/blank.png"
+    return render_template('product_page.html',prod_name=prod_name,prod_description=prod_description,prod_size=prod_size,prod_image=image_new_loc,v_name=v_name,v_website=v_website,v_phone=v_phone,v_email=v_email)
 
 
 @app.route("/New_Products", methods=['GET', 'POST'])
