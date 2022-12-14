@@ -40,7 +40,10 @@ def req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd
     handler = Database_Connection()
     handler.execute("INSERT INTO OnDemand_Request(req_title,req_description,req_dimensions,req_quantity,req_need_by_data,req_budget) VALUES(?,?,?,?,?,?)", req_title, req_desc, req_dimensions, req_qty, req_nbd, req_budget)
     handler.commit()
-    
+    handler.execute("SELECT H_ID from Hospital where hosp_name=?",hosp_name)
+    h_id = handler.fetchval()
+    handler.execute("INSERT INTO OnDemand_Request(h_id) values(?)",h_id)
+    handler.commit()
 """
 The below section of code was generated as an initial step to generate the xml file.
 def credentials_generator():
@@ -340,6 +343,10 @@ def new_request():
             allHospitals_list.append(i[0])
         return render_template("new_request_form.html",message=None,allhospitals=allHospitals_list)
 
+@app.route("/Requests/<int:req_id>",methods = ['GET', 'POST'])
+def request_display(req_id):
+    cursor = Database_Connection()
+    cursor.execute("SELECT * FROM OnDemand_Request")
 
 @app.route("/AboutUs")
 def about_us():
