@@ -38,8 +38,9 @@ def prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data):
 
 def req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty):
     handler = Database_Connection()
-    handler.execute("INSERT INTO OnDemand_Request(req_title,req_desc,) VALUES(?,?,?,?,?,?)", Prod_ID, Prod_Name, V_ID, Man_date, Prod_Size, Prod_Quantity, Description)
-
+    handler.execute("INSERT INTO OnDemand_Request(req_title,req_description,req_dimensions,req_quantity,req_need_by_data,req_budget) VALUES(?,?,?,?,?,?)", req_title, req_desc, req_dimensions, req_qty, req_nbd, req_budget)
+    handler.commit()
+    
 """
 The below section of code was generated as an initial step to generate the xml file.
 def credentials_generator():
