@@ -84,5 +84,30 @@
                 <img src="../static/images/profile.png" 
                 alt="Avatar" class="avatar">
             </div>
+		<div class="container">
+                <label for="user_type"><b>Representing<b style="color: red"> *</b></b></label><br>
+                <select name="user_type" id="user_type" required>
+                    <option name="none">Choose One Option</option>
+                    <option name="hospital">Hospital</option>
+                    <option namw="vendor">Manufacturer / Vendor</option><br><br>
+                </select><br><br>
+                
+                <label for="provider" ><b>Hospital/ Vendor Name <b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter Username" name="uname" required ><br><br>
+                <label for="uname" ><b>Username<b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter Username" name="uname" required ><br><br>
+                
+                <label for="pwd"><b>Password<b style="color: red"> *</b></b></label><br>
+                <input type="password" placeholder="Enter Password" name="pwd" required><br><br>
+                
+                <label for="email"><b>Email ID<b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter Email Address" name="email" required><br><br>
+                
+                <label for="num"><b>Phone Number<b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter Phone Number" name="num" required><br><br>
+                
+                <button type="submit" >Save</button> <br><br>
+				<button type="button" class="cancelbtn">Cancel</button>
+            </div>
 </body>
 </html>
