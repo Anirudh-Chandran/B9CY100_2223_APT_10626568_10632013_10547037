@@ -343,10 +343,25 @@ def new_request():
             allHospitals_list.append(i[0])
         return render_template("new_request_form.html",message=None,allhospitals=allHospitals_list)
 
+
 @app.route("/Requests/<int:req_id>",methods = ['GET', 'POST'])
 def request_display(req_id):
     cursor = Database_Connection()
-    cursor.execute("SELECT * FROM OnDemand_Request")
+    cursor.execute("SELECT * FROM OnDemand_Request where req_id=?",req_id)
+    req_values = cursor.fetchall()
+    req_title = req_values[0][1]
+    req_quantity = req_values[0][2]
+    req_dimensions = req_values[0][3]
+    req_description = req_values[0][4]
+    req_need_by_data = req_values[0][5]
+    req_budget = req_values[0][6]
+    h_id = req_values[0][7]
+    cursor.execute("SELECT h_name,h_phone,h_email FROM hospital where h_id=?", h_id)
+    h_values = cursor.fetchall()
+    h_name = h_values[0][0]
+    h_phone = h_values[0][1]
+    h_email = h_values[0][2]
+    return render_template("request_page.html",req_title=req_title,req_quantity=req_quantity,req_dimensions=req_dimensions,req_description=req_description,req_need_by_data=req_need_by_data,req_budget=req_budget,h_name=h_name,h_phone=h_phone,h_email=h_email)
 
 @app.route("/AboutUs")
 def about_us():
