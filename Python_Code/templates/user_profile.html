@@ -36,9 +36,15 @@
             {
                 width:auto;
                 padding: 10px 20px;
-                background-color: red;
+                background-color:#E96264;
             }
-            
+            .deletebtn 
+            {
+                width:auto;
+                padding: 10px 20px;
+                background-color:red;
+				margin-left: 70%
+            }
             .imgcontainer
             {
                 text-align: center;
@@ -80,6 +86,9 @@
 
 <body>
 	<form method="post" style="background-size: auto"> 
+		<div>
+			<button type="button" class="deletebtn">Delete Account</button>
+		</div>
             <div class="imgcontainer">
                 <img src="../static/images/profile.png" 
                 alt="Avatar" class="avatar">
@@ -112,7 +121,8 @@
                 <input type="text" placeholder="Enter Phone Number" name="num" required><br><br>
                 
                 <button type="submit" >Save</button> <br><br>
-				<button type="button" class="cancelbtn">Cancel</button>
+				<button type="button" class="cancelbtn">Cancel</button><br><br>
+			
             </div>
 </body>
 </html>
