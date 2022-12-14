@@ -134,8 +134,14 @@ def logout():
 @app.route("/Registration",methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        usertype = request.form['user_type']
+        provider = request.form['provider']
+        if usertype == 'Hospital':
+            h_name = usertype
+        elif usertype == 'Manufacturer / Vendor':
+            v_name = usertype
         spl_char = ['%','!','@','#','$','^','&','*','(',')','_','-','=','+']
-        upper_char =string.ascii_uppercase
+        upper_char = string.ascii_uppercase
         lower_char = string.ascii_lowercase
         number_char = range(0,9)
         username = request.form['uname']
@@ -156,6 +162,7 @@ def register():
             flash("Incorrect phone number")
             return redirect("/Registration")
         login_ids[username] = password
+
         return redirect('/Login')
     else:
         return render_template("registration.html")
