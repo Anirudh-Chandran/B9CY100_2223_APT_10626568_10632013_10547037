@@ -70,7 +70,7 @@ def credentials_addition(usertype,username,password):
     tree_read = x.parse("credentials.xml")
     root = tree_read.getroot()
     for i in root:
-        if usertype==i.tag:
+        if usertype == i.tag:
             provider = i.tag
             break
     provider_user = x.SubElement(provider,username)
@@ -179,7 +179,10 @@ def logout():
 def register():
     if request.method == 'POST':
         usertype = request.form['user_type']
-        provider = request.form['provider']
+        if usertype == "Hospital":
+            h_provider = request.form['provider']
+        elif usertype == "Manufacturer / Vendor":
+            v_provider = request.form['provider']
         spl_char = ['%','!','@','#','$','^','&','*','(',')','_','-','=','+']
         upper_char = string.ascii_uppercase
         lower_char = string.ascii_lowercase
@@ -187,7 +190,7 @@ def register():
         username = request.form['uname']
         password = request.form['pwd']
         message="Please use \n Password length >8 character \n one Upper character \n one lower character \n one number \n special character(@,#,!,etc) "
-        if len(password)<8:
+        if len(password) < 8:
             flash(message)
             return redirect("/Registration")
         for i in password:
