@@ -77,14 +77,16 @@ def credentials_generator():
 """
 
 
-def credentials_addition(usertype,username,password):
+def credentials_addition(usertype,provider,username,password):
     tree_read = x.parse("credentials.xml")
     root = tree_read.getroot()
+    container = None
     for i in root:
         if usertype == i.tag:
-            provider = i
+            container = i
             break
-    provider_user = x.SubElement(provider,username)
+    subcontainer = x.SubElement(container,provider)
+    provider_user = x.SubElement(subcontainer,username)
     provider_user.text = password
     tree_write = x.ElementTree(root)
     with open("credentials.xml",'wb+') as f:
@@ -163,10 +165,12 @@ def loginpage():
         # credentials_generator()
         tree = x.parse('credentials.xml')
         root = tree.getroot()
+
         for i in root:
-            for j in range(len(i)):
-                login_ids[i[j].tag] = i[j].text
-        print(login_ids)
+            for j in i:
+                for k in j:
+                    key_val = k
+                    login_ids[k.tag] = key_val.text
         if username in login_ids:
             if password == login_ids[username]:
                 session['uname'] = username
@@ -220,15 +224,19 @@ def register():
             flash("Incorrect phone number")
             return redirect("/Registration")
 
-        credentials_addition(usertype,username,password)
+
         if usertype == "Hospital":
             h_provider = request.form['provider']
+
             if h_provider is not None:
+                credentials_addition(usertype, h_provider, username, password)
                 hospital_entry(h_provider,street,city,postcode,website,email,phone_no)
         else:
+
             v_provider = request.form['provider']
             v_about_us = request.form['aboutus']
             if v_provider is not None:
+                credentials_addition(usertype, v_provider, username, password)
                 vendor_entry(v_provider,street,city,postcode,website,email,phone_no,v_about_us)
         return redirect('/Login')
     else:
@@ -394,9 +402,29 @@ def request_display(req_id):
 def about_us():
     return render_template("about_us.html",session_value=session.get('uname'))
 
+
 @app.route("/My_Profile",methods = ['GET', 'POST'])
 def my_profile():
-    return render_template("user_profile.html")
+    tree = x.parse('credentials.xml')
+    root = tree.getroot()
+    provider_type = " "
+    provider_name = " "
+    profile_name = " "
+    for i in root:
+        for j in i:
+            for k in j:
+                if session['uname']==k.tag:
+                    provider_type=i.tag
+                    provider_name=j.tag
+                    profile_name = k
+                    break
+    if provider_type == "Hospital":
+        cursor = Database_Connection()
+        cursor.execute("SELECT h_email,h_phone from Hospital where h_name=?",profile_name)
+        fetched_value = cursor.fetchall()
+        profile_email = fetched_value[0][0]
+        profile_phone = fetched_value[0][1]
+    return render_template("user_profile.html",provider_type=provider_type,provider_name=provider_name,profile_name=profile_name.tag,profile_password=profile_name.text,profile_email=profile_email,profile_phone=profile_phone)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080) # Remove Host and Port after testing
