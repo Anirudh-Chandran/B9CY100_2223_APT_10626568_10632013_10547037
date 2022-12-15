@@ -328,7 +328,6 @@ def On_Demand_Request():
         req_ids = []
         req_titles = []
         req_descs = []
-        image_list = []
         cursor = Database_Connection()
         cursor.execute("SELECT req_id,req_title,req_description from OnDemand_Request")
         all_reqs = cursor.fetchall()
