@@ -9,7 +9,7 @@
             body {font-family: Arial, Helvetica, sans-serif;}
             form {border: 4px solid #f1f1f1;width: 500px; margin: auto; text-align: center }
 
-            input[type=text], input[type=password], select, textarea
+            input[type=text], input[type=password], select
             {
                 width: 250px;
                 padding: 14px, 20px;
@@ -92,26 +92,26 @@
 					{% endfor %}
 			</div>
             <div class="container" id="container_id">
-                <label for="user_type"><b>Representing<b style="color: red"> *</b></b></label><br>
-                <select name="user_type" id="user_type" required>
-                    <option name="none" value="none">Choose One Option</option>
+                <label for="seeAnotherField"><b>Representing<b style="color: red"> *</b></b></label><br>
+                <select name="seeAnotherField" id="seeAnotherField" required>
+                    <option name="none">Choose One Option</option>
                     <option name="hospital" value="hospital">Hospital</option>
                     <option name="vendor" value="vendor">Manufacturer / Vendor</option><br><br>
-                </select><br>
-
-				<div id="hospital_name"><br>
+                </select><br><br>
+				
+				<div id='hospital_name'>
 				<label for="h_name" ><b>Hospital Name<b style="color: red"> *</b></b></label><br>
 				<input type="text" placeholder="Enter Hospital Name" name="h_name" id="h_name" >
 				</div>
 				
-				<div id="vendor_name"><br>
+				<div id='vendor_name'>
 				<label for="v_name" ><b>Vendor/ Manufacturer Name<b style="color: red"> *</b></b></label><br>
 				<input type="text" placeholder="Enter Vendor/ Manufacturer Name" name="v_name" id="v_name" >
-				</div><br>
+				</div>
 				
-                <label for="uname" id="uname"><b>Username<b style="color: red"> *</b></b></label><br>
-				<input type="text" placeholder="Enter Username" name="uname" id="space" required ><br><br>
-                
+    			<label for="uname" ><b>Username<b style="color: red"> *</b></b></label><br>
+				<input type="text" placeholder="Enter Username" name="uname" id="uname" required > <br><br>
+		      
                 <label for="pwd"><b>Password<b style="color: red"> *</b></b></label><br>
                 <input type="password" placeholder="Enter Password" name="pwd" required><br><br>
                 
@@ -132,12 +132,6 @@
 				
 				<label for="website"><b>Website</b></label><br>
                 <input type="text" placeholder="Enter website(https://)" name="website" ><br><br>
-				
-				<div id="about_us_div">
-				<label for="v_about_us"><b>About Us<b style="color: red"> *</b></b></label><br>
-                <textarea id="v_about_us" name="v_about_us" placeholder="Tell us something about your organization (500 words max.)" rows="4" cols="50"></textarea><br><br>
-				</div>
-				
                 <br>
                 <button type="submit" id="submission">Register</button> <br><br>
 				<button type="button" class="cancelbtn">Cancel</button>
@@ -149,7 +143,8 @@
             
                   
         </form>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 		<script src="../static/js/hide-show-fields-form.js"></script>
+		
     </body>
 </html>
