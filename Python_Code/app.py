@@ -406,7 +406,7 @@ def about_us():
 @app.route("/My_Profile",methods = ['GET', 'POST'])
 def my_profile():
     if request.method == "POST":
-        pass
+        
     else:
         tree = x.parse('credentials.xml')
         root = tree.getroot()
