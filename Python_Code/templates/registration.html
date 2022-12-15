@@ -98,101 +98,6 @@
                     <option name="hospital">Hospital</option>
                     <option name="vendor">Manufacturer / Vendor</option><br><br>
                 </select><br><br>
-                <script>
-					function display(){
-						if (document.getElementById("user_type").value == "Hospital"){
-							
-							var prov = document.createElement("label");
-							prov.setAttribute("for","provider1");
-							prov.setAttribute("id","provider1");
-							var details = document.createTextNode("Hospital Details"); 
-							var text_bold1 = document.createElement("b");
-							var text_bold2 = document.createElement("b");
-							text_bold1.setAttribute("style","color:red");
-							var star = document.createTextNode("*");
-							text_bold2.appendChild(details);
-							text_bold1.appendChild(star);
-							text_bold2.appendChild(text_bold1);
-							prov.appendChild(text_bold2);
-							
-							var breaker1 = document.createElement("br");
-							breaker1.setAttribute("id","breaker1");
-							
-							var inp = document.createElement("input");
-							inp.setAttribute("type","text");
-							inp.setAttribute("placeholder","Hospital details");
-							inp.setAttribute("name","provider");
-							inp.setAttribute("id","provider2");
-							var breaker2 = document.createElement("br");
-							breaker2.setAttribute("id","breaker2");
-							var breaker3 = document.createElement("br");
-							breaker3.setAttribute("id","breaker3");
-							
-							document.getElementById("container_id").insertBefore(inp,document.getElementById("uname"));
-							document.getElementById("container_id").insertBefore(breaker2,document.getElementById("uname"));
-							document.getElementById("container_id").insertBefore(prov,document.getElementById("provider2"));
-							document.getElementById("container_id").insertBefore(breaker1,document.getElementById("provider2"));
-							
-							
-						}
-						else if(document.getElementById("user_type").value == "Manufacturer / Vendor"){
-						
-							var prov = document.createElement("label");
-							prov.setAttribute("for","provider1");
-							prov.setAttribute("id","provider1");
-							var details = document.createTextNode("Vendor Details"); 
-							var text_bold1 = document.createElement("b");
-							var text_bold2 = document.createElement("b");
-							text_bold1.setAttribute("style","color:red");
-							var star = document.createTextNode("*");
-							text_bold2.appendChild(details);
-							text_bold1.appendChild(star);
-							text_bold2.appendChild(text_bold1);
-							prov.appendChild(text_bold2);
-							
-							var breaker1 = document.createElement("br");
-							breaker1.setAttribute("id","breaker1");
-							
-							var inp = document.createElement("input");
-							inp.setAttribute("type","text");
-							inp.setAttribute("placeholder","Vendor details");
-							inp.setAttribute("name","provider");
-							inp.setAttribute("id","provider2");
-							var breaker2 = document.createElement("br");
-							breaker2.setAttribute("id","breaker2");
-							
-							
-							document.getElementById("container_id").insertBefore(inp,document.getElementById("uname"));
-							document.getElementById("container_id").insertBefore(breaker2,document.getElementById("uname"));
-							document.getElementById("container_id").insertBefore(prov,document.getElementById("provider2"));
-							document.getElementById("container_id").insertBefore(breaker1,document.getElementById("provider2"));
-							
-							var abus = document.createElement("label");
-							var l = document.createTextNode("About Us");
-							abus.setAttribute("for", "breaker");
-							abus.setAttribute("id","breaker");
-							abus.appendChild(l);
-							var breaker3 = document.createElement("br");
-							breaker3.setAttribute("id","breaker3");
-							var breaker4 = document.createElement("br");
-							breaker4.setAttribute("id","breaker4");
-							
-							var inp = document.createElement("input");
-							inp.setAttribute("type","text");
-							inp.setAttribute("placeholder","Enter a description");
-							inp.setAttribute("name","aboutus");
-							inp.setAttribute("id","aboutus");
-							
-							
-							document.getElementById("container_id").insertBefore(inp,document.getElementById("submission"));
-							document.getElementById("container_id").insertBefore(breaker4,document.getElementById("submission"));
-							document.getElementById("container_id").insertBefore(abus,document.getElementById("aboutus"));
-							document.getElementById("container_id").insertBefore(breaker3,document.getElementById("aboutus"));
-							
-						}
-						
-					}
-				</script>
 
                 <label for="uname" id="uname"><b>Username<b style="color: red"> *</b></b></label><br>
 				<input type="text" placeholder="Enter Username" name="uname" id="space" required ><br><br>
@@ -218,6 +123,11 @@
 				
 				<label for="website"><b>Website</b></label><br>
                 <input type="text" placeholder="Enter website(https://)" name="website" ><br><br>
+				
+				<label for="v_about_us">Enter Description <strong style="color:red">*</strong></label><br>
+                <textarea id="v_about_us" name="v_about_us" placeholder="Tell us something about your organization (500 words max.)" rows="4" cols="50"></textarea><br><br>
+				
+				
                 <br>
                 <button type="submit" id="submission">Register</button> <br><br>
 				<button type="button" class="cancelbtn">Cancel</button>
