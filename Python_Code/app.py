@@ -26,6 +26,17 @@ def Database_Connection():
     return connection.cursor()
 
 
+def hospital_entry(h_provider,street,city,postcode,website,email,phone_no):
+    cursor = Database_Connection()
+    cursor.execute("INSERT INTO HOSPITAL(H_name,H_street,H_city,H_postal_code,H_website,H_email,H_phone) VALUES(?,?,?,?,?,?,?)",h_provider,street,city,postcode,website,email,phone_no)
+    cursor.commit()
+
+
+def vendor_entry(v_provider,street,city,postcode,website,email,phone_no,v_about_us):
+    cursor = Database_Connection()
+    cursor.execute("INSERT INTO VENDOR(V_name,V_street,V_city,V_postal_code,V_website,V_email,V_phone_no,v_about_us) VALUES (?,?,?,?,?,?,?,?)",v_provider,street,city,postcode,website,email,phone_no,v_about_us)
+    cursor.commit()
+
 def prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data):
     handler = Database_Connection()
     handler.execute("INSERT INTO Product(Prod_Name,V_ID,Prod_Size,Prod_Description) VALUES(?,1,?,?)",Prod_Name,Prod_Size,Description)
@@ -181,13 +192,8 @@ def logout():
 def register():
     if request.method == 'POST':
         usertype = request.form.get('user_type')
-        if usertype == "Hospital":
-            h_provider = request.form['provider']
-        elif usertype == "Manufacturer / Vendor":
-            v_provider = request.form['provider']
-        else:
-            flash("Please select a usertype")
-            return redirect("/Registration")
+        h_provider = None
+        v_provider = None
         spl_char = ['%','!','@','#','$','^','&','*','(',')','_','-','=','+']
         upper_char = string.ascii_uppercase
         lower_char = string.ascii_lowercase
@@ -201,6 +207,10 @@ def register():
         for i in password:
             if i in spl_char or i in upper_char or i in lower_char or i in number_char:
                 continue
+        street = request.form['street']
+        city = request.form['city']
+        postcode = request.form['postcode']
+        website = request.form['website']
         email = request.form['email']
         if '@' not in email or "dbs.ie" not in email:
             flash("Incorrect email id")
@@ -209,7 +219,17 @@ def register():
         if not int(phone_no) or len(phone_no) > 10:
             flash("Incorrect phone number")
             return redirect("/Registration")
+
         credentials_addition(usertype,username,password)
+        if usertype == "Hospital":
+            h_provider = request.form['provider']
+            if h_provider is not None:
+                hospital_entry(h_provider,street,city,postcode,website,email,phone_no)
+        else:
+            v_provider = request.form['provider']
+            v_about_us = request.form['aboutus']
+            if v_provider is not None:
+                vendor_entry(v_provider,street,city,postcode,website,email,phone_no,v_about_us)
         return redirect('/Login')
     else:
         return render_template("registration.html")

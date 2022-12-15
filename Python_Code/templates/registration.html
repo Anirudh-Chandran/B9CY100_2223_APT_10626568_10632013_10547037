@@ -91,7 +91,7 @@
 						{{ message }}
 					{% endfor %}
 			</div>
-            <div class="container">
+            <div class="container" id="container_id">
                 <label for="user_type"><b>Representing<b style="color: red"> *</b></b></label><br>
                 <select name="user_type" id="user_type" onchange = "if (this.selectedIndex) display();" required>
                     <option name="none">Choose One Option</option>
@@ -107,10 +107,30 @@
 						if(document.getElementById("user_type").value == "Manufacturer / Vendor"){
 							document.getElementById("provider").innerHTML = "Vendor Details";
 							document.getElementById("place").placeholder = "Vendor Name";
+							var inp = document.createElement("input");
+							inp.setAttribute("type","text");
+							inp.setAttribute("placeholder","Enter a description");
+							inp.setAttribute("name","aboutus");
+							inp.setAttribute("id","aboutus");
+							document.getElementById("container_id").insertBefore(inp,document.getElementById("submission"));
+							var breaker = document.createElement("br");
+							document.getElementById("container_id").insertBefore(breaker,document.getElementById("aboutus"));
+							var breaker2 = document.createElement("br");
+							document.getElementById("container_id").insertBefore(breaker2,document.getElementById("submission"));
+							var breaker3 = document.createElement("br");
+							document.getElementById("container_id").insertBefore(breaker3,breaker2)
+							var abus = document.createElement("label");
+							var l = document.createTextNode("About Us");
+							abus.setAttribute("for", "aboutus");
+							abus.setAttribute("id","breaker");
+							abus.appendChild(l);
+							document.getElementById("container_id").insertBefore(abus,breaker);
+							
 						}
 						
 					}
 				</script>
+				
                 <label for ="provider" id="provider"><b> <b style="color: red"> *</b></b></label><br>
 				<input type="text" placeholder="Enter value" id="place" name="provider" required ><br><br>
 				
@@ -120,13 +140,25 @@
                 <label for="pwd"><b>Password<b style="color: red"> *</b></b></label><br>
                 <input type="password" placeholder="Enter Password" name="pwd" required><br><br>
                 
+				<label for="street"><b>Street<b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter street" name="street" ><br><br>
+                
+				<label for="city"><b>City<b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter city" name="city" ><br><br>
+				
+				<label for="postcode"><b>Postal Code<b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter postal code" name="postcode" ><br><br>
+				
                 <label for="email"><b>Email ID<b style="color: red"> *</b></b></label><br>
                 <input type="text" placeholder="Enter Email Address" name="email" required><br><br>
                 
                 <label for="num"><b>Phone Number<b style="color: red"> *</b></b></label><br>
                 <input type="text" placeholder="Enter Phone Number" name="num" required><br><br>
+				
+				<label for="website"><b>Website<b style="color: red"> *</b></b></label><br>
+                <input type="text" placeholder="Enter website(https://)" name="website" ><br><br>
                 
-                <button type="submit" >Register</button> <br><br>
+                <button type="submit" id="submission">Register</button> <br><br>
 				<button type="button" class="cancelbtn">Cancel</button>
             </div>
                 <div class="container signin">
