@@ -4,4 +4,4 @@
 ##### @vicky-motwani: 10632013
 
 ## Business Case:
-#### AVA is a Product website from which hospital administrations can simply search, and buy medical equipment needed for their hospital. HTML and CSS has been used for designing the front-end for the website. Python is working as middleware and acting as a bridge connecting . MySQL is implemented as a backend database.
+#### AVA is a Product website from which hospital administrations can simply search, and buy medical equipment needed for their hospital. HTML and CSS has been used for designing the front-end for the website. Python is working as middleware and acting as a bridge connecting . MySQL is implemented as a backend database. ddleware and acting as a bridge connecting . MySQL is implemented as a backend database. The website being simple to use provides a lot of functionality where a vendor or a hospital staff will create their respective accounts. The home page displays a navigation bar which is helpful for quick access to the main components of the website. Navigation shortcuts to Products page, On Demand Request, and Login/ Register are mentioned.
