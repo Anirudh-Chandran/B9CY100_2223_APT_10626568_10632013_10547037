@@ -13,6 +13,16 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/1792/1792392.png" 
                 alt="Avatar" class="avatar">
             </div>
- 
-
+            <div class="flashes">
+					{% for message in get_flashed_messages() %}
+						{{ message }}
+					{% endfor %}
+			</div>
+             <div class="container" id="container_id">
+                <label for="user_type"><b>Representing<b style="color: red"> *</b></b></label><br>
+                <select name="user_type" id="user_type" onchange = "if (this.selectedIndex) display();" required>
+                    <option name="none">Choose One Option</option>
+                    <option name="hospital">Hospital</option>
+                    <option name="vendor">Manufacturer / Vendor</option><br><br>
+                </select><br><br>
     </body>
