@@ -39,15 +39,16 @@
 	  
 		<div class="row text-center">
 		{% for j in range(i*3,(i+1)*3)%}
+			{% if j < prod_length %}
                 <div class="col-md-4 pb-1 pb-md-0">
-		<div class="card">
-		  <img src={{image_list[j]}} alt="No Image" width="350" height="200" class="card-img-top rounded">
-			<div class="card-body">
-				<a href="/{{prod_ids[j]}}" class="btn btn-primary">{{prod_ids[j]}}.{{prod_names[j]}}</a>
-				<p class="card-text">{{prod_descs[j]}}</p>
-			</div>
-		</div>
-		</div>
+					<div class="card">
+		  				<img src={{image_list[j]}} alt="No Image" width="350" height="200" class="card-img-top rounded">
+						<div class="card-body">
+						<a href="/{{prod_ids[j]}}" class="btn btn-primary">{{prod_ids[j]}}.{{prod_names[j]}}</a>
+						<p class="card-text">{{prod_descs[j]}}</p>
+						</div>
+					</div>
+				</div>
 			
 	
 		{% endfor %}
