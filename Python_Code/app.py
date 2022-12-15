@@ -405,26 +405,36 @@ def about_us():
 
 @app.route("/My_Profile",methods = ['GET', 'POST'])
 def my_profile():
-    tree = x.parse('credentials.xml')
-    root = tree.getroot()
-    provider_type = " "
-    provider_name = " "
-    profile_name = " "
-    for i in root:
-        for j in i:
-            for k in j:
-                if session['uname']==k.tag:
-                    provider_type=i.tag
-                    provider_name=j.tag
-                    profile_name = k
-                    break
-    if provider_type == "Hospital":
-        cursor = Database_Connection()
-        cursor.execute("SELECT h_email,h_phone from Hospital where h_name=?",profile_name)
-        fetched_value = cursor.fetchall()
-        profile_email = fetched_value[0][0]
-        profile_phone = fetched_value[0][1]
-    return render_template("user_profile.html",provider_type=provider_type,provider_name=provider_name,profile_name=profile_name.tag,profile_password=profile_name.text,profile_email=profile_email,profile_phone=profile_phone)
+    if request.method == "POST":
+        pass
+    else:
+        tree = x.parse('credentials.xml')
+        root = tree.getroot()
+        provider_type = " "
+        provider_name = " "
+        profile_name = " "
+        for i in root:
+            for j in i:
+                for k in j:
+                    if session['uname']==k.tag:
+                        provider_type=i
+                        provider_name=j
+                        profile_name = k
+                        break
+        if provider_type.tag == "Hospital":
+            cursor = Database_Connection()
+            cursor.execute("SELECT h_email,h_phone from Hospital where h_name=?",provider_name.tag)
+            fetched_value = cursor.fetchall()
+            profile_email = fetched_value[0][0]
+            profile_phone = fetched_value[0][1]
+        else:
+            cursor = Database_Connection()
+            cursor.execute("SELECT v_email,v_phone from Vendor where v_name=?",profile_name.tag)
+            fetched_value = cursor.fetchall()
+
+            profile_email = fetched_value[0][0]
+            profile_phone = fetched_value[0][1]
+        return render_template("user_profile.html",provider_type=provider_type.tag,provider_name=provider_name.tag,profile_name=profile_name.tag,profile_password=profile_name.text,profile_email=profile_email,profile_phone=profile_phone)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080) # Remove Host and Port after testing
