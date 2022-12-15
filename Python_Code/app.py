@@ -395,6 +395,9 @@ def request_display(req_id):
 def about_us():
     return render_template("about_us.html",session_value=session.get('uname'))
 
+@app.route("/My_Profile",methods = ['GET', 'POST'])
+def my_profile():
+    return render_template("user_profile.html")
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080) # Remove Host and Port after testing
