@@ -18,21 +18,18 @@
 						{{ message }}
 					{% endfor %}
 
-
-                    <input type='option' id='vendor' onchange="autofill()">
-                    <input type='option' id='hospital'>
-
-
-           
-			</div>
-               
-            <!-- <div class="container" id="container_id">
-                <label for="user_type"><b>Representing<b style="color: red"> *</b></b></label><br>
-                <select name="user_type" id="user_type" onchange = "if (this.selectedIndex) display();" required>
                     <option name="none">Choose One Option</option>
                     <option name="hospital">Hospital</option>
                     <option name="vendor">Manufacturer / Vendor</option><br><br>
-                </select><br><br> -->
+
+			</div>
+               
+             <div class="container" id="container_id">
+                <label for="user_type"><b>Representing<b style="color: red"> *</b></b></label><br>
+                <select name="user_type" id="user_type" onchange = "if (this.selectedIndex) display();" required>
+                 <input type='option' id='vendor' onchange="autofill()">
+                 <input type='option' id='hospital'>
+                </select><br><br>
                  <script>
                   function autofill()
                 {
@@ -41,9 +38,7 @@
                  {
                     document.getElementById('field2').value= 'B';
                  }
-                }     
-							
-				
+                }     				
                 </script>
 
         
