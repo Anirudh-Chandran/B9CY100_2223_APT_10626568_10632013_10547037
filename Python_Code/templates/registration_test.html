@@ -92,21 +92,26 @@
 					{% endfor %}
 			</div>
             <div class="container" id="container_id">
-                <label for="user_type"><b>Representing<b style="color: red"> *</b></b></label><br>
-                <select name="user_type" id="user_type" onchange = "if (this.selectedIndex) display();" required>
+                <label for="seeAnotherField"><b>Representing<b style="color: red"> *</b></b></label><br>
+                <select name="seeAnotherField" id="seeAnotherField" required>
                     <option name="none">Choose One Option</option>
-                    <option name="hospital">Hospital</option>
-                    <option name="vendor">Manufacturer / Vendor</option><br><br>
+                    <option name="hospital" value="hospital">Hospital</option>
+                    <option name="vendor" value="vendor">Manufacturer / Vendor</option><br><br>
                 </select><br><br>
 				
-                <script>
-					<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-				</script>
-
-                <label for="uname" id="uname"><b>Username<b style="color: red"> *</b></b></label><br>
-				<input type="text" placeholder="Enter Username" name="uname" id="space" required ><br><br>
-                
-                
+				<div id='hospital_name'>
+				<label for="h_name" ><b>Hospital Name<b style="color: red"> *</b></b></label><br>
+				<input type="text" placeholder="Enter Hospital Name" name="h_name" id="h_name" >
+				</div>
+				
+				<div id='vendor_name'>
+				<label for="v_name" ><b>Vendor/ Manufacturer Name<b style="color: red"> *</b></b></label><br>
+				<input type="text" placeholder="Enter Vendor/ Manufacturer Name" name="v_name" id="v_name" >
+				</div>
+				
+    			<label for="uname" ><b>Username<b style="color: red"> *</b></b></label><br>
+				<input type="text" placeholder="Enter Username" name="uname" id="uname" required > <br><br>
+		      
                 <label for="pwd"><b>Password<b style="color: red"> *</b></b></label><br>
                 <input type="password" placeholder="Enter Password" name="pwd" required><br><br>
                 
@@ -132,12 +137,14 @@
 				<button type="button" class="cancelbtn">Cancel</button>
             </div>
                 <div class="container signin">
-                    <p>Already have an account? <a href="/Login">Sign in</a>
+                    Already have an account? <a href="/Login">Sign in</a>
                 </div>
 
             
                   
         </form>
-        
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<script src="../static/js/hide-show-fields-form.js"></script>
+		
     </body>
 </html>
