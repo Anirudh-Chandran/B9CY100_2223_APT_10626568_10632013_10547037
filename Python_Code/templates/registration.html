@@ -101,24 +101,59 @@
                 <script>
 					function display(){
 						if (document.getElementById("user_type").value == "Hospital"){
-							document.getElementById("provider").innerHTML = "Hospital Details";
-							document.getElementById("place").placeholder = "Hospital Name"
+							
+							var prov = document.createElement("label");
+							prov.setAttribute("for","provider");
+							prov.setAttribute("id","provider1");
+							var details = document.createTextNode("Hospital Details"); 
+							prov.appendChild(details)
+							var breaker1 = document.createElement("br");
+							document.getElementById("container_id").insertBefore(breaker1,document.getElementById("provider1"));
+							
+							
+							
+							
+							
 						}
 						if(document.getElementById("user_type").value == "Manufacturer / Vendor"){
-							document.getElementById("provider").innerHTML = "Vendor Details";
-							document.getElementById("place").placeholder = "Vendor Name";
+						
+							var breaker1 = document.createElement("br");
+							document.getElementById("container_id").insertBefore(breaker1,document.getElementById("provider1"));
+							var prov = document.createElement("label");
+							prov.setAttribute("for","provider");
+							prov.setAttribute("id","provider1");
+							var text_bold1 = document.createElement("b");
+							var text_bold2 = document.createElement("b");
+							text_bold2.setAttribute("style","color:red");
+							var star = document.createTextNode("*");
+							text_bold2.appendChild(star)
+							text_bold1.appendChild(text_bold2)
+							var details = document.createTextNode("Vendor Details");
+							text_bold1.appendChild(details)
+							text_bold1.appendChild(prov)
+							var breaker2 = document.createElement("br");
+							document.getElementById("container_id").insertBefore(breaker2,document.getElementById("provider2"));
+							var inp = document.createElement("input");
+							inp.setAttribute("type","text");
+							inp.setAttribute("placeholder","Vendor details");
+							inp.setAttribute("name","provider");
+							inp.setAttribute("id","provider2");
+							document.getElementById("container_id").insertBefore(inp,breaker6);
+							var breaker6 = document.createElement("br");
+							document.getElementById("container_id").insertBefore(breaker6,document.getElementById("uname"));
+							
 							var inp = document.createElement("input");
 							inp.setAttribute("type","text");
 							inp.setAttribute("placeholder","Enter a description");
 							inp.setAttribute("name","aboutus");
 							inp.setAttribute("id","aboutus");
-							document.getElementById("container_id").insertBefore(inp,document.getElementById("submission"));
-							var breaker = document.createElement("br");
-							document.getElementById("container_id").insertBefore(breaker,document.getElementById("aboutus"));
-							var breaker2 = document.createElement("br");
-							document.getElementById("container_id").insertBefore(breaker2,document.getElementById("submission"));
+							document.getElementById("container_id").insertBefore(inp,breaker4);
 							var breaker3 = document.createElement("br");
-							document.getElementById("container_id").insertBefore(breaker3,breaker2)
+							document.getElementById("container_id").insertBefore(breaker3,document.getElementById("aboutus"));
+							var breaker4 = document.createElement("br");
+							document.getElementById("container_id").insertBefore(breaker4,document.getElementById("submission"));
+							var breaker5 = document.createElement("br");
+							document.getElementById("container_id").insertBefore(breaker5,breaker4)
 							var abus = document.createElement("label");
 							var l = document.createTextNode("About Us");
 							abus.setAttribute("for", "aboutus");
@@ -131,10 +166,14 @@
 					}
 				</script>
 				
+<<<<<<< Updated upstream
                 <label for ="provider" id="provider"><b> Name <b style="color: red"> *</b></b></label><br>
 				<input type="text" placeholder="Enter value" id="place" name="provider" required ><br><br>
 				
                 <label for="uname" ><b>Username<b style="color: red"> *</b></b></label><br>
+=======
+                <label for="uname" id="uname"><b>Username<b style="color: red"> *</b></b></label><br>
+>>>>>>> Stashed changes
                 <input type="text" placeholder="Enter Username" name="uname" required ><br><br>
                 
                 <label for="pwd"><b>Password<b style="color: red"> *</b></b></label><br>

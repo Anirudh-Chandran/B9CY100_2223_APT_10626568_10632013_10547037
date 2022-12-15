@@ -292,7 +292,7 @@ def product_page(prod_id):
             f.write(image_val)
     else:
         image_new_loc = image_loc + "images/blank.png"
-    return render_template('product_page.html',prod_name=prod_name,prod_description=prod_description,prod_size=prod_size,prod_image=image_new_loc,v_name=v_name,v_website=v_website,v_phone=v_phone,v_email=v_email)
+    return render_template('product_page.html',prod_name=prod_name,prod_description=prod_description,prod_size=prod_size,prod_image=image_new_loc,v_name=v_name,v_website=v_website,v_phone=v_phone,v_email=v_email,session_value=session.get('uname'))
 
 
 @app.route("/New_Products", methods=['GET', 'POST'])
