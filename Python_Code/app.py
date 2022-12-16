@@ -429,7 +429,7 @@ def my_profile():
                         provider_name=j
                         profile_name = k
                         break
-        if provider_type.tag == "Hospital":
+        if provider_type.tag == "hospital":
             cursor = Database_Connection()
             cursor.execute("SELECT h_email,h_phone from Hospital where h_name=?",provider_name.tag)
             fetched_value = cursor.fetchall()
