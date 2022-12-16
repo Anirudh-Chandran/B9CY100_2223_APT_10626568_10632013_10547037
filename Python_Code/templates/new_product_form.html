@@ -14,7 +14,11 @@
 			margin: 0
 			}
 			form{width: 700px; margin: auto}
-	
+	.flashes
+			{
+				color: red;
+				text-align: center
+			}
 </style>
         </head>
         <body>
@@ -29,6 +33,7 @@
 		<a href="/Logout">Logout</a>
 	</div>
 </nav>
+			<hr>
 	<div class="flashes">
 		{% if message != None%}
 			{% for message in get_flashed_messages() %}
@@ -36,7 +41,7 @@
 			{% endfor %}
 		{% endif %}
 	</div>
-	<hr>
+	
             <h2><center>New Product</center></h2>
 			<div class="container">
 				<div class="row text-center" >
