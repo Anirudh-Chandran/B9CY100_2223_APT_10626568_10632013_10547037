@@ -107,6 +107,7 @@ def credentials_addition(usertype,provider,username,password):
     with open("credentials.xml",'wb+') as f:
         tree_write.write(f)
 
+
 @app.route("/", methods=['GET', 'POST'])
 def homepage():
     session['uname']=None
@@ -371,17 +372,17 @@ def new_request():
     if request.method == "POST":
         req_title = request.form['Req_title']
         req_desc = request.form['Req_Description']
-        hosp_name = request.form['hospitals']
+        hosp_name = request.form.get('hospitals')
         req_dimensions = request.form['Dimensions']
         req_budget = request.form['Budget']
         req_nbd = request.form['NeedByDate']
         req_qty = request.form['Quantity']
+        print(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty)
         req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty)
         message = "New Request created"
         flash(message)
         return redirect('/New_Request')
     else:
-
         allHospitals_list = []
         handler = Database_Connection()
         handler.execute("SELECT H_NAME FROM HOSPITAL")
@@ -478,7 +479,24 @@ def my_profile():
 
 @app.route("/DeleteAccount",methods = ['GET', 'POST'])
 def delete_account():
-    
+    tree = x.parse('credentials.xml')
+    root = tree.getroot()
+    provider = None
+    parent = None
+    for i in root:
+        for j in i:
+            for k in j:
+                if session['uname'] == k.tag:
+                    parent = j
+                    provider = k
+                    break
+    if provider:
+        with open('credentials.xml','r'):
+            provider.text = " "
+            parent.remove(provider)
+            tree.write('credentials.xml')
+    session['uname']=None
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080) # Remove Host and Port after testing
