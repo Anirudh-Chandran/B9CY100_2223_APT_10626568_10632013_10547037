@@ -379,7 +379,7 @@ def new_request():
 @app.route("/Requests/<int:req_id>",methods = ['GET', 'POST'])
 def request_display(req_id):
     cursor = Database_Connection()
-    cursor.execute("SELECT * FROM OnDemand_Request where req_id=?",req_id)
+    cursor.execute("SELECT req_title,req_quantity,req_dimensions,req_description,req_need_by_date,[req_budget($)],h_id FROM OnDemand_Request where req_id=?",req_id)
     req_values = cursor.fetchall()
     req_title = req_values[0][1]
     req_quantity = req_values[0][2]
@@ -388,6 +388,7 @@ def request_display(req_id):
     req_need_by_data = req_values[0][5]
     req_budget = req_values[0][6]
     h_id = req_values[0][7]
+    print("requests:" + str(req_values))
     cursor.execute("SELECT h_name,h_phone,h_email FROM hospital where h_id=?", h_id)
     h_values = cursor.fetchall()
     h_name = h_values[0][0]
@@ -403,6 +404,7 @@ def about_us():
 @app.route("/My_Profile",methods = ['GET', 'POST'])
 def my_profile():
     if request.method == "POST":
+        provider_type = request.form.get('user_type')
         provider_name = request.form['provider_name']
         profile_name = request.form['uname']
         profile_password = request.form['pwd']
@@ -413,8 +415,10 @@ def my_profile():
         for i in root:
             for j in i:
                 for k in j:
-                    if provider_name == j.tag:
-                        print(j)
+                    pass
+
+
+
     else:
         tree = x.parse('credentials.xml')
         root = tree.getroot()
