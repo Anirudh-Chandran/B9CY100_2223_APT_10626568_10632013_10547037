@@ -7,6 +7,8 @@
 <title>{{req_title}}</title>
 	<style>
 		label{margin-right: 100px }
+		th{width: 200px;padding: 10px}
+		td{width: 400px;}
 	</style>
 </head>
 
@@ -25,15 +27,16 @@
 	</div>
 </nav>
 	<hr>
-	<br><br><br><br>
-	
-	<table align="center" style="background-color: aliceblue; background-size: auto;width: 700px; margin: auto; text-align: left;border: 4px solid #f1f1f1; padding: 20px;margin-left: 100px" >
+	<br><br>
+	<h2 align="center">{{req_title}}</h2><br><br>
+	<table align="center" width="1000px" style="background-color: aliceblue; text-align: left;border: 4px solid #f1f1f1; padding: 20px" >
 	<tbody>
 		<tr>
-	<th style="color: #007bff">Request Title:<td>{{req_title}}</td>
-			</tr>
+	<th style="color: #007bff">Request Details</th>
+		</tr>
+
 		<tr>
-	<th>Request Details:</th><td>{{req_description}}</td>
+	<th >Description:</th><td>{{req_description}}</td>
 		</tr>	
 		
 	{%if req_dimensions != None%}
