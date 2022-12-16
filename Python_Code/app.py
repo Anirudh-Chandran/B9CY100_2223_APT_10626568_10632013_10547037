@@ -120,7 +120,7 @@ def homepage():
                 f.write(image_val)
         else:
             image_list.append(image_loc + "images/blank.png")
-    return render_template("homepage.html", row_length=int(row_length) , prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
+    return render_template("homepage.html", row_length=int(row_length) , prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list,prod_length=len(all_prods))
 
 
 @app.route("/Home", methods=['GET', 'POST'])
@@ -152,7 +152,7 @@ def user_home():
                     f.write(image_val)
             else:
                 image_list.append(image_loc + "images/blank.png")
-        return render_template("user_homepage.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list)
+        return render_template("user_homepage.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list,prod_length=len(all_prods))
     else:
         return redirect("/")
 
@@ -268,9 +268,9 @@ def products():
         else:
             image_list.append(image_loc + "images/blank.png")
     if session.get('uname'):
-        return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list,session_value=session.get('uname'))
+        return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list,session_value=session.get('uname'),prod_length=len(all_prods))
     else:
-        return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list,session_value=session.get('uname'))
+        return render_template("products.html", row_length=int(row_length), prod_ids=prod_ids, prod_names=prod_names, prod_descs=prod_descs, image_list=image_list,session_value=session.get('uname'),prod_length=len(all_prods))
 
 
 @app.route("/<int:prod_id>",methods=['GET','POST'])
@@ -346,7 +346,7 @@ def On_Demand_Request():
             req_titles.append(all_reqs[value][1])
             req_descs.append(all_reqs[value][2])
 
-        return render_template("on_demand_request.html", row_length=int(row_length), req_ids=req_ids, req_titles=req_titles, req_descs=req_descs)
+        return render_template("on_demand_request.html", row_length=int(row_length), req_ids=req_ids, req_titles=req_titles, req_descs=req_descs,prod_length=len(all_reqs))
     else:
         return redirect("/Login")
 
