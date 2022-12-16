@@ -5,6 +5,9 @@
 		<link href="../static/css/bootstrap-4.4.1.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{req_title}}</title>
+	<style>
+		label{margin-right: 100px }
+	</style>
 </head>
 
 <body>
@@ -24,31 +27,43 @@
 	<hr>
 	<br><br><br><br>
 	
-	<form action="#" style="background-color: aliceblue; background-size: auto;width: 700px; margin: auto; text-align: left;border: 4px solid #f1f1f1; padding: 10px" >
-	<b style="color: #007bff">Request Title: {{req_title}}</b><br><br>
-	<label style="margin-right: 50px ">Request Details: </label>{{req_description}}<br><br>
+	<table style="background-color: aliceblue; background-size: auto;width: 700px; margin: auto; text-align: left;border: 4px solid #f1f1f1; padding: 10px;margin-left: 100px" >
+	<tbody>
+		<tr>
+	<b style="color: #007bff"><label>Request Title:</label>{{req_title}}</b><br><br>
+			</tr>
+	<label>Request Details:</label>{{req_description}}<br><br>
+			
 	{%if req_dimensions != None%}
-	Request Dimensions: {{req_dimensions}}<br><br>
+	<label>Request Dimensions:</label>{{req_dimensions}}<br><br>
 	{%endif%}
+			
 	{%if req_quantity != None%}
-	Quantity: {{req_quantity}}<br><br>
+	<label>Quantity:</label>{{req_quantity}}<br><br>
 	{%endif%}
+			
 	{%if req_budget != None%}
-	Budget (€): {{req_budget}}<br><br>
+	<label>Budget (€):</label>{{req_budget}}<br><br>
 	{%endif%}
+			
 	{%if req_need_by_date != None%}
-	Need By Date: {{req_need_by_date}}<br><br>
+	<label>Need By Date:</label>{{req_need_by_date}}<br><br>
 	{%endif%}
+			
 	{%if h_name != None%}
 	<b style="color: #007bff">Requestor Details</b><br><br>
-	Name: {{h_name}}<br><br>
+	<label>Name:</label>{{h_name}}<br><br>
 	{%endif%}
+			
 	{%if h_phone != None%}
-	Phone{{h_phone}}<br><br>
+	<label>Phone:</label>{{h_phone}}<br><br>
 	{%endif%}
+			
 	{%if h_email != None%}
-	EmailID: {{h_email}}<br><br>
+	<label>EmailID:</label>{{h_email}}<br><br>
 	{%endif%}
-		</form>
+			
+		</tbody>	
+		</table>
 </body>
 </html>
