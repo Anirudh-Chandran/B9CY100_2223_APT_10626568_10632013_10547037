@@ -34,7 +34,7 @@ def hospital_entry(h_provider,street,city,postcode,website,email,phone_no):
 
 def vendor_entry(v_provider,street,city,postcode,website,email,phone_no,v_about_us):
     cursor = Database_Connection()
-    cursor.execute("INSERT INTO VENDOR(V_name,V_street,V_city,V_postal_code,V_website,V_email,V_phone_no,v_about_us) VALUES (?,?,?,?,?,?,?,?)",v_provider,street,city,postcode,website,email,phone_no,v_about_us)
+    cursor.execute("INSERT INTO VENDOR(V_name,V_street,V_city,V_postal_code,V_website,V_email,V_phone,v_about_us) VALUES (?,?,?,?,?,?,?,?)",v_provider,street,city,postcode,website,email,phone_no,v_about_us)
     cursor.commit()
 
 def prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data):
@@ -223,18 +223,15 @@ def register():
         if not int(phone_no) or len(phone_no) > 10:
             flash("Incorrect phone number")
             return redirect("/Registration")
-
-
-        if usertype == "Hospital":
-            h_provider = request.form['provider']
-
+        if usertype == "hospital":
+            h_provider = request.form.get('h_name')
             if h_provider is not None:
+
                 credentials_addition(usertype, h_provider, username, password)
                 hospital_entry(h_provider,street,city,postcode,website,email,phone_no)
         else:
-
-            v_provider = request.form['provider']
-            v_about_us = request.form['aboutus']
+            v_provider = request.form.get('v_name')
+            v_about_us = request.form['v_about_us']
             if v_provider is not None:
                 credentials_addition(usertype, v_provider, username, password)
                 vendor_entry(v_provider,street,city,postcode,website,email,phone_no,v_about_us)
@@ -406,7 +403,18 @@ def about_us():
 @app.route("/My_Profile",methods = ['GET', 'POST'])
 def my_profile():
     if request.method == "POST":
-        
+        provider_name = request.form['provider_name']
+        profile_name = request.form['uname']
+        profile_password = request.form['pwd']
+        profile_email = request.form['email']
+        profile_phone = request.form['num']
+        tree = x.parse('credentials.xml')
+        root = tree.getroot()
+        for i in root:
+            for j in i:
+                for k in j:
+                    if provider_name == j.tag:
+                        print(j)
     else:
         tree = x.parse('credentials.xml')
         root = tree.getroot()
