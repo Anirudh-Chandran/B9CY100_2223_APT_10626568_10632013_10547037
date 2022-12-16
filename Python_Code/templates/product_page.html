@@ -5,6 +5,10 @@
 	<link href="../static/css/bootstrap-4.4.1.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{prod_name}}</title>
+	<style>
+	th{width: 200px;padding: 10px}
+		td{width: 400px;}
+	</style>
 </head>
 
 <body>
@@ -35,23 +39,25 @@
 	<br>
 	<img src={{prod_image}} style="width: 300px; height: 300px"></img>
 	<table align="right" width="1000px" style="background-color: aliceblue; text-align: left;border: 4px solid #f1f1f1; padding: 20px" >
-		
-	{{prod_description}}<br><br>
+	<tbody>	
+		<tr><th style="color: #007bff" >Product Details</th></tr>
+	{{prod_description}}
 	{%if prod_size != None%}
-	{{prod_size}}<br><br>
+	{{prod_size}}
 	{%endif%}
 	{%if v_name != None%}
-	{{v_name}}<br><br>
+	{{v_name}}
 	{%endif%}
 	{%if v_phone != None%}
-	{{v_phone}}<br><br>
+	{{v_phone}}
 	{%endif%}
 	{%if v_email != None%}
-	{{v_email}}<br><br>
+	{{v_email}}
 	{%endif%}
 	{%if v_website != None%}
-	{{v_website}}<br><br>
+	{{v_website}}
 	{%endif%}
+		<tbody>
 	</table>
 
 </body>
