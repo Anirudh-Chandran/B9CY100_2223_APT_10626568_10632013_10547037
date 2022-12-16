@@ -37,26 +37,35 @@
 	
 	<h2 align="center" style="color: #007bff" >{{prod_name}}</h2>
 	<br>
-	<img src={{prod_image}} style="width: 300px; height: 300px"></img>
-	<table align="right" width="1000px" style="background-color: aliceblue; text-align: left;border: 4px solid #f1f1f1; padding: 20px" >
+	<img src={{prod_image}} style="width: 300px; height: 300px; float: left;margin-right: 10px;margin-top: 10px"></img>
+	<table align="center" width="900px" style="background-color: aliceblue; text-align: left;border: 4px solid #f1f1f1; padding: 10px" >
 	<tbody>	
 		<tr><th style="color: #007bff" >Product Details</th></tr>
-	{{prod_description}}
-	{%if prod_size != None%}
-	{{prod_size}}
+	<th>Description:</th><td>{{prod_description}}</td>
+		
+	{%if prod_size != None%}<tr>
+	<th>Size:</th><td>{{prod_size}}</td></tr>
 	{%endif%}
 	{%if v_name != None%}
-	{{v_name}}
+		<tr>
+	<th style="color: #007bff">Vendor Details</th></tr>
+		<tr>
+		<tr>
+	<th>Name:</th><td>{{v_name}}</td></tr>
 	{%endif%}
-	{%if v_phone != None%}
-	{{v_phone}}
+		
+	{%if v_phone != None%}<tr>
+	<th>Phone:</th><td>{{v_phone}}</td></tr>
 	{%endif%}
-	{%if v_email != None%}
-	{{v_email}}
+		
+	{%if v_email != None%}<tr>
+	<th>EmailID:</th><td>{{v_email}}</td></tr>
 	{%endif%}
-	{%if v_website != None%}
-	{{v_website}}
+		
+	{%if v_website != None%}<tr>
+	<th>Website:</th><td>{{v_website}}</td></tr>
 	{%endif%}
+		
 		<tbody>
 	</table>
 
