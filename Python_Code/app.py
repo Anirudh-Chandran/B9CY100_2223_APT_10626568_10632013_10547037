@@ -479,20 +479,15 @@ def my_profile():
 def delete_account():
     tree = x.parse('credentials.xml')
     root = tree.getroot()
-    provider = None
-    parent = None
-    for i in root:
-        for j in i:
-            for k in j:
-                if session['uname'] == k.tag:
-                    parent = j
-                    provider = k
-                    break
-    if provider:
-        with open('credentials.xml','r'):
-            provider.text = " "
-            parent.remove(provider)
-            tree.write('credentials.xml')
+
+    with open("credentials.xml",'wb+') as f:
+        for i in root:
+            for j in i:
+                for k in j:
+                    if session['uname'] == k.tag:
+                        j.remove(k)
+                        tree.write(f)
+
     session['uname']=None
     return redirect("/")
 
