@@ -76,6 +76,11 @@
                 
                 }
             }
+			.flashes
+			{
+				color: red;
+				text-align: center
+			}
 			label{text-align: center}
            </style>   
     </head>
@@ -86,7 +91,7 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/1792/1792392.png" 
                 alt="Avatar" class="avatar">
             </div>
-			<div class="flashes">
+			<div class="flashes" >
 					{% for message in get_flashed_messages() %}
 						{{ message }}
 					{% endfor %}
