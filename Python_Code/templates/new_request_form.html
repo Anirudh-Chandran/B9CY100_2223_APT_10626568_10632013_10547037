@@ -64,7 +64,7 @@
 				<label for="Budget">Budget(€)<strong style="color:red">*</strong></label><br>
                 <input type="number" id="Budget" name="Budget" required style="width: 150px; margin: auto; text-align: center"><br>
                 <label for="NeedByDate">Need By Date <strong style="color:red">*</strong></label><br>
-				<input type="date" id="NeedByDate" name="NeedByDate" required style="width: 150px; margin: auto; text-align: center" required><br>
+				<input type="date" id="NeedByDate" name="NeedByDate" onchange="DateValidate()" required style="width: 150px; margin: auto; text-align: center" required><br>
 				<label for="Quantity">Quantity <strong style="color:red">*</strong></label><br>
                 <input type="number" id="Quantity" name="Quantity" required style="width: 100px; margin: auto; text-align: center"><br>
                 <input type="submit" value="Submit" class="btn btn-primary" style="width: 100px; margin: auto; text-align: center">
@@ -72,5 +72,18 @@
 						</div>
 					</div>
 				</div>
+	
+	<script>
+	function DateValidate() {
+var UDate = document.getElementById("NeedByDate").value;
+var CurrDate = new Date();
+  
+if (new Date(UDate).getTime() <= CurrDate.getTime()) {
+    alert("The Date must be Bigger or Equal to today date");
+	document.getElementById("NeedByDate").value='';
+    return false;
+}
+return true;}
+	</script>
         </body>
 </html>
