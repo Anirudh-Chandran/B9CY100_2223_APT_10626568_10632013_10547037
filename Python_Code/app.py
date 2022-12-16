@@ -2,7 +2,6 @@ from flask import Flask,request,render_template,url_for,flash,session,redirect
 from flask_session import Session
 import pyodbc
 from datetime import timedelta
-import datetime
 import string
 import xml.etree.ElementTree as x
 
@@ -38,6 +37,18 @@ def vendor_entry(v_provider,street,city,postcode,website,email,phone_no,v_about_
     cursor.execute("INSERT INTO VENDOR(V_name,V_street,V_city,V_postal_code,V_website,V_email,V_phone,v_about_us) VALUES (?,?,?,?,?,?,?,?)",v_provider,street,city,postcode,website,email,phone_no,v_about_us)
     cursor.commit()
 
+
+def h_updation(provider_name,profile_email,profile_phone):
+    cursor = Database_Connection()
+    cursor.execute("update hospital set h_email=?,h_phone=? where h_name=?",profile_email,profile_phone,provider_name)
+    cursor.commit()
+
+
+def v_updation(provider_name,profile_email,profile_phone):
+    cursor = Database_Connection()
+    cursor.execute("update vendor set v_email=?,v_phone=? where v_name=?", profile_email, profile_phone, provider_name)
+    cursor.commit()
+
 def prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data):
     handler = Database_Connection()
     handler.execute("INSERT INTO Product(Prod_Name,V_ID,Prod_Size,Prod_Description) VALUES(?,1,?,?)",Prod_Name,Prod_Size,Description)
@@ -50,12 +61,14 @@ def prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data):
 
 def req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty):
     handler = Database_Connection()
-    handler.execute("INSERT INTO OnDemand_Request(req_title,req_description,req_dimensions,req_quantity,req_need_by_data,req_budget) VALUES(?,?,?,?,?,?)", req_title, req_desc, req_dimensions, req_qty, req_nbd, req_budget)
+    handler.execute("INSERT INTO OnDemand_Request(req_title,req_description,req_dimensions,req_quantity,req_need_by_date,req_budget) VALUES(?,?,?,?,?,?)", req_title, req_desc, req_dimensions, req_qty, req_nbd, req_budget)
     handler.commit()
     handler.execute("SELECT H_ID from Hospital where hosp_name=?",hosp_name)
     h_id = handler.fetchval()
     handler.execute("INSERT INTO OnDemand_Request(h_id) values(?)",h_id)
     handler.commit()
+
+
 """
 The below section of code was generated as an initial step to generate the xml file.
 def credentials_generator():
@@ -83,6 +96,7 @@ def credentials_addition(usertype,provider,username,password):
     root = tree_read.getroot()
     container = None
     for i in root:
+        print(i.tag)
         if usertype == i.tag:
             container = i
             break
@@ -404,8 +418,9 @@ def about_us():
 @app.route("/My_Profile",methods = ['GET', 'POST'])
 def my_profile():
     if request.method == "POST":
-        provider_type = request.form.get('user_type')
-        provider_name = request.form['provider_name']
+        flag = False
+        provider_type = None
+        provider_name = request.form.get('provider_name')
         profile_name = request.form['uname']
         profile_password = request.form['pwd']
         profile_email = request.form['email']
@@ -415,10 +430,22 @@ def my_profile():
         for i in root:
             for j in i:
                 for k in j:
-                    pass
+                    provider_type = i.tag
+                    if provider_name == j.tag:
+                        if profile_name == k.tag:
+                            name_value = k
+                            if profile_password == name_value.text:
+                                flag = True
+                                break
+        if not flag:
+            credentials_addition(provider_type, provider_name, profile_name, profile_password)
 
-
-
+        if provider_type == "hospital":
+            h_updation(provider_name,profile_email,profile_phone)
+        else:
+            v_updation(provider_name,profile_email,profile_phone)
+        flash("Changes Saved")
+        return redirect("/My_Profile")
     else:
         tree = x.parse('credentials.xml')
         root = tree.getroot()
@@ -447,6 +474,11 @@ def my_profile():
             profile_email = fetched_value[0][0]
             profile_phone = fetched_value[0][1]
         return render_template("user_profile.html",provider_type=provider_type.tag,provider_name=provider_name.tag,profile_name=profile_name.tag,profile_password=profile_name.text,profile_email=profile_email,profile_phone=profile_phone)
+
+
+@app.route("/DeleteAccount",methods = ['GET', 'POST'])
+def delete_account():
+    
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080) # Remove Host and Port after testing

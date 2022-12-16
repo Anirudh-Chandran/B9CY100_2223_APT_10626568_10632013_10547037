@@ -133,7 +133,7 @@
                 <input type="text" value={{profile_phone}} placeholder="Enter Phone Number" name="num" required><br><br>
                 
                 <button type="submit" >Save</button> <br><br>
-				<button type="button" class="cancelbtn">Cancel</button>
+				<button type="button" class="cancelbtn" action="/Home">Cancel</button>
 			 
             </div>
 		
@@ -142,7 +142,7 @@
 		{
 		  var x = confirm("Are you sure you want to delete?");
 		  if (x)
-			  window.location='https://avaorg.azurewebsites.net/DeleteAccount';
+			  window.location='/DeleteAccount';
 		  else
 			return false;
 		}
