@@ -40,13 +40,14 @@
 	Need By Date: {{req_need_by_date}}<br><br>
 	{%endif%}
 	{%if h_name != None%}
-	{{h_name}}<br><br>
+	<b style="color: #007bff">Requestor Details</b><br><br>
+	Name: {{h_name}}<br><br>
 	{%endif%}
 	{%if h_phone != None%}
-	{{h_phone}}<br><br>
+	Phone{{h_phone}}<br><br>
 	{%endif%}
 	{%if h_email != None%}
-	{{h_email}}<br><br>
+	EmailID: {{h_email}}<br><br>
 	{%endif%}
 		</form>
 </body>
