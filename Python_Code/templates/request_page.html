@@ -27,40 +27,52 @@
 	<hr>
 	<br><br><br><br>
 	
-	<table style="background-color: aliceblue; background-size: auto;width: 700px; margin: auto; text-align: left;border: 4px solid #f1f1f1; padding: 10px;margin-left: 100px" >
+	<table align="center" style="background-color: aliceblue; background-size: auto;width: 700px; margin: auto; text-align: left;border: 4px solid #f1f1f1; padding: 20px;margin-left: 100px" >
 	<tbody>
 		<tr>
-	<b style="color: #007bff"><label>Request Title:</label>{{req_title}}</b><br><br>
+	<th style="color: #007bff">Request Title:<td>{{req_title}}</td>
 			</tr>
-	<label>Request Details:</label>{{req_description}}<br><br>
-			
+		<tr>
+	<th>Request Details:</th><td>{{req_description}}</td>
+		</tr>	
+		
 	{%if req_dimensions != None%}
-	<label>Request Dimensions:</label>{{req_dimensions}}<br><br>
+		<tr>
+	<th>Request Dimensions:</th><td>{{req_dimensions}}</td>
+			</tr>
 	{%endif%}
 			
 	{%if req_quantity != None%}
-	<label>Quantity:</label>{{req_quantity}}<br><br>
+		<tr>
+	<th>Quantity:</th><td>{{req_quantity}}</td>
+			</tr>
 	{%endif%}
 			
 	{%if req_budget != None%}
-	<label>Budget (€):</label>{{req_budget}}<br><br>
+			<tr>
+	<th>Budget (€):</th><td>{{req_budget}}</td></tr>
 	{%endif%}
 			
 	{%if req_need_by_date != None%}
-	<label>Need By Date:</label>{{req_need_by_date}}<br><br>
+				<tr>
+	<th>Need By Date:</th><td>{{req_need_by_date}}</td></tr>
 	{%endif%}
 			
 	{%if h_name != None%}
-	<b style="color: #007bff">Requestor Details</b><br><br>
-	<label>Name:</label>{{h_name}}<br><br>
+		<tr>
+	<th style="color: #007bff">Requestor Details</th>
+		<tr>
+	<th>Name:</th><td>{{h_name}}</td></tr>
 	{%endif%}
 			
 	{%if h_phone != None%}
-	<label>Phone:</label>{{h_phone}}<br><br>
+		<tr>
+	<th>Phone:</th><td>{{h_phone}}</td></tr>
 	{%endif%}
 			
 	{%if h_email != None%}
-	<label>EmailID:</label>{{h_email}}<br><br>
+			<tr>
+	<th>EmailID:</th><td>{{h_email}}</td></tr>
 	{%endif%}
 			
 		</tbody>	
