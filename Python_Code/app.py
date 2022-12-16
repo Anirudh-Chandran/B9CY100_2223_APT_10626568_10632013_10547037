@@ -230,7 +230,7 @@ def register():
         postcode = request.form['postcode']
         website = request.form['website']
         email = request.form['email']
-        if '@' not in email or "dbs.ie" not in email:
+        if '@' not in email:
             flash("Incorrect email id")
             return redirect("/Registration")
         phone_no = request.form['num']
