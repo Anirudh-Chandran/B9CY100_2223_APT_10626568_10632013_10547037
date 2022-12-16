@@ -61,11 +61,9 @@ def prod_Dataentry(Prod_Name,Prod_Size,Description,bin_data):
 
 def req_Dataentry(req_title,req_desc,hosp_name,req_dimensions,req_budget,req_nbd,req_qty):
     handler = Database_Connection()
-    handler.execute("INSERT INTO OnDemand_Request(req_title,req_description,req_dimensions,req_quantity,req_need_by_date,req_budget) VALUES(?,?,?,?,?,?)", req_title, req_desc, req_dimensions, req_qty, req_nbd, req_budget)
-    handler.commit()
-    handler.execute("SELECT H_ID from Hospital where hosp_name=?",hosp_name)
+    handler.execute("SELECT H_ID from Hospital where h_name=?", hosp_name)
     h_id = handler.fetchval()
-    handler.execute("INSERT INTO OnDemand_Request(h_id) values(?)",h_id)
+    handler.execute("INSERT INTO OnDemand_Request(req_title,req_description,req_dimensions,req_quantity,req_need_by_date,req_budget,h_id) VALUES(?,?,?,?,?,?,?)", req_title, req_desc, req_dimensions, req_qty, req_nbd, req_budget,h_id)
     handler.commit()
 
 
