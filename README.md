@@ -1,9 +1,45 @@
-## Collaborators:
-##### @Anirudh-Chandran: 10626568
-##### @Ameya-Khandekar: 10547037
-##### @vicky-motwani: 10632013
+# WEB APPLICATION FOR HOSPITAL-VENDOR CREDENTIALISING
 
-#### AVA is a Product website from which hospital administrations can simply search, and buy medical equipment needed for their hospital. HTML and CSS have been used for designing the front end of the website. Python is working as middleware and acts as a bridge connecting. MySQL is implemented as a backend database. middleware and acting as a bridge connecting. MySQL is implemented as a backend database. The website is simple to use and provides a lot of functionality where a vendor or hospital staff will create their respective accounts. The home page displays a navigation bar which is helpful for quick access to the main components of the website. Navigation shortcuts to the Products page, On Demand Request, and Login/ Register are mentioned.
-#### The Products page contains a list of products that the hospital staff can browse and order when required. Clicking on the product, we are redirected to a detailed description of the product. The description includes things like the name of the product, the size, phone number, and email address of the vendor who sells it. To order the product, the user will have to just click on order and a new order will be placed by the user. As hospital users will be able to login and order equipment from the portal, a payment mode has not been implemented since hospitals directly pay the vendor on delivery or at the end of the month.
+AVA ORG is a Hospital - Vendor medical device management portal, where the Vendor is a medical device manufacturer who publishes their respective products on the portal. Hospital representatives register themselves, browse published medical device products, and can contact vendors for buying the product. Also, they can add their requests for any unpublished/ unavailable medical devices. Vendors can explore these hospital requests and can connect with them for the production of specified devices. Hospitals will have to take into consideration the time required for the vendor to deliver the product. This project acts as a proof of concept.
 
-#### On-demand request is added when the hospital has specific requirements about a product that is not available on the website. The Registration page is used to create new user accounts. At the time of registration, the user will have to select what type of user he/she is, it can either be a vendor or it can be a hospital staff. They will also have to enter a new username and password. As a details section, the new user will have to store their address as well. Users will have to mention their email id and phone number for communication reasons. The user can also mention his/her website
+## CONTRIBUTORS
+@Anirudh-Chandran: 10626568
+@Ameya-Khandekar: 10547037
+@vicky-motwani: 10632013
+
+## TECHNOLOGIES USED
+ - Front end
+	- HTML
+	- CSS
+	- JS
+ - Middleware
+	- Python
+		- flask
+		- flask session
+		- pyodbc
+	- Azure app services 
+ - Backend
+	- Azure SQL
+	- XML
+## TECHNICAL DESCRIPTION 
+ - 
+## CONTRIBUTION REPORT
+ - @Anirudh-Chandran
+ - @Ameya-Khandekar
+ - @vicky-motwani
+## ATTRIBUTION REPORT
+### Bootstrap CSS,JS
+ - file path: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/tree/main/Python_Code/static/css/
+ - copyrights: Bootstrap
+ - License: MIT 
+### JQuery
+ - filepath: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/blob/main/Python_Code/static/js/jquery-3.4.1.min.js
+ - copyrights: JS Foundation
+ - License: MIT 
+### Popper
+  - filepath: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/blob/main/Python_Code/static/js/popper.min.js
+  - copyrights: Federico Zivolo
+  - License: MIT 
+
+
+ 
