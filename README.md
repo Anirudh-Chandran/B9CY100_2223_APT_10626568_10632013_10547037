@@ -3,9 +3,9 @@
 AVA ORG is a Hospital - Vendor medical device management portal, where the Vendor is a medical device manufacturer who publishes their respective products on the portal. Hospital representatives register themselves, browse published medical device products, and can contact vendors for buying the product. Also, they can add their requests for any unpublished/ unavailable medical devices. Vendors can explore these hospital requests and can connect with them for the production of specified devices. Hospitals will have to take into consideration the time required for the vendor to deliver the product. This project acts as a proof of concept.
 
 ## CONTRIBUTORS
-@Anirudh-Chandran: 10626568
-@Ameya-Khandekar: 10547037
-@vicky-motwani: 10632013
+@Anirudh-Chandran: 10626568<br>
+@Ameya-Khandekar: 10547037<br>
+@vicky-motwani: 10632013<br>
 
 ## TECHNOLOGIES USED
  - Front end
@@ -22,11 +22,13 @@ AVA ORG is a Hospital - Vendor medical device management portal, where the Vendo
 	- Azure SQL
 	- XML
 ## TECHNICAL DESCRIPTION 
-The landing page of the web application is the homepage.html which displays images and texts loaded by the Python flask framework and jinja template. The data is fetched from the backend Azure SQL database using the python pyodbc module. The home page has the below navigations: - Home
+The landing page of the web application is the homepage.html which displays images and texts loaded by the Python flask framework and jinja template. The data is fetched from the backend Azure SQL database using the python pyodbc module. The home page has the below navigations: 
+- Home
 - Products
 - OnDemand Requests
 - About Us 
 - Login/Register<br>
+
 Each navigation is associated with respective flask API routing.
 
 ### homepage.html: 
@@ -60,6 +62,7 @@ Authorized users will have an additional navigation option on the on_demand_requ
 For authorized users, the page shows the user profile information. This page allows users to edit the details of their profile. There is an option to delete the account.
 
 ### App.py
+	========================================================================================================================================================
 	| APIs                       | Navigations                     | Action -Performed
 	========================================================================================================================================================
 	| /                          | homepage.html                   | Loads the homepage of the application
@@ -104,16 +107,16 @@ _Azure app services_ - Researched hosting a web application on Azure and after e
 
 ## ATTRIBUTION REPORT
 ### Bootstrap CSS,JS
- - file path: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/tree/main/Python_Code/static/css/
- - copyrights: Bootstrap
+ - File path: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/tree/main/Python_Code/static/css/
+ - Copyright: Bootstrap
  - License: MIT 
 ### JQuery
- - filepath: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/blob/main/Python_Code/static/js/jquery-3.4.1.min.js
- - copyrights: JS Foundation
+ - File path: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/blob/main/Python_Code/static/js/jquery-3.4.1.min.js
+ - Copyright: JS Foundation
  - License: MIT 
 ### Popper
-  - filepath: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/blob/main/Python_Code/static/js/popper.min.js
-  - copyrights: Federico Zivolo
+  - File path: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/blob/main/Python_Code/static/js/popper.min.js
+  - Copyright: Federico Zivolo
   - License: MIT 
 
 
