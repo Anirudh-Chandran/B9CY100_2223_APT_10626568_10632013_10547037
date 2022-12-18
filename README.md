@@ -90,9 +90,10 @@ For authorized users, the page shows the user profile information. This page all
 	=========================================================================================================================================================
  
 ## CONTRIBUTION REPORT
- - @Anirudh-Chandran
- - @Ameya-Khandekar
- - @vicky-motwani
+ ### @Anirudh-Chandran
+ Primarily, the contribution has been focused on Python coding. A connection to the database required learning the PyODBC module. The initial connection and execution of commands took a day or two to establish. After successfully connecting, the main concern was determining how to work with Flask. Flask has been another challenging domain to work on; a lot of examples and tutorials were referred to during the development phase. The HTML pages that were created by the members had to communicate with Flask, and the required inputs and outputs had to be taken and provided to the webpage. There were efforts made to get the right format and kind of content. It had been a beautiful journey exploring the flask session, from confusions about whether the handling was happening or not to ensuring the correct session was handled. There were comparatively small efforts put into working with Jinja templates on HTML pages and firing the right SQL commands. XML templates were used to handle the credentials, for which some research had to be done.
+ ### @Ameya-Khandekar
+ ### @vicky-motwani
 ## ATTRIBUTION REPORT
 ### Bootstrap CSS,JS
  - file path: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/tree/main/Python_Code/static/css/
