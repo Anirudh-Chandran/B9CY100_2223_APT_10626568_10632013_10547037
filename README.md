@@ -95,6 +95,13 @@ For authorized users, the page shows the user profile information. This page all
  ### @Ameya-Khandekar
  Throughout the project, I focused on developing and administering a database on Azure, as well as producing HTML webpages and designing them with CSS. Due to the fact that HTML and CSS had not been extensively utilized for a long time, substantial research and practice were necessary. To attain the desired objectives, several prototype webpages were built for practice and to guarantee that the final selected web pages were enough. CSS was used to format and style webpages in order to make them seem more presentable. JavaScript was also used to aid with certain development.
  ### @vicky-motwani
+Worked on HTML, CSS, JavaScript, designing SQL tables, and Azure app services. 
+Invested time and effort as follows:
+_HTML, CSS_ - Explored many web portals, designed a layout and theme, and applied it to HTML pages.
+_JavaScript_ - Implemented JavaScript for controlling field behaviour on the "My Profile" page.
+_Azure SQL_ - Researched, discussed, finalized, and created tables on Azure SQL; hence, it was accessible online for all members to collaborate fruitfully.
+_Azure app services_ - Researched hosting a web application on Azure and after exploring other unsuccessful methods, deployed our app on azure app services by uploading a zip package containing app files using PowerShell cmdlets.
+
 ## ATTRIBUTION REPORT
 ### Bootstrap CSS,JS
  - file path: https://github.com/Anirudh-Chandran/B9CY100_2223_APT_10626568_10632013_10547037/tree/main/Python_Code/static/css/
