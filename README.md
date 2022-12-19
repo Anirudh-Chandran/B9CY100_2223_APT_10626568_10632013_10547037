@@ -92,6 +92,12 @@ For authorized users, the page shows the user profile information. This page all
 	| /DeleteAccount             | -----                           | Initialised when delete button is clicked on user_profile.html and routes back to homepage.html
 	=========================================================================================================================================================
  
+### Azure SQL: 
+Created Azure SQL DB which includes tables - namely, hospital, vendor, product, product_images and ondemand_request to manage data inserted via the registration form, new product form, and new request form.
+ 
+### Azure App Services:
+Hosted the application on Azure app services using zip package method deployed via powershell commands.
+ 
 ## CONTRIBUTION REPORT
  ### @Anirudh-Chandran
  Primarily, the contribution has been focused on Python coding. A connection to the database required learning the PyODBC module. The initial connection and execution of commands took a day or two to establish. After successfully connecting, the main concern was determining how to work with Flask. Flask has been another challenging domain to work on; a lot of examples and tutorials were referred to during the development phase. The HTML pages that were created by the members had to communicate with Flask, and the required inputs and outputs had to be taken and provided to the webpage. There were efforts made to get the right format and kind of content. It had been a beautiful journey exploring the flask session, from confusions about whether the handling was happening or not to ensuring the correct session was handled. There were comparatively small efforts put into working with Jinja templates on HTML pages and firing the right SQL commands. XML templates were used to handle the credentials, for which some research had to be done.
